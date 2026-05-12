@@ -717,7 +717,11 @@ function select(idx){
 
 function showNextBtn(){
   var btn=document.getElementById('btn-next');
-  btn.style.display='inline-block';
+  btn.style.display='block';
+  btn.style.width='100%';
+  btn.style.padding='14px';
+  btn.style.fontSize='16px';
+  btn.style.marginTop='8px';
   btn.innerHTML=curQ===gameQuestions.length-1?'Ver resultado 🏆':'Siguiente →';
 }
 

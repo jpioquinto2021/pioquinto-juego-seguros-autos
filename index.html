@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿A quién le estás vendiendo? · Seguros del Estado</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6fa;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:1.5rem 1rem}
+.app{background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,.08);padding:1.5rem;width:100%;max-width:660px}
+.screen{display:none}.screen.active{display:block}
+.hdr{text-align:center;margin-bottom:1rem}
+.hdr h1{font-size:21px;font-weight:700;color:#111}
+.hdr p{font-size:13px;color:#666;margin-top:4px}
+.logo-txt{text-align:center;font-size:12px;color:#185FA5;font-weight:700;letter-spacing:.8px;margin-bottom:.75rem}
+
+/* NAV TABS */
+.nav-tabs{display:flex;gap:6px;margin-bottom:1.25rem;background:#f0f4ff;border-radius:10px;padding:4px}
+.nav-tab{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:600;color:#666;border-radius:8px;cursor:pointer;transition:all .15s;border:none;background:transparent;font-family:inherit}
+.nav-tab.active{background:#fff;color:#185FA5;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+/* ARQUETIPOS FICHAS */
+.arch-grid{display:flex;flex-direction:column;gap:12px}
+.arch-card{border-radius:12px;overflow:hidden;border:1px solid #e8eaf0}
+.arch-header{display:flex;align-items:center;gap:12px;padding:1rem;cursor:pointer;user-select:none}
+.arch-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
+.arch-icon.rey{background:#FAEEDA}
+.arch-icon.guerrero{background:#E6F1FB}
+.arch-icon.sabio{background:#EAF3DE}
+.arch-title{font-size:16px;font-weight:700;color:#111}
+.arch-subtitle{font-size:12px;color:#888;margin-top:2px}
+.arch-chevron{margin-left:auto;font-size:18px;color:#aaa;transition:transform .2s}
+.arch-chevron.open{transform:rotate(180deg)}
+.arch-body{display:none;padding:0 1rem 1rem;border-top:1px solid #f0f0f0}
+.arch-body.open{display:block}
+.arch-section{margin-top:.85rem}
+.arch-section-title{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#aaa;font-weight:700;margin-bottom:6px}
+.arch-desc{font-size:13px;color:#444;line-height:1.65}
+.phrase-list{display:flex;flex-direction:column;gap:6px}
+.phrase{background:#f8f9fb;border-left:3px solid #e0e0e0;border-radius:0 6px 6px 0;padding:7px 10px;font-size:13px;color:#555;font-style:italic;line-height:1.5}
+.phrase.rey{border-color:#EF9F27}
+.phrase.guerrero{border-color:#378ADD}
+.phrase.sabio{border-color:#639922}
+.obj-list{display:flex;flex-direction:column;gap:8px}
+.obj-item{background:#FFF8F0;border-radius:8px;padding:9px 12px}
+.obj-item .objecion{font-size:12px;color:#854F0B;font-weight:600;margin-bottom:3px}
+.obj-item .respuesta{font-size:12px;color:#444;line-height:1.5}
+.prod-badge{display:inline-block;font-size:12px;padding:4px 12px;border-radius:99px;font-weight:700;margin-top:4px}
+.prod-badge.elite{background:#FAEEDA;color:#633806}
+.prod-badge.integral{background:#E6F1FB;color:#0C447C}
+.prod-badge.clasico{background:#EAF3DE;color:#27500A}
+.abordaje-box{background:#f0f4ff;border-radius:8px;padding:10px 12px;font-size:13px;color:#0C447C;line-height:1.65}
+
+/* JUEGO */
+.game-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;gap:10px}
+.timer-ring{position:relative;width:48px;height:48px;flex-shrink:0}
+.timer-ring svg{transform:rotate(-90deg)}
+.timer-ring circle{fill:none;stroke-width:3}
+.timer-bg{stroke:#e0e0e0}
+.timer-fg{stroke:#185FA5;stroke-linecap:round;transition:stroke-dashoffset .9s linear}
+.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#111}
+.timer-ring.urgent .timer-fg{stroke:#E24B4A}
+.timer-ring.urgent .timer-num{color:#E24B4A}
+.progress-bar{flex:1;height:5px;background:#e8eaf0;border-radius:99px}
+.progress-fill{height:100%;background:#185FA5;border-radius:99px;transition:width .3s}
+.score-live{font-size:13px;font-weight:700;color:#185FA5;min-width:52px;text-align:right}
+.timeout-bar{height:3px;background:#E24B4A;border-radius:99px;transition:width .1s linear;margin-bottom:.5rem}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+.q-cnt{font-size:12px;color:#888}
+.q-prof{font-size:13px;font-weight:700}
+.q-type-badge{font-size:10px;padding:2px 8px;border-radius:99px;font-weight:700;margin-left:6px}
+.badge-producto{background:#E6F1FB;color:#0C447C}
+.badge-arquetipo{background:#FAEEDA;color:#633806}
+.qbox{background:#f8f9fb;border:1px solid #e8eaf0;border-radius:12px;padding:1.1rem;margin-bottom:.75rem}
+.qtype{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#aaa;margin-bottom:6px;font-weight:600}
+.qtxt{font-size:15px;color:#111;line-height:1.65}
+.hint{font-size:11px;color:#666;margin-top:10px;padding:8px 10px;background:#fff;border-radius:8px;line-height:1.6;border:1px solid #e8eaf0}
+.opts{display:flex;flex-direction:column;gap:7px;margin-bottom:.85rem}
+.opt{background:#fff;border:1px solid #e0e2e8;border-radius:8px;padding:11px 16px;text-align:left;cursor:pointer;font-size:14px;color:#111;line-height:1.5;font-family:inherit;transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:#185FA5;background:#f0f4ff}
+.opt.correct{border-color:#3B6D11;background:#EAF3DE;color:#27500A;font-weight:600}
+.opt.wrong{border-color:#993C1D;background:#FAECE7;color:#4A1B0C}
+.opt:disabled{cursor:default}
+.fb{border-radius:8px;padding:11px 16px;font-size:13px;line-height:1.6;margin-bottom:.75rem;display:none}
+.fb.correct{background:#EAF3DE;color:#27500A;border-left:3px solid #3B6D11}
+.fb.wrong{background:#FAECE7;color:#4A1B0C;border-left:3px solid #993C1D}
+.coach-box{border-radius:8px;padding:11px 16px;font-size:13px;line-height:1.6;margin-bottom:.75rem;background:#E6F1FB;border-left:3px solid #185FA5;color:#0C447C;display:none}
+.tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:99px;font-weight:700;margin-bottom:7px}
+.tag-elite{background:#FAEEDA;color:#633806}
+.tag-integral{background:#E6F1FB;color:#0C447C}
+.tag-clasico{background:#EAF3DE;color:#27500A}
+.tag-arquetipo{background:#F3EEFE;color:#533AB7}
+
+/* RESULTADO */
+.result-board{background:#f8f9fb;border:1px solid #e8eaf0;border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:1rem}
+.score-big{font-size:52px;font-weight:700;color:#185FA5}
+.score-lbl{font-size:13px;color:#888;margin-top:2px}
+.rank{font-size:18px;font-weight:700;margin:10px 0 4px;color:#111}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
+.stat{background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:10px;text-align:center}
+.snum{font-size:22px;font-weight:700;color:#185FA5}
+.slbl{font-size:11px;color:#888;margin-top:2px}
+.history{display:flex;flex-direction:column;gap:6px;margin-top:1rem}
+.hist-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:8px 10px;border-radius:8px}
+.hist-item.ok{color:#27500A;background:#EAF3DE}
+.hist-item.bad{color:#4A1B0C;background:#FAECE7}
+
+.btn{background:#fff;border:1px solid #ccc;border-radius:8px;padding:10px 18px;font-size:14px;color:#111;cursor:pointer;font-family:inherit;transition:background .1s}
+.btn:hover{background:#f0f2f5}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#185FA5;color:#fff;border-color:#185FA5;font-weight:600}
+.btn-p:hover{background:#0C447C}
+.btn-lg{padding:13px 24px;font-size:15px;width:100%;margin-top:.5rem}
+.info-strip{display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:10px 14px;background:#f0f4ff;border-radius:8px;font-size:13px;color:#555}
+footer{text-align:center;margin-top:1.5rem;font-size:11px;color:#ccc}
+@media(max-width:480px){.stats{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- PANTALLA PRINCIPAL -->
+<div class="screen active" id="s-main">
+  <div class="logo-txt">SEGUROS DEL ESTADO</div>
+  <div class="hdr">
+    <h1>¿A quién le estás vendiendo?</h1>
+    <p>Entrenamiento de intermediarios · Autos livianos</p>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('tab-arquetipos',this)">Arquetipos</button>
+    <button class="nav-tab" onclick="showTab('tab-productos',this)">Productos</button>
+    <button class="nav-tab" onclick="startGame()">Jugar</button>
+  </div>
+
+  <!-- TAB ARQUETIPOS -->
+  <div id="tab-arquetipos" class="tab-content">
+    <p style="font-size:13px;color:#666;margin-bottom:1rem;line-height:1.6">Conoce a fondo a cada tipo de cliente. Entiende cómo piensa, qué dice y cómo cerrar con él.</p>
+    <div class="arch-grid">
+
+      <!-- REY -->
+      <div class="arch-card">
+        <div class="arch-header" onclick="toggleArch('rey')">
+          <div class="arch-icon rey"><i class="ti ti-crown" style="color:#BA7517"></i></div>
+          <div>
+            <div class="arch-title">El Rey</div>
+            <div class="arch-subtitle">Quiere lo mejor, sin preguntas · Producto ideal: <strong>Élite</strong></div>
+          </div>
+          <i class="ti ti-chevron-down arch-chevron" id="chev-rey"></i>
+        </div>
+        <div class="arch-body" id="body-rey">
+          <div class="arch-section">
+            <div class="arch-section-title">¿Quién es?</div>
+            <div class="arch-desc">Profesional o empresario exitoso. Tiene un vehículo de alta gama y lo ve como una extensión de su estatus. El precio no es su principal preocupación — lo es la tranquilidad y la experiencia sin fricciones. Toma decisiones rápido cuando siente que la propuesta está a su altura.</div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Frases típicas que usa</div>
+            <div class="phrase-list">
+              <div class="phrase rey">"Quiero lo mejor, no me compliques con deducibles."</div>
+              <div class="phrase rey">"Si me pasa algo, necesito un carro de reemplazo de inmediato."</div>
+              <div class="phrase rey">"Ya tengo seguro, pero quiero saber si el tuyo es mejor."</div>
+              <div class="phrase rey">"El precio no es el problema, el problema es que me fallen."</div>
+            </div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Cómo abordarlo</div>
+            <div class="abordaje-box">Habla su idioma: estatus, tranquilidad y exclusividad. No empieces por el precio — empieza por lo que incluye Élite que los demás no tienen. Muéstrale que entiendes el valor de su inversión. Sé directo y seguro: él detecta la duda.</div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Objeciones frecuentes y cómo responderlas</div>
+            <div class="obj-list">
+              <div class="obj-item">
+                <div class="objecion">🔴 "Me lo ofrecen más barato en otra aseguradora."</div>
+                <div class="respuesta">¿Revisamos qué incluye exactamente esa póliza? Muchos Élite del mercado tienen sublímites en llantas o no cubren amortiguadores. El nuestro no tiene esos topes ocultos.</div>
+              </div>
+              <div class="obj-item">
+                <div class="objecion">🔴 "Ya tengo seguro y nunca lo he usado."</div>
+                <div class="respuesta">Perfecto — eso significa que ha tenido suerte. Pero cuando lo necesite, querrá tener los 30 días de reemplazo y el deducible en cero. Ese día no es momento para arrepentirse.</div>
+              </div>
+              <div class="obj-item">
+                <div class="objecion">🔴 "¿Para qué pagar tanto si el carro ya está asegurado con el concesionario?"</div>
+                <div class="respuesta">El seguro del concesionario generalmente es básico. Élite de Seguros del Estado cubre llantas, llaves, amortiguadores y accesorios — eso el concesionario no lo da.</div>
+              </div>
+            </div>
+          </div>
+          <div class="arch-section">
+            <span class="prod-badge elite">Producto: Élite</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GUERRERO -->
+      <div class="arch-card">
+        <div class="arch-header" onclick="toggleArch('guerrero')">
+          <div class="arch-icon guerrero"><i class="ti ti-shield" style="color:#185FA5"></i></div>
+          <div>
+            <div class="arch-title">El Guerrero</div>
+            <div class="arch-subtitle">Analítico y comparador · Producto ideal: <strong>Integral</strong></div>
+          </div>
+          <i class="ti ti-chevron-down arch-chevron" id="chev-guerrero"></i>
+        </div>
+        <div class="arch-body" id="body-guerrero">
+          <div class="arch-section">
+            <div class="arch-section-title">¿Quién es?</div>
+            <div class="arch-desc">Persona práctica, informada y metódica. Antes de comprar ya investigó precios, comparó opciones y tiene preguntas concretas. No le gusta que lo presionen ni que le "vendan" — quiere que le asesoren con datos. Si le das los argumentos correctos, cierra rápido.</div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Frases típicas que usa</div>
+            <div class="phrase-list">
+              <div class="phrase guerrero">"Ya cotizé con tres aseguradoras. ¿Por qué debería elegirte a ti?"</div>
+              <div class="phrase guerrero">"¿Cuántas asistencias incluye? ¿Cuáles son los deducibles exactos?"</div>
+              <div class="phrase guerrero">"Viajo mucho por carretera — necesito saber qué pasa si me quedo varado."</div>
+              <div class="phrase guerrero">"La diferencia de precio no me parece justificada."</div>
+            </div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Cómo abordarlo</div>
+            <div class="abordaje-box">Sé específico y honesto. Muéstrale números concretos — asistencias, días de reemplazo, deducibles exactos. El truco más efectivo: divide la diferencia de prima en días ($767/día). Nunca le digas "confíe en mí" — dile "mire los datos".</div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Objeciones frecuentes y cómo responderlas</div>
+            <div class="obj-list">
+              <div class="obj-item">
+                <div class="objecion">🔴 "Integral es 18% más caro que la competencia."</div>
+                <div class="respuesta">¿Comparamos coberturas? Integral incluye 16 asistencias, deducible 0% en hurto y 20 días de reemplazo. Si la otra tiene menos, el 18% es barato.</div>
+              </div>
+              <div class="obj-item">
+                <div class="objecion">🔴 "¿Para qué 16 asistencias si nunca las uso?"</div>
+                <div class="respuesta">La bolsa de asistencias es como el extintor del carro: espera no usarla, pero el día que la necesite en carretera a las 11 PM va a querer tener 16 y no 12.</div>
+              </div>
+              <div class="obj-item">
+                <div class="objecion">🔴 "Prefiero el Clásico — es suficiente para mí."</div>
+                <div class="respuesta">Tiene sentido. Pero considere que Clásico aplica 10% de deducible en hurto. En un vehículo de $95M eso son $9.5M de su bolsillo. Integral lo cubre con deducible 0%.</div>
+              </div>
+            </div>
+          </div>
+          <div class="arch-section">
+            <span class="prod-badge integral">Producto: Integral</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SABIO -->
+      <div class="arch-card">
+        <div class="arch-header" onclick="toggleArch('sabio')">
+          <div class="arch-icon sabio"><i class="ti ti-bulb" style="color:#3B6D11"></i></div>
+          <div>
+            <div class="arch-title">El Sabio</div>
+            <div class="arch-subtitle">Racional y precavido · Producto ideal: <strong>Clásico o Integral</strong></div>
+          </div>
+          <i class="ti ti-chevron-down arch-chevron" id="chev-sabio"></i>
+        </div>
+        <div class="arch-body" id="body-sabio">
+          <div class="arch-section">
+            <div class="arch-section-title">¿Quién es?</div>
+            <div class="arch-desc">Persona cautelosa que toma decisiones lentamente y necesita entender todo antes de comprar. No desconfía de ti, pero necesita procesar. Valora la honestidad por encima de todo — si le dices algo que no es cierto, pierde la venta para siempre. Es fiel si gana su confianza.</div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Frases típicas que usa</div>
+            <div class="phrase-list">
+              <div class="phrase sabio">"¿Qué exactamente NO cubre este seguro?"</div>
+              <div class="phrase sabio">"Déjame pensarlo — te llamo la semana que viene."</div>
+              <div class="phrase sabio">"¿Me puedes explicar qué es un deducible y cómo funciona?"</div>
+              <div class="phrase sabio">"¿Por qué necesito Integral si mi carro es sencillo?"</div>
+            </div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Cómo abordarlo</div>
+            <div class="abordaje-box">Nunca lo presiones. Dale tiempo y dale información clara — especialmente las exclusiones. Un comparativo escrito funciona mejor que una llamada larga. Si reconoces cuándo Clásico es suficiente para él, ganas su confianza de por vida. La honestidad es tu mayor herramienta.</div>
+          </div>
+          <div class="arch-section">
+            <div class="arch-section-title">Objeciones frecuentes y cómo responderlas</div>
+            <div class="obj-list">
+              <div class="obj-item">
+                <div class="objecion">🔴 "Déjame pensarlo, no tengo afán."</div>
+                <div class="respuesta">Claro, tómese el tiempo. Le envío un comparativo de los tres productos con las exclusiones claras — así tiene todo para decidir con calma.</div>
+              </div>
+              <div class="obj-item">
+                <div class="objecion">🔴 "¿Por qué pagaría Integral si uso el carro solo en ciudad?"</div>
+                <div class="respuesta">Buena pregunta. Para uso solo en ciudad, Clásico puede ser suficiente si acepta que aplica deducible en hurto y no cubre vidrios. ¿Le explico exactamente qué excluye?</div>
+              </div>
+              <div class="obj-item">
+                <div class="objecion">🔴 "No entiendo por qué hay tres opciones. ¿Cuál es la diferencia real?"</div>
+                <div class="respuesta">Las tres diferencias clave son: deducible (0% vs 10%), días de reemplazo (30, 20 o 7) y accesorios cubiertos. Le armo una tabla en 2 minutos con eso.</div>
+              </div>
+            </div>
+          </div>
+          <div class="arch-section">
+            <span class="prod-badge clasico">Producto: Clásico</span>
+            <span class="prod-badge integral" style="margin-left:6px">o Integral</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end arch-grid -->
+  </div><!-- end tab-arquetipos -->
+
+  <!-- TAB PRODUCTOS -->
+  <div id="tab-productos" class="tab-content" style="display:none">
+    <p style="font-size:13px;color:#666;margin-bottom:1rem;line-height:1.6">Resumen de los tres productos de seguro de autos livianos de Seguros del Estado.</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="background:#FAEEDA;border:1px solid #EF9F27;border-radius:12px;padding:1rem">
+        <div style="font-size:15px;font-weight:700;color:#633806;margin-bottom:8px">Élite <span style="font-size:12px;font-weight:400">— Para el Rey</span></div>
+        <div style="font-size:12px;color:#854F0B;line-height:1.8">
+          ✓ Cobertura hasta $4.400 millones<br>
+          ✓ Deducible 0% en daños y hurto<br>
+          ✓ 20 asistencias en la vigencia<br>
+          ✓ Vehículo de reemplazo hasta 30 días<br>
+          ✓ Grúa sin restricción de alcohol · Radio 40km<br>
+          ✓ Vidrios hasta 90 SMDLV (con logomarca)<br>
+          ✓ Llantas hasta 90 SMDLV · 1 evento<br>
+          ✓ Llaves hasta 90 SMDLV · 2 eventos<br>
+          ✓ Amortiguadores hasta 90 SMDLV<br>
+          ✓ Pequeños accesorios hasta 90 SMDLV<br>
+          ✓ Parachoques hasta 90 SMDLV<br>
+          ✓ Asistencia en viajes hasta 80 SMDLV<br>
+          ✓ Conductor elegido · Radio 40km
+        </div>
+      </div>
+      <div style="background:#E6F1FB;border:1px solid #378ADD;border-radius:12px;padding:1rem">
+        <div style="font-size:15px;font-weight:700;color:#0C447C;margin-bottom:8px">Integral <span style="font-size:12px;font-weight:400">— Para el Guerrero</span></div>
+        <div style="font-size:12px;color:#185FA5;line-height:1.8">
+          ✓ Cobertura hasta $4.000 millones<br>
+          ✓ Deducible 0% en daños y hurto mayor cuantía<br>
+          ✓ 16 asistencias en la vigencia<br>
+          ✓ Vehículo de reemplazo hasta 20 días<br>
+          ✓ Grúa sin restricción de alcohol · Radio 40km<br>
+          ✓ Vidrios hasta 30 SMDLV (sin logomarca)<br>
+          ✗ Sin llantas, llaves, amortiguadores<br>
+          ✓ Asistencia en viajes hasta 60 SMDLV<br>
+          ✓ Conductor elegido · Radio 40km
+        </div>
+      </div>
+      <div style="background:#EAF3DE;border:1px solid #639922;border-radius:12px;padding:1rem">
+        <div style="font-size:15px;font-weight:700;color:#27500A;margin-bottom:8px">Clásico <span style="font-size:12px;font-weight:400">— Para el Sabio</span></div>
+        <div style="font-size:12px;color:#3B6D11;line-height:1.8">
+          ✓ Cobertura hasta $3.000 millones<br>
+          ⚠ Deducible 10% o 1 SMMLV en daños y hurto<br>
+          ✓ 12 asistencias en la vigencia<br>
+          ✓ Vehículo de reemplazo hasta 7 días<br>
+          ✓ Grúa sin restricción de alcohol · Radio 40km<br>
+          ✗ Sin vidrios, llantas, llaves, amortiguadores<br>
+          ✓ Asistencia en viajes hasta 50 SMDLV<br>
+          ✓ Conductor elegido · Radio 40km
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.25rem">
+    <button class="btn btn-p btn-lg" onclick="startGame()">
+      <i class="ti ti-player-play"></i> Ir al juego
+    </button>
+  </div>
+  <footer>Seguros del Estado · Dirección de Formación</footer>
+</div>
+
+<!-- PANTALLA JUEGO -->
+<div class="screen" id="s-game">
+  <div class="game-top">
+    <div class="timer-ring" id="timer-ring">
+      <svg width="48" height="48" viewBox="0 0 48 48">
+        <circle class="timer-bg" cx="24" cy="24" r="20"/>
+        <circle class="timer-fg" id="timer-arc" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="0"/>
+      </svg>
+      <div class="timer-num" id="timer-num">20</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+    <div class="score-live" id="score-live">0 pts</div>
+  </div>
+  <div class="timeout-bar" id="timeout-bar" style="width:100%"></div>
+  <div class="q-meta">
+    <span class="q-cnt" id="q-cnt">Pregunta 1 / 15</span>
+    <span class="q-prof" id="q-prof"></span>
+  </div>
+  <div class="qbox">
+    <div class="qtype" id="q-type"></div>
+    <div class="qtxt" id="q-txt"></div>
+    <div class="hint" id="q-hint"></div>
+  </div>
+  <div id="tag-area" style="margin-bottom:8px"></div>
+  <div class="opts" id="opts"></div>
+  <div class="fb" id="fb"></div>
+  <div class="coach-box" id="coach-box"></div>
+  <button class="btn btn-p" id="btn-next" style="display:none" onclick="nextQ()">Siguiente →</button>
+  <div style="margin-top:.75rem">
+    <button class="btn" style="font-size:12px;padding:6px 14px" onclick="backToMain()">← Volver al inicio</button>
+  </div>
+</div>
+
+<!-- PANTALLA RESULTADO -->
+<div class="screen" id="s-result">
+  <div class="hdr"><h1>Resultado final</h1></div>
+  <div class="result-board">
+    <div class="score-big" id="r-score"></div>
+    <div class="score-lbl">puntos de 150</div>
+    <div class="rank" id="r-rank"></div>
+    <p style="font-size:13px;color:#666;margin-top:6px" id="r-msg"></p>
+    <div class="stats">
+      <div class="stat"><div class="snum" id="r-ok"></div><div class="slbl">correctas</div></div>
+      <div class="stat"><div class="snum" id="r-bad"></div><div class="slbl">incorrectas</div></div>
+      <div class="stat"><div class="snum" id="r-pct"></div><div class="slbl">% acierto</div></div>
+    </div>
+  </div>
+  <div class="history" id="history"></div>
+  <div style="display:flex;gap:8px;margin-top:1rem;flex-wrap:wrap">
+    <button class="btn" style="flex:1" onclick="backToMain()">← Ver arquetipos</button>
+    <button class="btn btn-p" style="flex:1" onclick="restartGame()"><i class="ti ti-refresh"></i> Jugar de nuevo</button>
+  </div>
+  <footer>Seguros del Estado · Dirección de Formación</footer>
+</div>
+
+</div><!-- end .app -->
+
+<script>
+const CIRC=125.6, TIME_LIMIT=20;
+
+const questions=[
+  // PREGUNTAS DE ARQUETIPO
+  {type:"arquetipo",profile:"Identificación",pColor:"#533AB7",product:"arquetipo",
+   text:"Un cliente dice: 'Quiero lo mejor para mi BMW, no me importa el precio — solo que si me pasa algo, no tenga que llamar a nadie.' ¿Qué arquetipo es?",
+   hint:"Pista: fíjate en 'no me importa el precio' y 'que no tenga que llamar a nadie'.",
+   options:["El Sabio — quiere entender todo","El Guerrero — compara precios","El Rey — quiere tranquilidad total","Ninguno de los tres"],
+   correct:2,
+   feedback:"Es El Rey. La clave está en que el precio no es su preocupación y quiere cero fricciones. Su producto ideal es Élite.",
+   coach:"💡 Coach: Cuando escuches 'no me importa el precio' y 'quiero tranquilidad', activa el modo Rey. Ve directo a Élite y habla de coberturas exclusivas, no de precios."},
+
+  {type:"arquetipo",profile:"Identificación",pColor:"#533AB7",product:"arquetipo",
+   text:"Un cliente lleva 3 semanas enviando mensajes preguntando por exclusiones, deducibles y casos específicos antes de decidir. ¿Qué arquetipo es?",
+   hint:"Pista: 3 semanas procesando, preguntas sobre exclusiones y casos específicos.",
+   options:["El Rey — exige respuestas rápidas","El Sabio — necesita entender todo antes de decidir","El Guerrero — está comparando precios","Ninguno de los tres"],
+   correct:1,
+   feedback:"Es El Sabio. Necesita tiempo y claridad total antes de comprar. No lo presiones — dale información completa y honesta, especialmente las exclusiones.",
+   coach:"💡 Coach: Con el Sabio la presión de cierre es contraproducente. Envíale un comparativo escrito con exclusiones claras. Eso acelera su decisión más que cualquier llamada."},
+
+  {type:"arquetipo",profile:"Identificación",pColor:"#533AB7",product:"arquetipo",
+   text:"Un cliente dice: 'Ya cotizé con Sura y Bolívar. La tuya es 15% más cara. Convénceme.' ¿Qué arquetipo es?",
+   hint:"Pista: ya investigó, compara precios y pide argumentos concretos.",
+   options:["El Sabio — no confía en nadie","El Rey — quiere el mejor","El Guerrero — analítico y comparador","Ninguno de los tres"],
+   correct:2,
+   feedback:"Es El Guerrero. Ya hizo su tarea — ahora necesita argumentos de valor concretos, no generalidades. Muéstrale el desglose de coberturas y divide la diferencia de prima en días.",
+   coach:"💡 Coach: Al Guerrero no le digas 'somos mejores'. Dile: 'El 15% adicional equivale a $X por día. A cambio tienes 4 asistencias más y 13 días extra de reemplazo. ¿Cuánto vale eso para ti?'"},
+
+  {type:"arquetipo",profile:"Filosofía",pColor:"#533AB7",product:"arquetipo",
+   text:"El Sabio te dice: 'Déjame pensarlo, te llamo la semana que viene.' ¿Cuál es la mejor respuesta?",
+   hint:"Recuerda: el Sabio valora la honestidad y necesita información, no presión.",
+   options:["'La oferta vence mañana, decídase hoy'","'Claro, le envío un comparativo con exclusiones para que decida con calma'","'Todos mis clientes eligen Integral, es el más vendido'","'¿Qué necesita saber para decidirse ahora?'"],
+   correct:1,
+   feedback:"Correcto. El Sabio necesita tiempo y datos — no presión. Un comparativo escrito con exclusiones claras es exactamente lo que acelera su decisión.",
+   coach:"💡 Coach: Nunca uses urgencia artificial con el Sabio — la detecta y pierde confianza. Dale control del proceso y él cerrará cuando esté listo, que suele ser rápido si le das buena información."},
+
+  {type:"arquetipo",profile:"Filosofía",pColor:"#533AB7",product:"arquetipo",
+   text:"El Guerrero dice: 'La diferencia entre Integral y Clásico es $280.000 al año. No lo veo justificado.' ¿Cuál es el mejor cierre?",
+   hint:"Recuerda: al Guerrero le funcionan los números concretos, no las generalidades.",
+   options:["'Integral es simplemente mejor, confíe en mí'","'$280.000 al año es nada para la tranquilidad que da'","'Son $767 pesos más al día: 0% deducible en hurto, 4 asistencias extra y 13 días más de reemplazo. ¿Vale la pena?'","'Le hago un descuento para igualar el precio del Clásico'"],
+   correct:2,
+   feedback:"Perfecto. El Guerrero piensa en costo-beneficio. Dividir la diferencia en días y desglosar lo que recibe es el argumento más efectivo.",
+   coach:"💡 Coach: Este es el cierre matemático del Guerrero. Practica decirlo con naturalidad: '$767 pesos al día' suena mucho menos que '$280.000 al año'. El framing lo es todo."},
+
+  {type:"arquetipo",profile:"Filosofía",pColor:"#533AB7",product:"arquetipo",
+   text:"El Rey compara tu Élite con otra aseguradora. ¿Cuál es el argumento diferenciador más poderoso?",
+   hint:"Recuerda: el Rey valora exclusividad y coberturas que otros no tienen.",
+   options:["'Somos la aseguradora más antigua de Colombia'","'Nuestro precio es el mejor del mercado'","'Élite cubre llantas, llaves y amortiguadores — muy pocas aseguradoras lo hacen. ¿Quiere revisar qué incluye la otra póliza?'","'Tenemos la mejor red de talleres'"],
+   correct:2,
+   feedback:"Exacto. Las coberturas exclusivas de accesorios (llantas, llaves, amortiguadores) son el diferenciador real de Élite. Invita al Rey a comparar — ahí es donde ganas.",
+   coach:"💡 Coach: Con el Rey no compites en precio — compites en exclusividad. 'Muy pocas aseguradoras cubren esto' activa su instinto de tener lo que otros no tienen."},
+
+  // PREGUNTAS DE PRODUCTO
+  {type:"producto",profile:"El Rey",pColor:"#BA7517",product:"elite",
+   text:"Un cliente con SUV de $350M quiere deducible 0% en todo. ¿Qué producto de Seguros del Estado le corresponde?",
+   hint:"Dato real: Élite 0%, Integral 0% en daños, Clásico 10% o 1 SMMLV.",
+   options:["Clásico — el más económico","Integral — buen balance","Élite — coberturas exclusivas + 0% deducible","Cualquiera, todos tienen 0% deducible"],
+   correct:2,
+   feedback:"Élite. Aunque Integral también tiene 0% en daños, Élite suma coberturas exclusivas: llantas, llaves, amortiguadores y 30 días de reemplazo — lo que el Rey necesita.",
+   coach:"💡 Coach: Para el Rey el argumento no es el precio sino la tranquilidad total. Di: 'Con Élite no paga deducible y tiene 30 días de reemplazo. Eso es lo que su inversión merece.'"},
+
+  {type:"producto",profile:"El Guerrero",pColor:"#185FA5",product:"integral",
+   text:"El Guerrero viaja por carretera. ¿Cuántas asistencias tiene Integral vs Clásico?",
+   hint:"Dato real: Élite = 20 · Integral = 16 · Clásico = 12 servicios en la vigencia.",
+   options:["Integral 20, Clásico 16","Integral 16, Clásico 12","Integral 12, Clásico 8","Todos tienen 16"],
+   correct:1,
+   feedback:"Integral tiene 16 asistencias vs 12 del Clásico. Para alguien que viaja por carretera, esas 4 asistencias extra pueden ser la diferencia.",
+   coach:"💡 Coach: Al Guerrero le gustan los números. 'En carretera, 4 asistencias más pueden ser la diferencia entre llegar a tiempo o no.' Concreto y directo."},
+
+  {type:"producto",profile:"El Sabio",pColor:"#3B6D11",product:"clasico",
+   text:"El Sabio pregunta: '¿El Clásico cubre los vidrios?' ¿Qué respondes?",
+   hint:"Dato real: Élite cubre vidrios hasta 90 SMDLV. Integral hasta 30 SMDLV. Clásico NO ampara vidrios.",
+   options:["Sí, hasta 30 SMDLV","Sí, hasta 90 SMDLV","No, Clásico no ampara vidrios — Integral sí lo hace","Solo en pérdida total"],
+   correct:2,
+   feedback:"Clásico NO ampara vidrios. Con el Sabio, sé honesto sobre las exclusiones y explica cuándo vale subir a Integral.",
+   coach:"💡 Coach: Di: 'Clásico no cubre vidrios — si eso le preocupa, Integral sí lo hace hasta 30 SMDLV. ¿Vale la diferencia de prima para usted?' Honestidad que cierra."},
+
+  {type:"producto",profile:"El Rey",pColor:"#BA7517",product:"elite",
+   text:"¿Cuántos días de reemplazo tiene Élite vs Integral en caso de siniestro?",
+   hint:"Dato real: Élite = 30 días · Integral = 20 días · Clásico = 7 días.",
+   options:["Élite 20, Integral 7","Élite 30, Integral 20","Élite 30, Integral 30","Élite 15, Integral 10"],
+   correct:1,
+   feedback:"Élite da 30 días de reemplazo vs 20 de Integral. Para el Rey, esos 10 días adicionales significan que su rutina no se interrumpe.",
+   coach:"💡 Coach: '30 días de reemplazo significa que su vida no para mientras reparamos su carro.' Ese es el argumento emocional perfecto para el Rey."},
+
+  {type:"producto",profile:"El Guerrero",pColor:"#185FA5",product:"integral",
+   text:"¿La grúa funciona si el conductor ha tomado alcohol? ¿Qué aplica en los tres productos?",
+   hint:"Dato real: Los tres planes tienen grúa por avería en radio de 40km SIN restricción al consumo de alcohol.",
+   options:["Solo Élite no tiene restricción","Ninguno cubre con alcohol","Los tres: grúa sin restricción de alcohol","Solo si no hubo accidente"],
+   correct:2,
+   feedback:"Los tres planes incluyen grúa sin restricción de alcohol en radio de 40km. Un diferenciador poderoso frente a muchas aseguradoras del mercado.",
+   coach:"💡 Coach: 'Nuestra grúa funciona incluso si tomó — sin restricciones, en los tres planes.' Este dato sorprende y diferencia."},
+
+  {type:"producto",profile:"El Sabio",pColor:"#3B6D11",product:"clasico",
+   text:"El Sabio tiene un carro de $48M. ¿Cuál es la diferencia de deducible en hurto entre Clásico e Integral?",
+   hint:"Dato real: Hurto mayor cuantía — Integral 0%, Clásico 10% o 1 SMMLV.",
+   options:["No hay diferencia","Clásico aplica 10% o 1 SMMLV; Integral tiene 0%","Integral no cubre hurto","Clásico no cubre hurto"],
+   correct:1,
+   feedback:"En hurto de mayor cuantía Integral tiene 0% de deducible, Clásico aplica 10% o 1 SMMLV. En $48M eso son $4.8M del bolsillo del cliente.",
+   coach:"💡 Coach: Muestra el cálculo: '$48M × 10% = $4.8M que pagaría de su bolsillo con Clásico. Integral lo cubre con 0%.' El Sabio entiende los números."},
+
+  {type:"producto",profile:"El Rey",pColor:"#BA7517",product:"elite",
+   text:"¿Qué coberturas de accesorios tiene Élite que NO tienen ni Integral ni Clásico?",
+   hint:"Dato real: Solo Élite ampara llantas, llaves, amortiguadores, pequeños accesorios y parachoques.",
+   options:["Responsabilidad civil ilimitada","Conductor elegido 24h","Llantas, llaves, amortiguadores, accesorios y parachoques","Asistencia jurídica"],
+   correct:2,
+   feedback:"Exclusivo de Élite: llantas, llaves, amortiguadores, pequeños accesorios y parachoques (hasta 90 SMDLV c/u). En un vehículo de alta gama eso puede ser millones.",
+   coach:"💡 Coach: 'Un juego de llantas de su vehículo cuesta $4-6 millones. Élite los cubre. Integral y Clásico no. Eso solo ya justifica la diferencia de prima.'"},
+
+  {type:"producto",profile:"El Guerrero",pColor:"#185FA5",product:"integral",
+   text:"La diferencia entre Integral y Clásico es $280.000/año. ¿Cuál es el argumento más contundente?",
+   hint:"Diferencias reales: 0% vs 10% deducible, 16 vs 12 asistencias, 20 vs 7 días reemplazo.",
+   options:["Integral es más caro, punto","$767 al día más da: 0% deducible, 4 asistencias extra y 13 días más de reemplazo","Clásico es suficiente","No hay diferencia real"],
+   correct:1,
+   feedback:"$280.000 ÷ 365 = $767/día. A ese precio: 0% deducible, 4 asistencias más, 13 días extra de reemplazo. El cierre perfecto para el Guerrero.",
+   coach:"💡 Coach: El framing diario funciona siempre con el Guerrero. '$767 pesos al día adicionales' suena completamente diferente a '$280.000 más al año'."},
+
+  {type:"producto",profile:"El Sabio",pColor:"#3B6D11",product:"integral",
+   text:"¿Cuál es el límite de asistencia en viajes de Élite vs Integral vs Clásico?",
+   hint:"Dato real: Élite hasta 80 SMDLV · Integral hasta 60 SMDLV · Clásico hasta 50 SMDLV. Todos ilimitados en número de eventos.",
+   options:["Solo Élite tiene asistencia en viajes","Élite 80, Integral 60, Clásico 50 SMDLV — todos ilimitados","Integral y Clásico no cubren viajes","Todos tienen el mismo límite"],
+   correct:1,
+   feedback:"Los tres tienen asistencia en viajes con límites distintos. Conocer los números exactos demuestra al Sabio que eres un asesor experto.",
+   coach:"💡 Coach: Con el Sabio, decir '80, 60 y 50 SMDLV' en lugar de 'sí cubre viajes' te diferencia como experto. Él valora la precisión."}
+];
+
+let curQ=0,score=0,correct=0,answered=false,timerInt=null,timeLeft=TIME_LIMIT,history=[];
+
+function showTab(tabId, btn){
+  document.querySelectorAll('.tab-content').forEach(function(t){t.style.display='none';});
+  document.getElementById(tabId).style.display='block';
+  document.querySelectorAll('.nav-tab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+function toggleArch(name){
+  var body=document.getElementById('body-'+name);
+  var chev=document.getElementById('chev-'+name);
+  var isOpen=body.classList.contains('open');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+function startGame(){
+  document.getElementById('s-main').classList.remove('active');
+  document.getElementById('s-game').classList.add('active');
+  curQ=0;score=0;correct=0;answered=false;history=[];
+  showQ();
+}
+
+function backToMain(){
+  clearInterval(timerInt);
+  document.getElementById('s-game').classList.remove('active');
+  document.getElementById('s-result').classList.remove('active');
+  document.getElementById('s-main').classList.add('active');
+}
+
+function showQ(){
+  const q=questions[curQ];
+  answered=false;
+  clearInterval(timerInt);
+  document.getElementById('btn-next').style.display='none';
+  document.getElementById('fb').style.display='none';
+  document.getElementById('coach-box').style.display='none';
+  document.getElementById('q-cnt').textContent='Pregunta '+(curQ+1)+' / '+questions.length;
+  document.getElementById('q-prof').textContent=q.profile;
+  document.getElementById('q-prof').style.color=q.pColor;
+  document.getElementById('q-type').textContent=q.type==='arquetipo'?'Pregunta de arquetipo':'Pregunta de producto';
+  document.getElementById('q-txt').textContent=q.text;
+  document.getElementById('q-hint').textContent=q.hint;
+  document.getElementById('prog').style.width=((curQ/questions.length)*100)+'%';
+  document.getElementById('score-live').textContent=score+' pts';
+  var tagClass=q.type==='arquetipo'?'tag-arquetipo':'tag-'+q.product;
+  var tagLabel=q.type==='arquetipo'?'Arquetipo':q.product.charAt(0).toUpperCase()+q.product.slice(1);
+  document.getElementById('tag-area').innerHTML='<span class="tag '+tagClass+'">'+tagLabel+'</span>';
+  const opts=document.getElementById('opts');
+  opts.innerHTML='';
+  q.options.forEach(function(o,i){
+    const b=document.createElement('button');
+    b.className='opt';b.textContent=o;
+    b.onclick=function(){select(i);};
+    opts.appendChild(b);
+  });
+  startTimer();
+}
+
+function startTimer(){
+  timeLeft=TIME_LIMIT;
+  const ring=document.getElementById('timer-ring');
+  const arc=document.getElementById('timer-arc');
+  const num=document.getElementById('timer-num');
+  const bar=document.getElementById('timeout-bar');
+  ring.classList.remove('urgent');
+  arc.style.strokeDashoffset=0;
+  bar.style.width='100%';
+  num.textContent=timeLeft;
+  timerInt=setInterval(function(){
+    timeLeft--;
+    var pct=timeLeft/TIME_LIMIT;
+    arc.style.strokeDashoffset=CIRC*(1-pct);
+    bar.style.width=(pct*100)+'%';
+    num.textContent=timeLeft;
+    if(timeLeft<=5)ring.classList.add('urgent');
+    if(timeLeft<=0){clearInterval(timerInt);timeoutQ();}
+  },1000);
+}
+
+function timeoutQ(){
+  if(answered)return;
+  answered=true;
+  clearInterval(timerInt);
+  const q=questions[curQ];
+  document.querySelectorAll('.opt').forEach(function(b,i){
+    b.disabled=true;
+    if(i===q.correct)b.classList.add('correct');
+  });
+  var fb=document.getElementById('fb');
+  fb.className='fb wrong';
+  fb.innerHTML='⏱ Tiempo agotado. '+q.feedback;
+  fb.style.display='block';
+  var cb=document.getElementById('coach-box');
+  cb.innerHTML=q.coach;cb.style.display='block';
+  history.push({ok:false,text:q.text.substring(0,65)+'...',type:q.type});
+  showNextBtn();
+}
+
+function select(idx){
+  if(answered)return;
+  answered=true;
+  clearInterval(timerInt);
+  const q=questions[curQ];
+  document.querySelectorAll('.opt').forEach(function(b,i){
+    b.disabled=true;
+    if(i===q.correct)b.classList.add('correct');
+    else if(i===idx&&idx!==q.correct)b.classList.add('wrong');
+  });
+  var ok=(idx===q.correct);
+  if(ok){score+=10;correct++;}
+  var fb=document.getElementById('fb');
+  fb.className='fb '+(ok?'correct':'wrong');
+  fb.innerHTML=(ok?'✓ ':'✗ ')+q.feedback;
+  fb.style.display='block';
+  var cb=document.getElementById('coach-box');
+  cb.innerHTML=q.coach;cb.style.display='block';
+  history.push({ok:ok,text:q.text.substring(0,65)+'...',type:q.type});
+  showNextBtn();
+}
+
+function showNextBtn(){
+  var btn=document.getElementById('btn-next');
+  btn.style.display='inline-block';
+  btn.innerHTML=curQ===questions.length-1?'Ver resultado 🏆':'Siguiente →';
+}
+
+function nextQ(){
+  curQ++;
+  if(curQ>=questions.length)showResult();
+  else showQ();
+}
+
+function showResult(){
+  document.getElementById('s-game').classList.remove('active');
+  document.getElementById('s-result').classList.add('active');
+  document.getElementById('r-score').textContent=score;
+  document.getElementById('r-ok').textContent=correct;
+  document.getElementById('r-bad').textContent=questions.length-correct;
+  document.getElementById('r-pct').textContent=Math.round((correct/questions.length)*100)+'%';
+  var rank,msg;
+  if(correct>=13){rank='¡Nivel Élite — Eres el Rey!';msg='Dominas productos Y arquetipos. Eres el intermediario que cualquier cliente necesita.';}
+  else if(correct>=9){rank='Nivel Integral — Muy sólido';msg='Buen manejo. Refuerza cómo argumentar con cada arquetipo y las coberturas exclusivas de Élite.';}
+  else{rank='Nivel Clásico — A reforzar';msg='Repasa los arquetipos y las diferencias clave de los productos. Cada detalle cierra ventas.';}
+  document.getElementById('r-rank').textContent=rank;
+  document.getElementById('r-msg').textContent=msg;
+  var hist=document.getElementById('history');
+  hist.innerHTML='';
+  history.forEach(function(h,i){
+    var d=document.createElement('div');
+    d.className='hist-item '+(h.ok?'ok':'bad');
+    var label=h.type==='arquetipo'?'[Arquetipo]':'[Producto]';
+    d.innerHTML='<span>'+(h.ok?'✓':'✗')+'</span><span><strong>P'+(i+1)+' '+label+':</strong> '+h.text+'</span>';
+    hist.appendChild(d);
+  });
+}
+
+function restartGame(){
+  curQ=0;score=0;correct=0;answered=false;history=[];
+  clearInterval(timerInt);
+  document.getElementById('s-result').classList.remove('active');
+  document.getElementById('history').innerHTML='';
+  document.getElementById('s-game').classList.add('active');
+  showQ();
+}
+</script>
+</body>
+</html>

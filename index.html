@@ -102,6 +102,25 @@ p.sub{font-size:13px;color:#666;text-align:center;margin-bottom:1.25rem}
 .btn-row{display:flex;gap:8px;margin-top:1rem}
 .btn-row .btn{flex:1}
 footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
+.dash-card{background:#f8f9fb;border:1px solid #e8eaf0;border-radius:12px;padding:1rem;margin-bottom:1rem}
+.dash-title{font-size:13px;font-weight:700;color:#185FA5;margin-bottom:.75rem}
+.bar-wrap{margin-bottom:.6rem}
+.bar-label{display:flex;justify-content:space-between;font-size:12px;color:#444;margin-bottom:3px}
+.bar-track{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;transition:width .5s}
+.bar-ok{background:#3B6D11}
+.bar-fail{background:#E24B4A}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1rem}
+.dash-stat{background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:10px;text-align:center}
+.dash-snum{font-size:24px;font-weight:700;color:#185FA5}
+.dash-slbl{font-size:11px;color:#888;margin-top:2px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:999}
+.modal-box{background:#fff;border-radius:16px;padding:1.5rem;width:90%;max-width:360px;text-align:center}
+.modal-box h2{font-size:18px;font-weight:700;margin-bottom:.5rem}
+.modal-box p{font-size:13px;color:#666;margin-bottom:1rem}
+.modal-box input{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:16px;font-family:inherit;text-align:center;letter-spacing:4px;margin-bottom:1rem}
+.tag-ok{background:#EAF3DE;color:#27500A;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:700}
+.tag-fail{background:#FAECE7;color:#4A1B0C;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:700}
 </style>
 </head>
 <body>
@@ -112,40 +131,45 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
   <div class="logo">SEGUROS DEL ESTADO</div>
   <h1>¿A quién le estás vendiendo?</h1>
   <p class="sub">Entrenamiento de intermediarios · Autos livianos</p>
-  <div class="field">
-    <label>Nombre completo *</label>
-    <input id="inp-name" type="text" placeholder="Ej: Carlos Rodríguez" maxlength="80">
-  </div>
-  <div class="field">
-    <label>Documento de identidad *</label>
-    <input id="inp-doc" type="text" placeholder="Ej: 12345678" maxlength="20">
-  </div>
-  <div class="field">
-    <label>Clave de intermediación *</label>
-    <input id="inp-clave" type="text" placeholder="Ej: INT-2024-001" maxlength="30">
-  </div>
-  <div class="field">
-    <label>Correo electrónico *</label>
-    <input id="inp-mail" type="email" placeholder="Ej: carlos@correo.com" maxlength="80">
-  </div>
-  <div class="field">
-    <label>Ciudad *</label>
-    <input id="inp-city" type="text" placeholder="Ej: Bogotá" maxlength="30">
-  </div>
-  <div class="field">
-    <label>Cargo</label>
-    <input id="inp-cargo" type="text" placeholder="Ej: Agente, Corredor, Asesor..." maxlength="50">
-  </div>
-  <div class="field">
-    <label>Rango de edad</label>
-    <div class="diff-row" style="flex-wrap:wrap;gap:6px">
-      <button class="diff-opt" id="edad-1" onclick="setEdad('18-25',this)">18-25</button>
-      <button class="diff-opt" id="edad-2" onclick="setEdad('26-35',this)">26-35</button>
-      <button class="diff-opt" id="edad-3" onclick="setEdad('36-45',this)">36-45</button>
-      <button class="diff-opt" id="edad-4" onclick="setEdad('46-55',this)">46-55</button>
-      <button class="diff-opt" id="edad-5" onclick="setEdad('56+',this)">56+</button>
+  
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.75rem">
+    <div class="field" style="margin-bottom:0">
+      <label>Nombre completo *</label>
+      <input id="inp-name" type="text" placeholder="Carlos Rodríguez" maxlength="80">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Documento *</label>
+      <input id="inp-doc" type="text" placeholder="12345678" maxlength="20">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Clave intermediación *</label>
+      <input id="inp-clave" type="text" placeholder="INT-2024-001" maxlength="30">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Correo electrónico *</label>
+      <input id="inp-mail" type="email" placeholder="correo@ejemplo.com" maxlength="80">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Ciudad *</label>
+      <input id="inp-city" type="text" placeholder="Bogotá" maxlength="30">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Cargo</label>
+      <input id="inp-cargo" type="text" placeholder="Agente, Corredor..." maxlength="50">
     </div>
   </div>
+
+  <div class="field">
+    <label>Rango de edad</label>
+    <div class="diff-row" style="gap:5px">
+      <button class="diff-opt" id="edad-1" onclick="setEdad('18-25',this)" style="padding:8px 4px;font-size:12px">18-25</button>
+      <button class="diff-opt" id="edad-2" onclick="setEdad('26-35',this)" style="padding:8px 4px;font-size:12px">26-35</button>
+      <button class="diff-opt" id="edad-3" onclick="setEdad('36-45',this)" style="padding:8px 4px;font-size:12px">36-45</button>
+      <button class="diff-opt" id="edad-4" onclick="setEdad('46-55',this)" style="padding:8px 4px;font-size:12px">46-55</button>
+      <button class="diff-opt" id="edad-5" onclick="setEdad('56+',this)" style="padding:8px 4px;font-size:12px">56+</button>
+    </div>
+  </div>
+
   <div class="field">
     <label>Nivel de dificultad</label>
     <div class="diff-row">
@@ -154,7 +178,18 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
       <button class="diff-opt" id="d-avanzado" onclick="setDiff('avanzado')">🔴 Avanzado</button>
     </div>
   </div>
+
+  <div style="background:#f0f4ff;border-radius:8px;padding:10px 14px;margin-bottom:1rem;display:flex;align-items:flex-start;gap:10px">
+    <input type="checkbox" id="chk-auth" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;cursor:pointer">
+    <label for="chk-auth" style="font-size:12px;color:#444;line-height:1.6;cursor:pointer">
+      Autorizo a <strong>Seguros del Estado</strong> a recolectar y usar mis datos personales (nombre, documento, correo, ciudad y cargo) con fines de formación y seguimiento comercial, conforme a la Ley 1581 de 2012 de Protección de Datos Personales de Colombia.
+    </label>
+  </div>
+
   <button class="btn btn-p btn-full" onclick="iniciar()">Comenzar juego →</button>
+  <div style="text-align:center;margin-top:1rem">
+    <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none" onclick="abrirDashboard()">📊 Acceso formación</button>
+  </div>
   <footer>Seguros del Estado · Dirección de Formación</footer>
 </div>
 
@@ -208,6 +243,18 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
   <div class="btn-row">
     <button class="btn" onclick="irLogin()">← Inicio</button>
     <button class="btn btn-p" onclick="irLogin()">🔄 Jugar de nuevo</button>
+  </div>
+  <footer>Seguros del Estado · Dirección de Formación</footer>
+</div>
+
+<!-- DASHBOARD -->
+<div class="screen" id="s-dash">
+  <div class="logo">SEGUROS DEL ESTADO</div>
+  <h1>📊 Dashboard de Formación</h1>
+  <p class="sub">Análisis de aciertos y errores por pregunta</p>
+  <div id="dash-content"></div>
+  <div style="margin-top:1rem">
+    <button class="btn" onclick="mostrar('s-login')">← Salir</button>
   </div>
   <footer>Seguros del Estado · Dirección de Formación</footer>
 </div>
@@ -463,6 +510,7 @@ function iniciar(){
   pMail=document.getElementById('inp-mail').value.trim();
   pCity=document.getElementById('inp-city').value.trim();
   pCargo=document.getElementById('inp-cargo').value.trim();
+  if(!document.getElementById('chk-auth').checked){alert('Debes aceptar la autorización de datos para continuar.');return;}
   if(!pName){alert('Ingresa tu nombre completo para continuar.');return;}
   if(!pDoc){alert('Ingresa tu documento de identidad.');return;}
   if(!pClave){alert('Ingresa tu clave de intermediación.');return;}
@@ -636,6 +684,15 @@ function mostrarResultado(){
   var img = new Image();
   img.src = SHEET_URL + params;
 
+  // Guardar detalle por pregunta
+  var detalleGuardado = JSON.parse(localStorage.getItem('seg_detalle') || '[]');
+  gHist.forEach(function(x){
+    detalleGuardado.push({txt:x.txt, tp:x.tp, lv:x.lv, ok:x.ok, name:pName, date:new Date().toLocaleDateString('es-CO')});
+  });
+  // Mantener solo los últimos 2000 registros
+  if(detalleGuardado.length > 2000) detalleGuardado = detalleGuardado.slice(-2000);
+  localStorage.setItem('seg_detalle', JSON.stringify(detalleGuardado));
+
   // Historial
   var h=document.getElementById('r-hist');
   h.innerHTML='';
@@ -656,6 +713,159 @@ function irLogin(){
   clearInterval(tmInt);
   resetEstado();
   mostrar('s-login');
+}
+
+// ---- DASHBOARD ----
+var DASH_KEY = 'formacion2024';
+
+function abrirDashboard(){
+  var overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.id = 'modal-dash';
+  var box = document.createElement('div');
+  box.className = 'modal-box';
+  box.innerHTML = '<h2>🔐 Acceso Formación</h2><p>Ingresa la clave para ver el dashboard</p>';
+  var inp = document.createElement('input');
+  inp.type = 'password';
+  inp.id = 'dash-key-input';
+  inp.placeholder = '••••••••';
+  inp.style.width='100%';inp.style.padding='10px 14px';inp.style.border='1px solid #ddd';
+  inp.style.borderRadius='8px';inp.style.fontSize='16px';inp.style.textAlign='center';
+  inp.style.letterSpacing='4px';inp.style.marginBottom='1rem';inp.style.fontFamily='inherit';
+  inp.addEventListener('keypress', function(e){if(e.key==='Enter')verificarClave();});
+  var btn1 = document.createElement('button');
+  btn1.className='btn btn-p';btn1.style.width='100%';btn1.textContent='Ingresar';
+  btn1.onclick=verificarClave;
+  var btn2 = document.createElement('button');
+  btn2.className='btn';btn2.style.cssText='width:100%;margin-top:8px;border:none;color:#aaa';
+  btn2.textContent='Cancelar';
+  btn2.onclick=function(){document.getElementById('modal-dash').remove();};
+  box.appendChild(inp);box.appendChild(btn1);box.appendChild(btn2);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  setTimeout(function(){inp.focus();},100);
+}
+
+function verificarClave(){
+  var key = document.getElementById('dash-key-input').value;
+  if(key === DASH_KEY){
+    document.getElementById('modal-dash').remove();
+    renderDashboard();
+    mostrar('s-dash');
+  } else {
+    alert('Clave incorrecta. Intenta de nuevo.');
+  }
+}
+
+function renderDashboard(){
+  var registros = JSON.parse(localStorage.getItem('seg_rank') || '[]');
+  var detalle = JSON.parse(localStorage.getItem('seg_detalle') || '[]');
+  var cont = document.getElementById('dash-content');
+
+  if(registros.length === 0){
+    cont.innerHTML = '<div style="text-align:center;padding:2rem;color:#aaa">Aún no hay datos. Los intermediarios deben jugar primero.</div>';
+    return;
+  }
+
+  // Stats generales
+  var totalJuegos = registros.length;
+  var promedioScore = Math.round(registros.reduce(function(a,b){return a+parseInt(b.score||0);},0)/totalJuegos);
+  var promedioPct = Math.round(registros.reduce(function(a,b){return a+parseInt(b.pct||0);},0)/totalJuegos);
+  var porNivel = {basico:0, intermedio:0, avanzado:0};
+  registros.forEach(function(r){porNivel[r.diff]=(porNivel[r.diff]||0)+1;});
+
+  var html = '<div class="stat-grid">';
+  html += '<div class="dash-stat"><div class="dash-snum">'+totalJuegos+'</div><div class="dash-slbl">Partidas jugadas</div></div>';
+  html += '<div class="dash-stat"><div class="dash-snum">'+promedioPct+'%</div><div class="dash-slbl">Promedio acierto</div></div>';
+  html += '<div class="dash-stat"><div class="dash-snum">'+promedioScore+'</div><div class="dash-slbl">Puntaje promedio</div></div>';
+  html += '<div class="dash-stat"><div class="dash-snum">'+(new Set(registros.map(function(r){return r.name;}))).size+'</div><div class="dash-slbl">Intermediarios</div></div>';
+  html += '</div>';
+
+  // Por nivel
+  html += '<div class="dash-card"><div class="dash-title">Partidas por nivel de dificultad</div>';
+  ['basico','intermedio','avanzado'].forEach(function(n){
+    var pct = totalJuegos > 0 ? Math.round((porNivel[n]||0)/totalJuegos*100) : 0;
+    var color = n==='basico'?'#3B6D11':n==='intermedio'?'#185FA5':'#993C1D';
+    html += '<div class="bar-wrap"><div class="bar-label"><span>'+n.charAt(0).toUpperCase()+n.slice(1)+'</span><span>'+(porNivel[n]||0)+' partidas ('+pct+'%)</span></div>';
+    html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>';
+  });
+  html += '</div>';
+
+  // Análisis por pregunta
+  if(detalle.length > 0){
+    // Agrupar por pregunta
+    var porPregunta = {};
+    detalle.forEach(function(d){
+      var key = d.txt;
+      if(!porPregunta[key]) porPregunta[key] = {txt:d.txt, tp:d.tp, lv:d.lv, ok:0, fail:0};
+      if(d.ok) porPregunta[key].ok++;
+      else porPregunta[key].fail++;
+    });
+
+    var preguntas = Object.values(porPregunta);
+    preguntas.sort(function(a,b){ return (b.fail/(b.ok+b.fail)) - (a.fail/(a.ok+a.fail)); });
+
+    // Top 10 más falladas
+    html += '<div class="dash-card"><div class="dash-title">🔴 Preguntas más falladas</div>';
+    preguntas.slice(0,10).forEach(function(p,i){
+      var total = p.ok + p.fail;
+      var pctFail = Math.round(p.fail/total*100);
+      var pctOk = 100 - pctFail;
+      var tipoBadge = p.tp==='arquetipo'?'<span style="background:#F3EEFE;color:#533AB7;font-size:10px;padding:1px 6px;border-radius:99px;font-weight:700">Arquetipo</span>':'<span style="background:#E6F1FB;color:#0C447C;font-size:10px;padding:1px 6px;border-radius:99px;font-weight:700">Producto</span>';
+      var nivBadge = '<span style="font-size:10px;color:#888">('+p.lv+')</span>';
+      html += '<div class="bar-wrap">';
+      html += '<div class="bar-label"><span style="flex:1;margin-right:8px">'+tipoBadge+' '+nivBadge+' '+p.txt.substring(0,55)+'...</span><span class="tag-fail">'+pctFail+'% error</span></div>';
+      html += '<div class="bar-track"><div class="bar-fill bar-ok" style="width:'+pctOk+'%"></div></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    // Top aciertos
+    var masAcertadas = preguntas.slice().sort(function(a,b){ return (b.ok/(b.ok+b.fail)) - (a.ok/(a.ok+a.fail)); });
+    html += '<div class="dash-card"><div class="dash-title">🟢 Preguntas mejor respondidas</div>';
+    masAcertadas.slice(0,5).forEach(function(p){
+      var total = p.ok + p.fail;
+      var pctOk = Math.round(p.ok/total*100);
+      html += '<div class="bar-wrap">';
+      html += '<div class="bar-label"><span style="flex:1;margin-right:8px">'+p.txt.substring(0,60)+'...</span><span class="tag-ok">'+pctOk+'% acierto</span></div>';
+      html += '<div class="bar-track"><div class="bar-fill bar-ok" style="width:'+pctOk+'%"></div></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    // Por tipo
+    var porTipo = {arquetipo:{ok:0,fail:0}, producto:{ok:0,fail:0}};
+    detalle.forEach(function(d){
+      var t = d.tp==='arquetipo'?'arquetipo':'producto';
+      if(d.ok) porTipo[t].ok++; else porTipo[t].fail++;
+    });
+    html += '<div class="dash-card"><div class="dash-title">Acierto por tipo de pregunta</div>';
+    ['arquetipo','producto'].forEach(function(t){
+      var tot = porTipo[t].ok + porTipo[t].fail;
+      var pct = tot>0?Math.round(porTipo[t].ok/tot*100):0;
+      var color = t==='arquetipo'?'#533AB7':'#185FA5';
+      html += '<div class="bar-wrap"><div class="bar-label"><span>'+t.charAt(0).toUpperCase()+t.slice(1)+'</span><span>'+pct+'% acierto ('+tot+' resp.)</span></div>';
+      html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>';
+    });
+    html += '</div>';
+
+  } else {
+    html += '<div class="dash-card" style="text-align:center;color:#aaa;font-size:13px">El detalle por pregunta aparecerá después de las primeras partidas con esta versión actualizada.</div>';
+  }
+
+  // Últimos jugadores
+  html += '<div class="dash-card"><div class="dash-title">Últimos intermediarios</div>';
+  registros.slice(0,10).forEach(function(r){
+    var diffColor = r.diff==='basico'?'#27500A':r.diff==='intermedio'?'#0C447C':'#4A1B0C';
+    var diffBg = r.diff==='basico'?'#EAF3DE':r.diff==='intermedio'?'#E6F1FB':'#FAECE7';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px">';
+    html += '<div><div style="font-weight:600;color:#111">'+r.name+'</div><div style="font-size:11px;color:#888">'+r.city+' · '+r.date+'</div></div>';
+    html += '<div style="text-align:right"><div style="font-weight:700;color:#185FA5">'+r.score+' pts</div><span style="background:'+diffBg+';color:'+diffColor+';font-size:10px;padding:1px 7px;border-radius:99px;font-weight:700">'+r.diff+'</span></div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  cont.innerHTML = html;
 }
 
 // Init

@@ -189,6 +189,7 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 </div><!-- end app -->
 
 <script>
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwZhfledhsRMdJTiYxWUnhPovkjPP-oBZ_CitWWsJnvAzD1ZCu16csJoTVbnkok2Cjn/exec';
 var CIRC = 119.4;
 var TL = 20;
 var diff = 'basico';
@@ -576,6 +577,13 @@ function mostrarResultado(){
   localStorage.setItem('seg_rank',JSON.stringify(registros));
   var pos=registros.findIndex(function(r){return r.name===pName&&r.score===score;})+1;
   document.getElementById('r-pos').textContent='🏆 Puesto '+pos+' de '+registros.length+' intermediarios';
+
+  // Enviar a Google Sheets
+  fetch(SHEET_URL, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:pName, city:pCity, diff:diff, score:score, pct:Math.round(pct*100), date:new Date().toISOString()})
+  }).catch(function(){});}
 
   // Historial
   var h=document.getElementById('r-hist');

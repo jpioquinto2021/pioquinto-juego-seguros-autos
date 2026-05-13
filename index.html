@@ -113,12 +113,38 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
   <h1>¿A quién le estás vendiendo?</h1>
   <p class="sub">Entrenamiento de intermediarios · Autos livianos</p>
   <div class="field">
-    <label>Tu nombre completo</label>
-    <input id="inp-name" type="text" placeholder="Ej: Carlos Rodríguez" maxlength="50">
+    <label>Nombre completo *</label>
+    <input id="inp-name" type="text" placeholder="Ej: Carlos Rodríguez" maxlength="80">
   </div>
   <div class="field">
-    <label>Ciudad</label>
+    <label>Documento de identidad *</label>
+    <input id="inp-doc" type="text" placeholder="Ej: 12345678" maxlength="20">
+  </div>
+  <div class="field">
+    <label>Clave de intermediación *</label>
+    <input id="inp-clave" type="text" placeholder="Ej: INT-2024-001" maxlength="30">
+  </div>
+  <div class="field">
+    <label>Correo electrónico *</label>
+    <input id="inp-mail" type="email" placeholder="Ej: carlos@correo.com" maxlength="80">
+  </div>
+  <div class="field">
+    <label>Ciudad *</label>
     <input id="inp-city" type="text" placeholder="Ej: Bogotá" maxlength="30">
+  </div>
+  <div class="field">
+    <label>Cargo</label>
+    <input id="inp-cargo" type="text" placeholder="Ej: Agente, Corredor, Asesor..." maxlength="50">
+  </div>
+  <div class="field">
+    <label>Rango de edad</label>
+    <div class="diff-row" style="flex-wrap:wrap;gap:6px">
+      <button class="diff-opt" id="edad-1" onclick="setEdad('18-25',this)">18-25</button>
+      <button class="diff-opt" id="edad-2" onclick="setEdad('26-35',this)">26-35</button>
+      <button class="diff-opt" id="edad-3" onclick="setEdad('36-45',this)">36-45</button>
+      <button class="diff-opt" id="edad-4" onclick="setEdad('46-55',this)">46-55</button>
+      <button class="diff-opt" id="edad-5" onclick="setEdad('56+',this)">56+</button>
+    </div>
   </div>
   <div class="field">
     <label>Nivel de dificultad</label>
@@ -189,11 +215,11 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 </div><!-- end app -->
 
 <script>
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwZhfledhsRMdJTiYxWUnhPovkjPP-oBZ_CitWWsJnvAzD1ZCu16csJoTVbnkok2Cjn/exec';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzeQusHo0HtwGsHduiQGWUf88UyoRqeJU4DL5Qf9j21dAvG84PFjqUYvKBrTRsYPO0/exec';
 var CIRC = 119.4;
 var TL = 30;
 var diff = 'basico';
-var pName = '', pCity = '';
+var pName = '', pCity = '', pDoc = '', pClave = '', pMail = '', pCargo = '', pEdad = '';
 var curQ, score, nOk, tmInt, tLeft, gHist, gQuestions;
 
 var banco = [
@@ -411,6 +437,15 @@ function resetEstado(){
   curQ=0; score=0; nOk=0; gHist=[]; gQuestions=[];
 }
 
+// ---- EDAD ----
+function setEdad(e, btn){
+  pEdad=e;
+  document.querySelectorAll('[id^="edad-"]').forEach(function(b){
+    b.className='diff-opt';
+  });
+  btn.className='diff-opt sel-intermedio';
+}
+
 // ---- DIFICULTAD ----
 function setDiff(d){
   diff=d;
@@ -423,8 +458,16 @@ function setDiff(d){
 // ---- INICIAR ----
 function iniciar(){
   pName=document.getElementById('inp-name').value.trim();
+  pDoc=document.getElementById('inp-doc').value.trim();
+  pClave=document.getElementById('inp-clave').value.trim();
+  pMail=document.getElementById('inp-mail').value.trim();
   pCity=document.getElementById('inp-city').value.trim();
-  if(!pName){alert('Ingresa tu nombre para continuar.');return;}
+  pCargo=document.getElementById('inp-cargo').value.trim();
+  if(!pName){alert('Ingresa tu nombre completo para continuar.');return;}
+  if(!pDoc){alert('Ingresa tu documento de identidad.');return;}
+  if(!pClave){alert('Ingresa tu clave de intermediación.');return;}
+  if(!pMail){alert('Ingresa tu correo electrónico.');return;}
+  if(!pCity){alert('Ingresa tu ciudad.');return;}
   resetEstado();
   var pool=banco.filter(function(q){return q.lv===diff;});
   pool.sort(function(){return Math.random()-.5;});
@@ -580,7 +623,12 @@ function mostrarResultado(){
 
   // Enviar a Google Sheets via GET
   var params = '?name=' + encodeURIComponent(pName) +
+    '&doc=' + encodeURIComponent(pDoc) +
+    '&clave=' + encodeURIComponent(pClave) +
+    '&mail=' + encodeURIComponent(pMail) +
     '&city=' + encodeURIComponent(pCity) +
+    '&cargo=' + encodeURIComponent(pCargo) +
+    '&edad=' + encodeURIComponent(pEdad) +
     '&diff=' + encodeURIComponent(diff) +
     '&score=' + encodeURIComponent(score) +
     '&pct=' + encodeURIComponent(Math.round(pct*100)) +

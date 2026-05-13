@@ -175,6 +175,10 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
       <input id="inp-mail" type="email" placeholder="correo@ejemplo.com" maxlength="80">
     </div>
     <div class="field" style="margin-bottom:0">
+      <label>Celular *</label>
+      <input id="inp-cel" type="tel" placeholder="3001234567" maxlength="15">
+    </div>
+    <div class="field" style="margin-bottom:0">
       <label>Ciudad *</label>
       <input id="inp-city" type="text" placeholder="Bogotá" maxlength="30">
     </div>
@@ -287,11 +291,11 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 </div><!-- end app -->
 
 <script>
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzeQusHo0HtwGsHduiQGWUf88UyoRqeJU4DL5Qf9j21dAvG84PFjqUYvKBrTRsYPO0/exec';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzs36e8jiXW7-ruS5q8E3XWCo4ZUNbHpfNNb-JcnyqgSOborz3PfNCr9OufB0WIEJvt/exec';
 var CIRC = 119.4;
 var TL = 30;
 var diff = 'basico';
-var pName = '', pCity = '', pDoc = '', pClave = '', pMail = '', pCargo = '', pEdad = '';
+var pName = '', pCity = '', pDoc = '', pClave = '', pMail = '', pCel = '', pCargo = '', pEdad = '';
 var curQ, score, nOk, tmInt, tLeft, gHist, gQuestions;
 
 var banco = [
@@ -424,11 +428,11 @@ var banco = [
    fb:'La analogía del extintor conecta con la lógica práctica del Guerrero.',
    coach:'💡 Las analogías concretas funcionan mejor que los argumentos abstractos.'},
   {lv:'intermedio',tp:'producto',prf:'El Rey',pc:'#BA7517',prod:'elite',
-   txt:'¿Hasta cuánto cubre Élite en vidrios y con qué condición?',
-   hint:'Dato real: Élite cubre vidrios hasta 90 SMDLV con repuesto de logomarca.',
-   ops:['90 SMDLV con repuesto de logomarca','30 SMDLV sin logomarca','90 SMDLV sin restricción','No cubre vidrios'],cor:0,
-   fb:'Élite cubre vidrios hasta 90 SMDLV con repuesto de logomarca.',
-   coach:'💡 Para el Rey el detalle de "con logomarca" importa — es coherente con su estatus.'},
+   txt:'¿Cuál es la diferencia entre Élite e Integral en la cobertura de vidrios?',
+   hint:'Dato real: Élite cubre vidrios hasta 90 SMDLV con logomarca. Integral hasta 30 SMDLV sin logomarca. Clásico NO ampara vidrios.',
+   ops:['Élite 90 SMDLV con logomarca, Integral 30 SMDLV sin logomarca, Clásico no ampara','Solo Élite cubre vidrios','Ambos cubren igual hasta 90 SMDLV','Integral cubre más que Élite en vidrios'],cor:0,
+   fb:'Élite cubre vidrios hasta 90 SMDLV con repuesto de logomarca. Integral los cubre hasta 30 SMDLV sin logomarca. Clásico no ampara vidrios.',
+   coach:'💡 Para el Rey el detalle de logomarca importa — es coherente con su estatus y el valor de su vehículo.'},
   {lv:'intermedio',tp:'arquetipo',prf:'El Sabio',pc:'#3B6D11',prod:'arquetipo',
    txt:'El Sabio pregunta "¿por qué necesito Integral si solo uso el carro en ciudad?" ¿Qué respondes?',
    hint:'Con el Sabio la honestidad genera más confianza que intentar vender más.',
@@ -533,6 +537,7 @@ function iniciar(){
   pDoc=document.getElementById('inp-doc').value.trim();
   pClave=document.getElementById('inp-clave').value.trim();
   pMail=document.getElementById('inp-mail').value.trim();
+  pCel=document.getElementById('inp-cel').value.trim();
   pCity=document.getElementById('inp-city').value.trim();
   pCargo=document.getElementById('inp-cargo').value.trim();
   if(!document.getElementById('chk-auth').checked){alert('Debes aceptar la autorización de datos para continuar.');return;}
@@ -540,6 +545,7 @@ function iniciar(){
   if(!pDoc){alert('Ingresa tu documento de identidad.');return;}
   if(!pClave){alert('Ingresa tu clave de intermediación.');return;}
   if(!pMail){alert('Ingresa tu correo electrónico.');return;}
+  if(!pCel){alert('Ingresa tu número de celular.');return;}
   if(!pCity){alert('Ingresa tu ciudad.');return;}
   resetEstado();
   var pool=banco.filter(function(q){return q.lv===diff;});
@@ -699,6 +705,7 @@ function mostrarResultado(){
     '&doc=' + encodeURIComponent(pDoc) +
     '&clave=' + encodeURIComponent(pClave) +
     '&mail=' + encodeURIComponent(pMail) +
+    '&cel=' + encodeURIComponent(pCel) +
     '&city=' + encodeURIComponent(pCity) +
     '&cargo=' + encodeURIComponent(pCargo) +
     '&edad=' + encodeURIComponent(pEdad) +

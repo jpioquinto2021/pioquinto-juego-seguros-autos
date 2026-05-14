@@ -291,7 +291,7 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 </div><!-- end app -->
 
 <script>
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzs36e8jiXW7-ruS5q8E3XWCo4ZUNbHpfNNb-JcnyqgSOborz3PfNCr9OufB0WIEJvt/exec';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbz4NPzw22lbtKM8pGAtb4tIeby7WPFPkqu8uacH_kTQasFY_tNf1OrgqL2XbzPD7LXS/exec';
 var CIRC = 119.4;
 var TL = 30;
 var diff = 'basico';
@@ -692,13 +692,33 @@ function mostrarResultado(){
   document.getElementById('r-rank').textContent=rank;
   document.getElementById('r-msg').textContent=msg;
 
-  // Ranking local
-  var registros=JSON.parse(localStorage.getItem('seg_rank')||'[]');
-  registros.push({name:pName,city:pCity,diff:diff,score:score,pct:Math.round(pct*100),date:new Date().toLocaleDateString('es-CO')});
-  registros.sort(function(a,b){return b.score-a.score;});
-  localStorage.setItem('seg_rank',JSON.stringify(registros));
-  var pos=registros.findIndex(function(r){return r.name===pName&&r.score===score;})+1;
-  document.getElementById('r-pos').textContent='🏆 Puesto '+pos+' de '+registros.length+' intermediarios';
+  // Ranking global desde Google Sheets
+  document.getElementById('r-pos').textContent='⏳ Calculando tu posición...';
+  setTimeout(function(){
+    fetch(SHEET_URL + '?action=ranking')
+      .then(function(r){return r.json();})
+      .then(function(ranking){
+        var pos = 1;
+        for(var i=0;i<ranking.length;i++){
+          if(ranking[i].score > score) pos++;
+        }
+        var total = ranking.length + 1;
+        document.getElementById('r-pos').textContent='🏆 Estás en el puesto '+pos+' de '+total+' intermediarios';
+        // También guardar local como respaldo
+        var registros=JSON.parse(localStorage.getItem('seg_rank')||'[]');
+        registros.push({name:pName,city:pCity,diff:diff,score:score,pct:Math.round(pct*100),date:new Date().toLocaleDateString('es-CO')});
+        registros.sort(function(a,b){return b.score-a.score;});
+        localStorage.setItem('seg_rank',JSON.stringify(registros));
+      })
+      .catch(function(){
+        var registros=JSON.parse(localStorage.getItem('seg_rank')||'[]');
+        registros.push({name:pName,city:pCity,diff:diff,score:score,pct:Math.round(pct*100),date:new Date().toLocaleDateString('es-CO')});
+        registros.sort(function(a,b){return b.score-a.score;});
+        localStorage.setItem('seg_rank',JSON.stringify(registros));
+        var pos=registros.findIndex(function(r){return r.name===pName&&r.score===score;})+1;
+        document.getElementById('r-pos').textContent='🏆 Puesto '+pos+' de '+registros.length+' intermediarios';
+      });
+  }, 2000);
 
   // Enviar a Google Sheets via GET
   var params = '?name=' + encodeURIComponent(pName) +

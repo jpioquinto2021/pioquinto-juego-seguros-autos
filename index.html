@@ -297,7 +297,7 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 </div><!-- end app -->
 
 <script>
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycby5DJ0F-2WkBqJWZnKBToClGM5GdsDDkOwBDw4UMvgLwUoE5Yx6RQngckqlFbuasX2d/exec';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyY4p8HRrvaoAFNtT2vcnoTSJlmcSfhKkjx6lFMPT_2t-xPBFv4ufoFsUmxv_3wEB2k/exec';
 var CIRC = 119.4;
 var TL = 30;
 var diff = 'basico';
@@ -699,12 +699,27 @@ function mostrarResultado(){
   document.getElementById('r-msg').textContent=msg;
 
   // Ranking global desde Google Sheets
-  document.getElementById('r-pos').textContent='⏳ Calculando tu posición...';
+  // Mensaje de espera animado
+  var mensajesEspera = [
+    '⏳ No te vayas... estamos calculando tu posición global',
+    '📊 Comparando tu resultado con todos los intermediarios...',
+    '🏆 ¡Ya casi! Preparando tu ranking...'
+  ];
+  var msgIdx = 0;
+  document.getElementById('r-pos').textContent = mensajesEspera[0];
+  var msgInterval = setInterval(function(){
+    msgIdx = (msgIdx + 1) % mensajesEspera.length;
+    document.getElementById('r-pos').textContent = mensajesEspera[msgIdx];
+  }, 900);
   setTimeout(function(){
-    fetch(SHEET_URL + '?action=ranking&score=' + score)
+    clearInterval(msgInterval);
+    fetch(SHEET_URL + '?action=ranking&score=' + score + '&nivel=' + encodeURIComponent(diff) + '&doc=' + encodeURIComponent(pDoc))
       .then(function(r){return r.json();})
       .then(function(data){
-        document.getElementById('r-pos').textContent='🏆 Estás en el puesto '+data.pos+' de '+data.total+' intermediarios';
+        var nivelLabel = {basico:'Básico', intermedio:'Intermedio', avanzado:'Avanzado'}[data.nivel] || data.nivel;
+        document.getElementById('r-pos').innerHTML =
+          '🏆 Puesto <strong>' + data.posGeneral + '</strong> de <strong>' + data.totalGeneral + '</strong> intermediarios (general)<br>' +
+          '📊 Puesto <strong>' + data.posNivel + '</strong> de <strong>' + data.totalNivel + '</strong> en nivel <strong>' + nivelLabel + '</strong>';
       })
       .catch(function(){
         document.getElementById('r-pos').textContent='🏆 ¡Resultado registrado!';

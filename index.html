@@ -143,11 +143,11 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
     </div>
     <div style="display:flex;gap:8px;margin-top:1rem;position:relative">
       <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:6px 12px;text-align:center;flex:1">
-        <div style="color:#fff;font-size:18px;font-weight:700">2</div>
+        <div style="color:#fff;font-size:18px;font-weight:700">3</div>
         <div style="color:rgba(255,255,255,.7);font-size:10px">Ramos activos</div>
       </div>
       <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:6px 12px;text-align:center;flex:1">
-        <div style="color:#fff;font-size:18px;font-weight:700">90+</div>
+        <div style="color:#fff;font-size:18px;font-weight:700">140+</div>
         <div style="color:rgba(255,255,255,.7);font-size:10px">Preguntas</div>
       </div>
       <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:6px 12px;text-align:center;flex:1">
@@ -164,9 +164,10 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
       <span style="font-size:11px;color:#C45E0A;font-weight:600">Mayo 2026</span>
     </div>
     <ul style="font-size:12px;color:#C45E0A;line-height:1.9;padding-left:1.1rem;margin:0">
-      <li>Nuevo módulo: <strong>Autos Comercial</strong> — TaxiEstado, Genio, Pesados y RC Pasajeros</li>
-      <li>41 preguntas nuevas con datos reales de coberturas</li>
-      <li>Ranking global mejorado con posición real entre todos los intermediarios</li>
+      <li>🆕 Nuevo ramo: <strong>Cumplimiento</strong> — Particular, Estatal, Judicial, RCE y más</li>
+      <li>25 preguntas nuevas basadas en clausulados reales</li>
+      <li>Autos Comercial — TaxiEstado, Genio, Pesados y RC Pasajeros</li>
+      <li>Ranking mejorado con posición real entre todos los intermediarios</li>
     </ul>
   </div>
 
@@ -224,11 +225,11 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
       <div style="font-size:14px;font-weight:700;color:#C45E0A">Autos</div>
       <div style="font-size:11px;color:#F47920;margin-top:3px">Particular · Comercial</div>
     </button>
-    <button onclick="alert('Próximamente 🚀')"
-      style="background:#f8f9fb;border:1px dashed #ccc;border-radius:12px;padding:1rem .75rem;cursor:not-allowed;font-family:inherit;text-align:center;opacity:.55">
-      <i class="ti ti-home" style="font-size:28px;color:#aaa;display:block;margin-bottom:6px" aria-hidden="true"></i>
-      <div style="font-size:14px;font-weight:700;color:#aaa">Generales</div>
-      <div style="font-size:11px;color:#bbb;margin-top:3px">Próximamente</div>
+    <button onclick="seleccionarRamo('cumplimiento',this)" id="ramo-cumplimiento"
+      style="background:#FEF0E6;border:2px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
+      <i class="ti ti-shield-check" style="font-size:28px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
+      <div style="font-size:14px;font-weight:700;color:#C45E0A">Cumplimiento</div>
+      <div style="font-size:11px;color:#F47920;margin-top:3px">Particular · Estatal · Judicial</div>
     </button>
     <button onclick="alert('Próximamente 🚀')"
       style="background:#f8f9fb;border:1px dashed #ccc;border-radius:12px;padding:1rem .75rem;cursor:not-allowed;font-family:inherit;text-align:center;opacity:.55">
@@ -262,6 +263,37 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
       </button>
     </div>
 
+  </div>
+
+  <!-- SEGMENTOS CUMPLIMIENTO -->
+  <div id="segmentos-cumplimiento" style="display:none">
+    <div style="font-size:13px;font-weight:700;color:#444;margin-bottom:8px">Elige el segmento de Cumplimiento:</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
+      <button onclick="irALogin('cumplimiento-particular')"
+        style="background:#E6F1FB;border:1.5px solid #185FA5;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
+        <i class="ti ti-building" style="font-size:24px;color:#185FA5;display:block;margin-bottom:6px" aria-hidden="true"></i>
+        <div style="font-size:13px;font-weight:700;color:#0C447C">Particular</div>
+        <div style="font-size:10px;color:#185FA5;margin-top:3px">Contratos privados</div>
+      </button>
+      <button onclick="irALogin('cumplimiento-estatal')"
+        style="background:#FEF0E6;border:1.5px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
+        <i class="ti ti-landmark" style="font-size:24px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
+        <div style="font-size:13px;font-weight:700;color:#C45E0A">Estatal</div>
+        <div style="font-size:10px;color:#F47920;margin-top:3px">Contratos con el Estado</div>
+      </button>
+      <button onclick="irALogin('cumplimiento-judicial')"
+        style="background:#E6F1FB;border:1.5px solid #185FA5;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
+        <i class="ti ti-gavel" style="font-size:24px;color:#185FA5;display:block;margin-bottom:6px" aria-hidden="true"></i>
+        <div style="font-size:13px;font-weight:700;color:#0C447C">Caución Judicial</div>
+        <div style="font-size:10px;color:#185FA5;margin-top:3px">Procesos judiciales</div>
+      </button>
+      <button onclick="irALogin('cumplimiento')"
+        style="background:#FEF0E6;border:1.5px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
+        <i class="ti ti-list-check" style="font-size:24px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
+        <div style="font-size:13px;font-weight:700;color:#C45E0A">Todos los amparos</div>
+        <div style="font-size:10px;color:#F47920;margin-top:3px">Mezcla todos los productos</div>
+      </button>
+    </div>
   </div>
 
   <div style="text-align:center;margin-top:.25rem">
@@ -907,490 +939,170 @@ var banco = [
    fb:'La frontera es 5 toneladas. Genio Comercial cubre capacidad hasta 5TN (exclusivo). Pesados cubre igual o superior a 5TN.',
    coach:'💡 Un camión de exactamente 5TN va en Pesados. Siempre verifica la capacidad exacta antes de suscribir.'},
 
-];
+  // =================== NUEVAS PREGUNTAS COMERCIAL (Presentación Mayo 2026) ===================
+  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
+   txt:'¿Cuál es el valor asegurable máximo para un taxi en el segmento comercial?',
+   hint:'Dato real: Taxis hasta $150 millones. Vehículos comerciales en general hasta $350 millones. Motos hasta $50 millones.',
+   ops:['$350 millones','$50 millones','$150 millones','$500 millones'],cor:2,seg:'comercial',
+   fb:'El valor asegurable máximo para taxis es $150 millones — menos que el general comercial ($350M) por el perfil de riesgo del taxi.',
+   coach:'💡 Pregunta siempre el valor del vehículo antes de cotizar. Si supera el límite, no es suscribible.'},
 
-// ---- ESTADO ----
-function resetEstado(){
-  curQ=0; score=0; nOk=0; gHist=[]; gQuestions=[];
-}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
+   txt:'¿Cuál es el valor asegurable máximo para una motocicleta en MotoEstado?',
+   hint:'Dato real: Motos hasta $50 millones. Vehículos comerciales generales hasta $350 millones.',
+   ops:['$150 millones','$350 millones','$100 millones','$50 millones'],cor:3,seg:'comercial',
+   fb:'El valor asegurable máximo para motos es $50 millones — el límite más bajo del segmento comercial.',
+   coach:'💡 Si una moto supera $50M, no es suscribible en MotoEstado. Verifica siempre el valor con la Guía Fasecolda.'},
 
-// ---- EDAD ----
-function setEdad(e, btn){
-  pEdad=e;
-  document.querySelectorAll('[id^="edad-"]').forEach(function(b){
-    b.className='diff-opt';
-  });
-  btn.className='diff-opt sel-intermedio';
-}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
+   txt:'¿Cuál es el valor asegurable máximo para vehículos pesados?',
+   hint:'Dato real: Pesados hasta $900 millones.',
+   ops:['$350 millones','$500 millones','$900 millones','$1.200 millones'],cor:2,seg:'comercial',
+   fb:'Los vehículos pesados tienen un valor asegurable máximo de $900 millones — el más alto del portafolio de autos.',
+   coach:'💡 Un remolcador puede costar $300M-$800M. El límite de $900M cubre la mayoría de flotas pesadas del mercado.'},
 
-// ---- NAVEGACIÓN DE RAMOS ----
-function seleccionarRamo(ramo, btn){
-  // Marcar ramo seleccionado
-  document.querySelectorAll('[id^="ramo-"]').forEach(function(b){
-    b.style.borderWidth='1px';
-    b.style.borderStyle='dashed';
-    b.style.borderColor='#ccc';
-    b.style.background='#f8f9fb';
-    b.style.opacity='0.6';
-  });
-  btn.style.borderWidth='2px';
-  btn.style.borderStyle='solid';
-  btn.style.borderColor='#185FA5';
-  btn.style.background='#E6F1FB';
-  btn.style.opacity='1';
-  // Mostrar segmentos del ramo
-  document.getElementById('segmentos-autos').style.display = ramo==='autos' ? 'block' : 'none';
-}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
+   txt:'¿Cuál es la antigüedad máxima permitida para asegurar un vehículo comercial (no moto)?',
+   hint:'Dato real: Vehículos comerciales hasta 15 años de antigüedad. Motos hasta 5 años.',
+   ops:['5 años','10 años','20 años','15 años'],cor:3,seg:'comercial',
+   fb:'Los vehículos comerciales pueden asegurarse hasta 15 años de antigüedad. Las motos solo hasta 5 años.',
+   coach:'💡 La antigüedad es una variable clave de suscripción. Siempre verifica el año de fabricación antes de cotizar.'},
 
-function irALogin(seg){
-  segmento = seg;
-  mostrar('s-login');
-  // Mostrar qué segmento se va a jugar
-  var labels = {particular:'🚗 Autos Particular', comercial:'🏢 Autos Comercial'};
-  var existing = document.getElementById('seg-indicator');
-  if(!existing){
-    var ind = document.createElement('div');
-    ind.id = 'seg-indicator';
-    ind.style.cssText = 'background:#f0f4ff;border-radius:8px;padding:8px 14px;margin-bottom:1rem;font-size:13px;font-weight:600;color:#185FA5;text-align:center';
-    var loginBox = document.querySelector('#s-login .field');
-    loginBox.parentNode.insertBefore(ind, loginBox);
-  }
-  document.getElementById('seg-indicator').textContent = 'Practicando: ' + labels[seg];
-}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
+   txt:'¿Cuál es la antigüedad máxima permitida para asegurar una motocicleta?',
+   hint:'Dato real: Motos hasta 5 años de antigüedad. Vehículos comerciales generales hasta 15 años.',
+   ops:['10 años','15 años','5 años','3 años'],cor:2,seg:'comercial',
+   fb:'Las motocicletas solo pueden asegurarse hasta 5 años de antigüedad — mucho menor que los vehículos comerciales (15 años).',
+   coach:'💡 Una moto de 6 años no es suscribible. Verifica siempre el año antes de ofrecer MotoEstado.'},
 
-// ---- SEGMENTO ----
-function setSeg(s, btn){
-  segmento = s;
-  document.querySelectorAll('[id^="seg-"]').forEach(function(b){
-    b.className='diff-opt';
-  });
-  btn.className='diff-opt sel-basico';
-}
+  {lv:'basico',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
+   txt:'Un cliente quiere asegurar su vehículo eléctrico comercial. ¿Qué le respondes?',
+   hint:'Dato real: Los vehículos eléctricos están dentro de las principales exclusiones del portafolio.',
+   ops:['Claro, lo aseguramos con Genio Comercial','Lo aseguramos con condiciones especiales','Los vehículos eléctricos son una exclusión — no son suscribibles en el portafolio actual','Solo si tiene menos de 5 años'],cor:2,seg:'comercial',
+   fb:'Los vehículos eléctricos son una exclusión expresa del portafolio de Seguros del Estado — no son suscribibles.',
+   coach:'💡 Comunica las exclusiones con claridad y empatía. Es mejor decirlo antes que en el siniestro.'},
 
-// ---- DIFICULTAD ----
-function setDiff(d){
-  diff=d;
-  var colores = {
-    basico:     {bg:'#E6F1FB',    border:'2px solid #185FA5',    icoCol:'#185FA5',  txt:'#0C447C',    chkIcon:'ti-circle-check', chkCol:'#185FA5'},
-    intermedio: {bg:'#FEF0E6', border:'2px solid #F47920',     icoCol:'#F47920',   txt:'#C45E0A', chkIcon:'ti-circle-check', chkCol:'#F47920'},
-    avanzado:   {bg:'#0C447C',      border:'2px solid #0C447C',    icoCol:'#fff',        txt:'#fff',          chkIcon:'ti-circle-check', chkCol:'#F47920'}
-  };
-  var inactivo = {bg:'#f8f9fb', border:'1.5px solid #ddd', icoCol:'#ccc', txt:'#aaa', chkIcon:'ti-circle', chkCol:'#ddd'};
-  ['basico','intermedio','avanzado'].forEach(function(x){
-    var btn = document.getElementById('d-'+x);
-    var chk = document.getElementById('chk-'+x);
-    var ico = btn.querySelector('i:first-child');
-    var lbl = btn.querySelector('div');
-    var c = (x===d) ? colores[x] : inactivo;
-    btn.style.background = c.bg;
-    btn.style.border = c.border;
-    if(ico) ico.style.color = c.icoCol;
-    if(lbl) lbl.style.color = c.txt;
-    chk.className = 'ti ' + c.chkIcon;
-    chk.style.color = c.chkCol;
-  });
-}
+  {lv:'basico',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
+   txt:'Un conductor de plataforma (Uber, InDriver) quiere asegurar su carro con Seguros del Estado. ¿Qué aplica?',
+   hint:'Dato real: El transporte de pasajeros en servicio de plataformas es una exclusión expresa.',
+   ops:['Se asegura como particular — es un carro normal','Se asegura con TaxiEstado','El transporte en plataformas es una exclusión — no es suscribible','Se asegura con Genio Pasajeros'],cor:2,seg:'comercial',
+   fb:'El transporte de pasajeros en servicio de plataformas (Uber, InDriver, etc.) es una exclusión expresa — no es suscribible.',
+   coach:'💡 Este es uno de los errores más frecuentes. Un carro de plataforma asegurado como particular tiene riesgo de no pago en siniestro.'},
 
-// ---- INICIAR ----
-function iniciar(){
-  pName=document.getElementById('inp-name').value.trim();
-  pDoc=document.getElementById('inp-doc').value.trim();
-  pClave=document.getElementById('inp-clave').value.trim();
-  pMail=document.getElementById('inp-mail').value.trim();
-  pCel=document.getElementById('inp-cel').value.trim();
-  pCity=document.getElementById('inp-city').value.trim();
-  pCargo=document.getElementById('inp-cargo').value.trim();
-  if(!document.getElementById('chk-auth').checked){alert('Debes aceptar la autorización de datos para continuar.');return;}
-  if(!pName){alert('Ingresa tu nombre completo para continuar.');return;}
-  if(!pDoc){alert('Ingresa tu documento de identidad.');return;}
-  if(!pClave){alert('Ingresa tu clave de intermediación.');return;}
-  if(!pMail){alert('Ingresa tu correo electrónico.');return;}
-  if(!pCel){alert('Ingresa tu número de celular.');return;}
-  if(!pCity){alert('Ingresa tu ciudad.');return;}
-  resetEstado();
-  var pool=banco.filter(function(q){
-    if(segmento==='particular'){
-      return q.lv===diff && (!q.seg || q.seg==='particular');
-    } else {
-      return q.lv===diff && q.seg===segmento;
-    }
-  });
-  pool.sort(function(){return Math.random()-.5;});
-  gQuestions=pool.slice(0,Math.min(15,pool.length));
-  mostrar('s-game');
-  mostrarQ();
-}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
+   txt:'¿Qué coberturas NO otorga el seguro cuando el vehículo pesado es un remolque?',
+   hint:'Dato real: Remolques NO tienen RCE, amparo patrimonial, accidentes personales, auxilio por paralización ni obligaciones financieras.',
+   ops:['Solo no tiene RCE','No tiene ninguna cobertura','RCE, amparo patrimonial, accidentes personales, auxilio por paralización y obligaciones financieras','Solo no tiene accidentes personales'],cor:2,seg:'comercial',
+   fb:'Los remolques tienen coberturas muy limitadas: NO tienen RCE, amparo patrimonial, accidentes personales, auxilio por paralización ni obligaciones financieras.',
+   coach:'💡 El remolque es el vehículo más limitado en coberturas. Siempre aclara esto al cliente antes de suscribir.'},
 
-// ---- MOSTRAR PREGUNTA ----
-function mostrarQ(){
-  var q=gQuestions[curQ];
-  clearInterval(tmInt);
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
+   txt:'¿Cuáles son las variables clave de tarificación en el segmento comercial?',
+   hint:'Dato real: Marca, clase, tipo/línea, año de fabricación, valor asegurable, zona y otros.',
+   ops:['Solo el valor y el año','Color, marca y modelo','Marca, clase, tipo/línea, año de fabricación, valor asegurable y zona','Solo la zona y el uso'],cor:2,seg:'comercial',
+   fb:'Las variables clave de tarificación son: marca, clase, tipo/línea, año de fabricación, valor asegurable y zona — todas determinan el precio final.',
+   coach:'💡 Conocer las variables de tarificación te permite anticipar el precio antes de cotizar y manejar las expectativas del cliente.'},
 
-  // reset UI
-  document.getElementById('q-fb').style.display='none';
-  document.getElementById('q-coach').style.display='none';
-  document.getElementById('q-hint').style.display='none';
-  document.getElementById('btn-sig').style.display='none';
-  document.getElementById('q-fb').className='fb';
+  {lv:'intermedio',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
+   txt:'Un taxista dice: "me robaron el taxi — es toda mi fuente de ingreso". ¿Qué argumento usa Seguros del Estado para este perfil?',
+   hint:'La presentación dice: Un taxi robado no es un carro perdido... es una familia sin ingresos mañana.',
+   ops:['El taxi tiene el mejor precio del mercado','TaxiEstado protege el patrimonio, da continuidad al negocio y responde rápido ante siniestro — un taxi robado es una familia sin ingresos','El seguro cubre el valor total sin deducible','Todos los seguros de taxi son iguales'],cor:1,seg:'comercial',
+   fb:'El argumento emocional más poderoso: "Un taxi robado no es un carro perdido... es una familia sin ingresos mañana." TaxiEstado fue diseñado para proteger esa realidad.',
+   coach:'💡 Con el taxista el argumento no es técnico — es humano. Conecta con su realidad: el taxi es su sustento diario.'},
 
-  // meta
-  var segLabel={'particular':'Autos Particular','comercial':'Autos Comercial'}[segmento]||segmento;
-  document.getElementById('q-cnt').textContent='Pregunta '+(curQ+1)+'/'+gQuestions.length+' · '+segLabel+' · '+pName;
-  document.getElementById('q-prof').textContent=q.prf;
-  document.getElementById('q-prof').style.color=q.pc;
-  document.getElementById('q-kind').textContent=q.tp==='arquetipo'?'Pregunta de arquetipo':'Pregunta de producto';
-  document.getElementById('q-txt').textContent=q.txt;
-  document.getElementById('q-hint').textContent=q.hint;
-  document.getElementById('pfill').style.width=((curQ/gQuestions.length)*100)+'%';
-  document.getElementById('pts-live').textContent=score+' pts';
+  {lv:'intermedio',tp:'arquetipo',prf:'Identificación',pc:'#633806',prod:'arquetipo',
+   txt:'¿Cuál es el perfil de cliente típico del segmento de vehículos pesados?',
+   hint:'Dato real: Empresas transportadoras, transportadores independientes, constructoras, mensajería, paqueteo y logística.',
+   ops:['Solo personas naturales con camiones','Empresas transportadoras, transportadores, constructoras, mensajería, paqueteo y logística','Solo cooperativas de transporte','Únicamente empresas con más de 10 vehículos'],cor:1,seg:'comercial',
+   fb:'El perfil de cliente pesado incluye: empresas transportadoras, transportadores independientes, constructoras, mensajería, paqueteo y logística.',
+   coach:'💡 Conocer el perfil de cliente te permite ir al lugar correcto a prospectar. Las constructoras y empresas de logística son clientes de alto valor.'},
 
-  // tags
-  var tagProd=q.tp==='arquetipo'?'<span class="tag t-arquetipo">Arquetipo</span>':'<span class="tag t-'+q.prod+'">'+q.prod.charAt(0).toUpperCase()+q.prod.slice(1)+'</span>';
-  document.getElementById('q-tags').innerHTML=tagProd+'<span class="tag t-'+q.lv+'">'+q.lv+'</span>';
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
+   txt:'¿Qué documentos se requieren AL EXPEDIR una póliza comercial?',
+   hint:'Dato real: Cotización, SARLAFT, documentos del tomador, tarjeta de propiedad, inspección/continuidad y facturas.',
+   ops:['Solo la cédula y el SOAT','Cotización, SARLAFT, documentos del tomador, tarjeta de propiedad, inspección y facturas','Solo la tarjeta de propiedad','Cédula, tarjeta de propiedad y foto del vehículo'],cor:1,seg:'comercial',
+   fb:'Para expedir una póliza comercial se necesita: cotización, SARLAFT, documentos del tomador, tarjeta de propiedad, inspección/continuidad y facturas.',
+   coach:'💡 El SARLAFT es obligatorio y no negociable. Un cliente que no pasa SARLAFT no puede ser asegurado sin importar el vehículo.'},
 
-  // opciones
-  var cont=document.getElementById('q-opts');
-  cont.innerHTML='';
-  q.ops.forEach(function(o,i){
-    var b=document.createElement('button');
-    b.className='opt';
-    b.textContent=o;
-    b.addEventListener('click',function(){responder(i);});
-    cont.appendChild(b);
-  });
+  {lv:'intermedio',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
+   txt:'Un cliente quiere asegurar una camioneta que fue repotenciada con motor nuevo. ¿Qué aplica?',
+   hint:'Dato real: Vehículos repotenciados o transformados son una exclusión expresa del portafolio.',
+   ops:['Se asegura normalmente','Se asegura con inspección adicional','Los vehículos repotenciados son una exclusión — no son suscribibles','Solo si tiene menos de 5 años de repotenciado'],cor:2,seg:'comercial',
+   fb:'Los vehículos repotenciados o transformados son una exclusión expresa. No son suscribibles en el portafolio de Seguros del Estado.',
+   coach:'💡 Antes de cotizar pregunta siempre si el vehículo ha sido modificado. Una repotenciación invalida la suscripción.'},
 
-  iniciarTimer();
-}
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
+   txt:'Un siniestro de un remolcador puede costar entre $300M y $800M. ¿Cuál es el argumento de venta más poderoso de Pesados?',
+   hint:'El seguro de Pesados está diseñado para proteger el patrimonio, dar continuidad al negocio y responder rápido ante siniestro.',
+   ops:['El precio más bajo del mercado','Proteger el patrimonio, dar continuidad al negocio y responder rápido — un siniestro de un remolcador puede costar $800M y paralizar la operación','Es el único seguro para pesados','Tiene el mayor número de asistencias'],cor:1,seg:'comercial',
+   fb:'El argumento de Pesados: proteger el patrimonio, dar continuidad al negocio y responder rápido. Un siniestro de un remolcador puede costar $800M.',
+   coach:'💡 Con el empresario transportador el argumento es financiero: ¿cuánto cuesta tener un vehículo pesado en taller? Eso cierra.'},
 
-// ---- TIMER ----
-function iniciarTimer(){
-  tLeft=TL;
-  var tw=document.getElementById('tw');
-  var arc=document.getElementById('t-arc');
-  var num=document.getElementById('t-num');
-  var tb=document.getElementById('tbar');
-  tw.classList.remove('urgent');
-  arc.style.strokeDashoffset=0;
-  tb.style.width='100%';
-  num.textContent=tLeft;
-  tmInt=setInterval(function(){
-    tLeft--;
-    var pct=tLeft/TL;
-    arc.style.strokeDashoffset=CIRC*(1-pct);
-    tb.style.width=(pct*100)+'%';
-    num.textContent=tLeft;
-    if(tLeft<=5)tw.classList.add('urgent');
-    if(tLeft<=0){clearInterval(tmInt);tiempoAgotado();}
-  },1000);
-}
+  {lv:'intermedio',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
+   txt:'¿Cuál de estas situaciones es una exclusión en el segmento comercial de Seguros del Estado?',
+   hint:'Dato real: Vehículos para carreras, importación temporal, test drive, salvamentos y regrabados son exclusiones.',
+   ops:['Un taxi con 10 años de antigüedad','Una moto de 4 años asegurada con MotoEstado','Un vehículo destinado a test drive de concesionario','Un camión de 4 toneladas con Genio Comercial'],cor:2,seg:'comercial',
+   fb:'Los vehículos destinados a test drive son una exclusión expresa. No son suscribibles en el portafolio.',
+   coach:'💡 Los concesionarios a veces piden asegurar vehículos de test drive. La respuesta es clara: no aplica.'},
 
-// ---- TIEMPO AGOTADO ----
-function tiempoAgotado(){
-  if(document.getElementById('btn-sig').style.display==='block')return;
-  clearInterval(tmInt);
-  var q=gQuestions[curQ];
-  document.querySelectorAll('.opt').forEach(function(b,i){
-    b.disabled=true;
-    if(i===q.cor)b.classList.add('correct');
-  });
-  document.getElementById('q-hint').style.display='block';
-  var fb=document.getElementById('q-fb');
-  fb.className='fb fail';
-  fb.innerHTML='⏱ Tiempo agotado. '+q.fb;
-  fb.style.display='block';
-  document.getElementById('q-coach').innerHTML=q.coach;
-  document.getElementById('q-coach').style.display='block';
-  gHist.push({ok:false,txt:q.txt.substring(0,60)+'...',tp:q.tp,lv:q.lv});
-  mostrarSig();
-}
+  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
+   txt:'Un intermediario quiere asegurar una flota de vehículos de renting corporativo. ¿Qué aplica?',
+   hint:'Dato real: Vehículos destinados al servicio de renting corporativo son una exclusión expresa.',
+   ops:['Se aseguran con Colectivas — es una flota','Se aseguran con condiciones especiales de suscripción','El renting corporativo es una exclusión expresa — no son suscribibles','Solo si la empresa tiene más de 5 años'],cor:2,seg:'comercial',
+   fb:'Los vehículos de renting corporativo son una exclusión expresa — no son suscribibles en el portafolio de Seguros del Estado.',
+   coach:'💡 El renting corporativo tiene un modelo de negocio distinto que genera riesgo moral. Es una exclusión firme.'},
 
-// ---- RESPONDER ----
-function responder(idx){
-  if(document.getElementById('btn-sig').style.display==='block')return;
-  clearInterval(tmInt);
-  var q=gQuestions[curQ];
-  document.querySelectorAll('.opt').forEach(function(b,i){
-    b.disabled=true;
-    if(i===q.cor)b.classList.add('correct');
-    else if(i===idx&&idx!==q.cor)b.classList.add('wrong');
-  });
-  var ok=(idx===q.cor);
-  if(ok){score+=10;nOk++;}
-  document.getElementById('q-hint').style.display='block';
-  var fb=document.getElementById('q-fb');
-  fb.className='fb '+(ok?'ok':'fail');
-  fb.innerHTML=(ok?'✓ ':'✗ ')+q.fb;
-  fb.style.display='block';
-  document.getElementById('q-coach').innerHTML=q.coach;
-  document.getElementById('q-coach').style.display='block';
-  gHist.push({ok:ok,txt:q.txt.substring(0,60)+'...',tp:q.tp,lv:q.lv});
-  mostrarSig();
-}
+  {lv:'avanzado',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
+   txt:'¿Cuáles son las condiciones ANTES DE COTIZAR que debe verificar el intermediario en el segmento comercial?',
+   hint:'Dato real: Usuario activo en plataforma, tipo de vehículo, uso, antigüedad, valor (Guía Fasecolda), inspección y continuidad.',
+   ops:['Solo el valor y la marca del vehículo','Usuario activo en plataforma, tipo y uso del vehículo, antigüedad, valor según Guía Fasecolda, inspección y continuidad','Solo la tarjeta de propiedad','El SARLAFT y la cédula del tomador'],cor:1,seg:'comercial',
+   fb:'Antes de cotizar: usuario activo, tipo de vehículo, uso, antigüedad, valor (Guía Fasecolda), inspección y continuidad. Sin estos datos no se puede cotizar correctamente.',
+   coach:'💡 Un intermediario que cotiza sin verificar estos datos primero comete errores de suscripción que luego se convierten en problemas en el siniestro.'},
 
-// ---- BOTÓN SIGUIENTE ----
-function mostrarSig(){
-  var btn=document.getElementById('btn-sig');
-  var esUltima=(curQ===gQuestions.length-1);
-  btn.textContent=esUltima?'Ver resultado 🏆':'Siguiente →';
-  btn.style.display='block';
-  btn.onclick=function(){
-    curQ++;
-    if(curQ>=gQuestions.length)mostrarResultado();
-    else mostrarQ();
-  };
-  setTimeout(function(){
-    btn.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },150);
-}
+  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
+   txt:'¿Por qué el solo 12% del parque automotor tiene seguro voluntario es una oportunidad y no un problema?',
+   hint:'Fuente: Fasecolda + RUNT. El 88% del mercado no está asegurado.',
+   ops:['Porque significa que el mercado está saturado','Porque el 88% sin seguro representa clientes potenciales con vehículo, capacidad de pago y exposición al riesgo — el mercado está virgen','Porque los clientes sin seguro no quieren asegurarse','Porque la competencia ya tiene ese 88%'],cor:1,seg:'comercial',
+   fb:'El 88% sin seguro son clientes que ya tienen vehículo, pueden tener capacidad de pago y están expuestos al riesgo — es un mercado virgen de enorme potencial.',
+   coach:'💡 Usa esta estadística con tus clientes intermediarios: el mercado de autos en Colombia está prácticamente sin explotar. Ese es su campo de acción.'},
 
-// ---- RESULTADO ----
-function mostrarResultado(){
-  mostrar('s-result');
-  document.getElementById('r-score').textContent=score;
-  document.getElementById('r-ok').textContent=nOk;
-  document.getElementById('r-bad').textContent=gQuestions.length-nOk;
-  document.getElementById('r-pct').textContent=Math.round((nOk/gQuestions.length)*100)+'%';
-  var pct=nOk/gQuestions.length;
-  var rank,msg;
-  if(pct>=.9){rank='¡Nivel Élite — Eres el Rey! 👑';msg='Dominas productos y arquetipos. Listo para cerrar con cualquier perfil.';}
-  else if(pct>=.7){rank='Nivel Integral — Muy sólido 💪';msg='Buen manejo. Refuerza los argumentos de cierre con cada arquetipo.';}
-  else if(pct>=.5){rank='Nivel Clásico — Vas bien 📈';msg='Base sólida. Profundiza en diferencias de coberturas y perfiles.';}
-  else{rank='Nivel Aprendiz — A reforzar 📚';msg='Revisa arquetipos y fichas de productos. Cada detalle cierra ventas.';}
-  document.getElementById('r-rank').textContent=rank;
-  document.getElementById('r-msg').textContent=msg;
+  {lv:'avanzado',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
+   txt:'¿Cuál de estas es una exclusión válida en el portafolio comercial de Seguros del Estado?',
+   hint:'Dato real: Vehículos con cambio de facelift, regrabados, embargados y con limitaciones a la propiedad son exclusiones.',
+   ops:['Un camión de 12 años con Pesados','Un vehículo con cambio de facelift o regrabado — son exclusiones expresas','Una moto de 4 años con MotoEstado','Un taxi de $120M con TaxiEstado'],cor:1,seg:'comercial',
+   fb:'Vehículos con cambio de facelift o regrabados son exclusiones expresas — tienen problemas de identificación o modificaciones que los hacen no suscribibles.',
+   coach:'💡 Un vehículo regrabado tiene serias implicaciones legales. La exclusión protege tanto a la aseguradora como al intermediario de responsabilidades futuras.'},
 
-  // Ranking global desde Google Sheets
-  // Mensaje de espera animado
-  var mensajesEspera = [
-    '⏳ No te vayas... estamos calculando tu posición global',
-    '📊 Comparando tu resultado con todos los intermediarios...',
-    '🏆 ¡Ya casi! Preparando tu ranking...'
-  ];
-  var msgIdx = 0;
-  document.getElementById('r-pos').textContent = mensajesEspera[0];
-  var msgInterval = setInterval(function(){
-    msgIdx = (msgIdx + 1) % mensajesEspera.length;
-    document.getElementById('r-pos').textContent = mensajesEspera[msgIdx];
-  }, 900);
-  setTimeout(function(){
-    clearInterval(msgInterval);
-    fetch(SHEET_URL + '?action=ranking&score=' + score + '&nivel=' + encodeURIComponent(diff) + '&doc=' + encodeURIComponent(pDoc))
-      .then(function(r){return r.json();})
-      .then(function(data){
-        var nivelLabel = {basico:'Básico', intermedio:'Intermedio', avanzado:'Avanzado'}[data.nivel] || data.nivel;
-        document.getElementById('r-pos').innerHTML =
-          '🏆 Puesto <strong>' + data.posGeneral + '</strong> de <strong>' + data.totalGeneral + '</strong> intermediarios (general)<br>' +
-          '📊 Puesto <strong>' + data.posNivel + '</strong> de <strong>' + data.totalNivel + '</strong> en nivel <strong>' + nivelLabel + '</strong>';
-      })
-      .catch(function(){
-        document.getElementById('r-pos').textContent='🏆 ¡Resultado registrado!';
-      });
-  }, 2000);
+  {lv:'avanzado',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
+   txt:'¿Cuál es la principal ventaja competitiva de Seguros del Estado en el segmento comercial y pesados según la presentación corporativa?',
+   hint:'Dato real: Apetito de riesgo claro y amplio, producto competitivo, facilidad de cotización, beneficio de continuidad, agilidad de inspección y acompañamiento técnico y comercial.',
+   ops:['El precio más bajo del mercado','El mayor número de asistencias','Apetito de riesgo amplio, producto competitivo, continuidad, agilidad de inspección y acompañamiento técnico y comercial','La cobertura más alta de RCE'],cor:2,seg:'comercial',
+   fb:'Las ventajas competitivas son: apetito de riesgo claro y amplio, producto competitivo, facilidad de cotización, beneficio de continuidad, agilidad de inspección y acompañamiento técnico y comercial.',
+   coach:'💡 Cuando el cliente pregunte por qué elegir Seguros del Estado, tienes 8 argumentos concretos. Memóralos y úsalos.'},
 
-  // Enviar a Google Sheets via GET
-  var params = '?name=' + encodeURIComponent(pName) +
-    '&doc=' + encodeURIComponent(pDoc) +
-    '&clave=' + encodeURIComponent(pClave) +
-    '&mail=' + encodeURIComponent(pMail) +
-    '&cel=' + encodeURIComponent(pCel) +
-    '&city=' + encodeURIComponent(pCity) +
-    '&cargo=' + encodeURIComponent(pCargo) +
-    '&edad=' + encodeURIComponent(pEdad) +
-    '&ramo=' + encodeURIComponent('autos') +
-    '&seg=' + encodeURIComponent(segmento) +
-    '&diff=' + encodeURIComponent(diff) +
-    '&score=' + encodeURIComponent(score) +
-    '&pct=' + encodeURIComponent(Math.round(pct*100)) +
-    '&date=' + encodeURIComponent(new Date().toLocaleDateString('es-CO'));
-  var img = new Image();
-  img.src = SHEET_URL + params;
+  // =================== CUMPLIMIENTO ===================
+  // BÁSICO
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué garantiza el Seguro de Cumplimiento de Seguros del Estado?',
+   hint:'El seguro de cumplimiento garantiza las obligaciones adquiridas en contratos, disposiciones legales y cauciones judiciales.',
+   ops:['Protege el patrimonio del asegurado ante robos','Garantiza las obligaciones adquiridas en contratos, disposiciones legales y cauciones judiciales','Cubre daños a terceros por accidentes','Es un seguro de vida para contratistas'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El seguro de cumplimiento garantiza las obligaciones de personas naturales o jurídicas en contratos, disposiciones legales y cauciones judiciales.',
+   coach:'💡 Cumplimiento no protege el patrimonio del contratista — protege al beneficiario (el contratante) ante el incumplimiento del contratista.'},
 
-  // Guardar detalle por pregunta
-  var detalleGuardado = JSON.parse(localStorage.getItem('seg_detalle') || '[]');
-  gHist.forEach(function(x){
-    detalleGuardado.push({txt:x.txt, tp:x.tp, lv:x.lv, ok:x.ok, name:pName, date:new Date().toLocaleDateString('es-CO')});
-  });
-  // Mantener solo los últimos 2000 registros
-  if(detalleGuardado.length > 2000) detalleGuardado = detalleGuardado.slice(-2000);
-  localStorage.setItem('seg_detalle', JSON.stringify(detalleGuardado));
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Cuántos tipos de Seguro de Cumplimiento ofrece Seguros del Estado?',
+   hint:'Seguros del Estado tiene: Cumplimiento Particular, Estatal, Ecopetrol, Disposiciones Legales y Caución Judicial.',
+   ops:['Solo uno — Cumplimiento General','Dos — Particular y Estatal','Cinco — Particular, Estatal, Ecopetrol, Disposiciones Legales y Caución Judicial','Tres — Particular, Estatal y Judicial'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'Seguros del Estado ofrece 5 modalidades de Cumplimiento: Particular, Estatal, Ecopetrol, Disposiciones Legales y Caución Judicial.',
+   coach:'💡 Conocer todas las modalidades te diferencia. La mayoría de intermediarios solo conoce Estatal y Particular.'},
 
-  // Historial
-  var h=document.getElementById('r-hist');
-  h.innerHTML='';
-  gHist.forEach(function(x,i){
-    var d=document.createElement('div');
-    d.className='hi '+(x.ok?'ok':'fail');
-    d.innerHTML='<span>'+(x.ok?'✓':'✗')+'</span><span><b>P'+(i+1)+' ['+(x.tp==='arquetipo'?'Arquetipo':'Producto')+'] ('+x.lv+'):</b> '+x.txt+'</span>';
-    h.appendChild(d);
-  });
-}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué amparo cubre al beneficiario si el contratista no suscribe el contrato después de ganar la licitación?',
+   hint:'El Amparo de Seriedad de la Oferta cubre el incumplimiento de las obligaciones previas a la firma del contrato.',
+   ops:['Amparo de Anticipo','Amparo de Cumplimiento del Contrato','Amparo de Seriedad de la Oferta','Amparo de Estabilidad de la Obra'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Amparo de Seriedad de la Oferta cubre al beneficiario cuando el proponente gana pero no suscribe el contrato, no amplía vigencias o no otorga garantías.',
+   coach:'💡 Seriedad de la Oferta = etapa precontractual. Cumplimiento del Contrato = etapa de ejecución. Son momentos distintos del proceso.'},
 
-// ---- UTILS ----
-function mostrar(id){
-  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
-  document.getElementById(id).classList.add('active');
-}
-function irLogin(){
-  clearInterval(tmInt);
-  resetEstado();
-  mostrar('s-inicio');
-}
-
-// ---- DASHBOARD ----
-var DASH_KEY = 'formacion2024';
-
-function abrirDashboard(){
-  var overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.id = 'modal-dash';
-  var box = document.createElement('div');
-  box.className = 'modal-box';
-  box.innerHTML = '<h2>🔐 Acceso Formación</h2><p>Ingresa la clave para ver el dashboard</p>';
-  var inp = document.createElement('input');
-  inp.type = 'password';
-  inp.id = 'dash-key-input';
-  inp.placeholder = '••••••••';
-  inp.style.width='100%';inp.style.padding='10px 14px';inp.style.border='1px solid #ddd';
-  inp.style.borderRadius='8px';inp.style.fontSize='16px';inp.style.textAlign='center';
-  inp.style.letterSpacing='4px';inp.style.marginBottom='1rem';inp.style.fontFamily='inherit';
-  inp.addEventListener('keypress', function(e){if(e.key==='Enter')verificarClave();});
-  var btn1 = document.createElement('button');
-  btn1.className='btn btn-p';btn1.style.width='100%';btn1.textContent='Ingresar';
-  btn1.onclick=verificarClave;
-  var btn2 = document.createElement('button');
-  btn2.className='btn';btn2.style.cssText='width:100%;margin-top:8px;border:none;color:#aaa';
-  btn2.textContent='Cancelar';
-  btn2.onclick=function(){document.getElementById('modal-dash').remove();};
-  box.appendChild(inp);box.appendChild(btn1);box.appendChild(btn2);
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
-  setTimeout(function(){inp.focus();},100);
-}
-
-function verificarClave(){
-  var key = document.getElementById('dash-key-input').value;
-  if(key === DASH_KEY){
-    document.getElementById('modal-dash').remove();
-    renderDashboard();
-    mostrar('s-dash');
-  } else {
-    alert('Clave incorrecta. Intenta de nuevo.');
-  }
-}
-
-function renderDashboard(){
-  var registros = JSON.parse(localStorage.getItem('seg_rank') || '[]');
-  var detalle = JSON.parse(localStorage.getItem('seg_detalle') || '[]');
-  var cont = document.getElementById('dash-content');
-
-  if(registros.length === 0){
-    cont.innerHTML = '<div style="text-align:center;padding:2rem;color:#aaa">Aún no hay datos. Los intermediarios deben jugar primero.</div>';
-    return;
-  }
-
-  // Stats generales
-  var totalJuegos = registros.length;
-  var promedioScore = Math.round(registros.reduce(function(a,b){return a+parseInt(b.score||0);},0)/totalJuegos);
-  var promedioPct = Math.round(registros.reduce(function(a,b){return a+parseInt(b.pct||0);},0)/totalJuegos);
-  var porNivel = {basico:0, intermedio:0, avanzado:0};
-  registros.forEach(function(r){porNivel[r.diff]=(porNivel[r.diff]||0)+1;});
-
-  var html = '<div class="stat-grid">';
-  html += '<div class="dash-stat"><div class="dash-snum">'+totalJuegos+'</div><div class="dash-slbl">Partidas jugadas</div></div>';
-  html += '<div class="dash-stat"><div class="dash-snum">'+promedioPct+'%</div><div class="dash-slbl">Promedio acierto</div></div>';
-  html += '<div class="dash-stat"><div class="dash-snum">'+promedioScore+'</div><div class="dash-slbl">Puntaje promedio</div></div>';
-  html += '<div class="dash-stat"><div class="dash-snum">'+(new Set(registros.map(function(r){return r.name;}))).size+'</div><div class="dash-slbl">Intermediarios</div></div>';
-  html += '</div>';
-
-  // Por nivel
-  html += '<div class="dash-card"><div class="dash-title">Partidas por nivel de dificultad</div>';
-  ['basico','intermedio','avanzado'].forEach(function(n){
-    var pct = totalJuegos > 0 ? Math.round((porNivel[n]||0)/totalJuegos*100) : 0;
-    var color = n==='basico'?'#3B6D11':n==='intermedio'?'#185FA5':'#993C1D';
-    html += '<div class="bar-wrap"><div class="bar-label"><span>'+n.charAt(0).toUpperCase()+n.slice(1)+'</span><span>'+(porNivel[n]||0)+' partidas ('+pct+'%)</span></div>';
-    html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>';
-  });
-  html += '</div>';
-
-  // Análisis por pregunta
-  if(detalle.length > 0){
-    // Agrupar por pregunta
-    var porPregunta = {};
-    detalle.forEach(function(d){
-      var key = d.txt;
-      if(!porPregunta[key]) porPregunta[key] = {txt:d.txt, tp:d.tp, lv:d.lv, ok:0, fail:0};
-      if(d.ok) porPregunta[key].ok++;
-      else porPregunta[key].fail++;
-    });
-
-    var preguntas = Object.values(porPregunta);
-    preguntas.sort(function(a,b){ return (b.fail/(b.ok+b.fail)) - (a.fail/(a.ok+a.fail)); });
-
-    // Top 10 más falladas
-    html += '<div class="dash-card"><div class="dash-title">🔴 Preguntas más falladas</div>';
-    preguntas.slice(0,10).forEach(function(p,i){
-      var total = p.ok + p.fail;
-      var pctFail = Math.round(p.fail/total*100);
-      var pctOk = 100 - pctFail;
-      var tipoBadge = p.tp==='arquetipo'?'<span style="background:#F3EEFE;color:#533AB7;font-size:10px;padding:1px 6px;border-radius:99px;font-weight:700">Arquetipo</span>':'<span style="background:#E6F1FB;color:#0C447C;font-size:10px;padding:1px 6px;border-radius:99px;font-weight:700">Producto</span>';
-      var nivBadge = '<span style="font-size:10px;color:#888">('+p.lv+')</span>';
-      html += '<div class="bar-wrap">';
-      html += '<div class="bar-label"><span style="flex:1;margin-right:8px">'+tipoBadge+' '+nivBadge+' '+p.txt.substring(0,55)+'...</span><span class="tag-fail">'+pctFail+'% error</span></div>';
-      html += '<div class="bar-track"><div class="bar-fill bar-ok" style="width:'+pctOk+'%"></div></div>';
-      html += '</div>';
-    });
-    html += '</div>';
-
-    // Top aciertos
-    var masAcertadas = preguntas.slice().sort(function(a,b){ return (b.ok/(b.ok+b.fail)) - (a.ok/(a.ok+a.fail)); });
-    html += '<div class="dash-card"><div class="dash-title">🟢 Preguntas mejor respondidas</div>';
-    masAcertadas.slice(0,5).forEach(function(p){
-      var total = p.ok + p.fail;
-      var pctOk = Math.round(p.ok/total*100);
-      html += '<div class="bar-wrap">';
-      html += '<div class="bar-label"><span style="flex:1;margin-right:8px">'+p.txt.substring(0,60)+'...</span><span class="tag-ok">'+pctOk+'% acierto</span></div>';
-      html += '<div class="bar-track"><div class="bar-fill bar-ok" style="width:'+pctOk+'%"></div></div>';
-      html += '</div>';
-    });
-    html += '</div>';
-
-    // Por tipo
-    var porTipo = {arquetipo:{ok:0,fail:0}, producto:{ok:0,fail:0}};
-    detalle.forEach(function(d){
-      var t = d.tp==='arquetipo'?'arquetipo':'producto';
-      if(d.ok) porTipo[t].ok++; else porTipo[t].fail++;
-    });
-    html += '<div class="dash-card"><div class="dash-title">Acierto por tipo de pregunta</div>';
-    ['arquetipo','producto'].forEach(function(t){
-      var tot = porTipo[t].ok + porTipo[t].fail;
-      var pct = tot>0?Math.round(porTipo[t].ok/tot*100):0;
-      var color = t==='arquetipo'?'#533AB7':'#185FA5';
-      html += '<div class="bar-wrap"><div class="bar-label"><span>'+t.charAt(0).toUpperCase()+t.slice(1)+'</span><span>'+pct+'% acierto ('+tot+' resp.)</span></div>';
-      html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>';
-    });
-    html += '</div>';
-
-  } else {
-    html += '<div class="dash-card" style="text-align:center;color:#aaa;font-size:13px">El detalle por pregunta aparecerá después de las primeras partidas con esta versión actualizada.</div>';
-  }
-
-  // Últimos jugadores
-  html += '<div class="dash-card"><div class="dash-title">Últimos intermediarios</div>';
-  registros.slice(0,10).forEach(function(r){
-    var diffColor = r.diff==='basico'?'#27500A':r.diff==='intermedio'?'#0C447C':'#4A1B0C';
-    var diffBg = r.diff==='basico'?'#EAF3DE':r.diff==='intermedio'?'#E6F1FB':'#FAECE7';
-    html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px">';
-    html += '<div><div style="font-weight:600;color:#111">'+r.name+'</div><div style="font-size:11px;color:#888">'+r.city+' · '+r.date+'</div></div>';
-    html += '<div style="text-align:right"><div style="font-weight:700;color:#185FA5">'+r.score+' pts</div><span style="background:'+diffBg+';color:'+diffColor+';font-size:10px;padding:1px 7px;border-radius:99px;font-weight:700">'+r.diff+'</span></div>';
-    html += '</div>';
-  });
-  html += '</div>';
-
-  cont.innerHTML = html;
-}
-
-// Init
-setDiff('basico');
-</script>
-</body>
-</html>
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué amparo protege al beneficiario cuando el contratista recibe dinero por adelantado y lo usa indebidamente?',
+   hint:'El Amparo de Anticipo garantiza la devolución del dinero entregado al contratista cuando lo usa o ap

@@ -126,194 +126,36 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 <body>
 <div class="app">
 
-<!-- PANTALLA INICIO: SELECCIÓN DE RAMO -->
-<div class="screen active" id="s-inicio">
-
-  <!-- HEADER CORPORATIVO -->
-  <div style="background:#0C447C;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;position:relative;overflow:hidden">
-    <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:#185FA5;border-radius:50%;opacity:.4"></div>
-    <div style="position:absolute;bottom:-30px;left:-10px;width:80px;height:80px;background:#185FA5;border-radius:50%;opacity:.3"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;position:relative">
-      <img src="data:image/jpeg;base64,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YIrLSMa5gE2Ok4a8nv4diluUt/mvVW5zXkw56LTqxq4ce1RjG9PWWAl2QjdXnvU7hWqNDQEobA29K+1KEpGyRXlVlVaX4EhPQCsXlVhaynGrrjUiQthq6w3oa3WwCpAcQUlQB6bjesrSiKCs4Lmy4TdqnapTRDQ2lo+w21iM/wAoG3Rz3uU7eYFSjHsetGK2iPY7HEEeJGB5U8xUpSid1KUo9VKJJJJ6kk1kqURQ++4VfZuVKyvHswVaH3be3b3mlQG5KVoQ4taVDmIIO7ih+6s9YYV5gQe4vt8F1k85V34ipj+75J5Ukjp8ayVKIlYbKcaYymFFhSJTjCYs6POCkAEqU0sKCTv5HbaszSiJWLyTG7Tldoesl6YU7He5VAoWULbWk8yHEKHVK0qAII8CKylKIoKcEzd2P8lv6sXM28jkJRAYRNKPh7QB0V+cEA1KcfsFpxezxrFZIiY0OIjkbQCSfHckk9VKJJJJ6kkmsjSiLDx8cZjZVPypMlxTs+FGhKaIHKlLK3VBQPjue+O/1CvRj2Ixsau96n22Y6mJepAmqglI7tiQRs64g+I7zYFQ8OYE+ZrP0oiw0vG2ZeU2/KVSXEu2+K/FS0AOVYdKSST47jkH76xeOacWfGstvWXRJEhx67kcjDhHdwwTzOhoeQcX76vWpbSiLB4di0fDrL8ixpbshHtMiTzuAA7uuqcI6eQKyP5q8bFiUWy3a+XtyS5Ml3yWmQ6t1I+bQhtKG2k7fkpCf3knzrPUoiwKsTipzNrM40lxl8W9VufYQkd2+33gWhSvPmQebb0Wa9+UYvacvtKrRd23O750vMusrKHo7yDuh1tY6pWk9Qf7QSKy9KIoG9gWazYxtdx1Wua7coci/Z4LDEtaPgXx4EjxUlIPw2qXWSy2vHbVFsllhtxIMNsNMsoHRKR/afMk9SSSa+6lEWDsmKx7Lf8AIL+1Ldccv77D7ragAlotMpaATt47hO/X4145bh1uy6PG9okSYU6A738GfEWESIrm2xKSQQQR0UkghQ6EVnqURQOXp3kl/a+TMw1DmXG0q2D8OLCbh+0p+g64glRQfAhPLuOnhU4jx2IjDcWKyhpllAbbbQNkoSBsAB5ACvZSiLDY7jTGOv3l5mU48bzcnLk4FgDu1KQhHKNvL5sHr8TWJsWmlmx7P71n1tkyG3b5FaYfh7juELQtSlOoHilSyr3vIkb+O9S+lESlKURKUpREpSlESsbd4AnNFsjcVkqURRq14tGiud4Wkg/VUiabS0nlSK8q/aIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoi/9k=" alt="Escuela de Formación" style="height:38px;object-fit:contain;border-radius:6px;background:#fff;padding:3px">
-      <img src="data:image/jpeg;base64,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" alt="70 años" style="height:38px;object-fit:contain;border-radius:6px;background:#fff;padding:3px">
-    </div>
-    <div style="margin-top:.85rem;position:relative">
-      <div style="color:#fff;font-size:18px;font-weight:700;line-height:1.3">Entrenamiento de<br>Intermediarios</div>
-      <div style="color:rgba(255,255,255,.7);font-size:12px;margin-top:4px">Seguros del Estado · Dirección de Formación</div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:1rem;position:relative">
-      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:6px 12px;text-align:center;flex:1">
-        <div style="color:#fff;font-size:18px;font-weight:700">3</div>
-        <div style="color:rgba(255,255,255,.7);font-size:10px">Ramos activos</div>
-      </div>
-      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:6px 12px;text-align:center;flex:1">
-        <div style="color:#fff;font-size:18px;font-weight:700">140+</div>
-        <div style="color:rgba(255,255,255,.7);font-size:10px">Preguntas</div>
-      </div>
-      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:6px 12px;text-align:center;flex:1">
-        <div style="color:#fff;font-size:18px;font-weight:700">3</div>
-        <div style="color:rgba(255,255,255,.7);font-size:10px">Niveles</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- NOVEDADES -->
-  <div style="background:#FEF0E6;border:1px solid #F4A45A;border-radius:12px;padding:.9rem 1rem;margin-bottom:1.25rem">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:.5rem">
-      <span style="background:#F47920;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px">NOVEDAD</span>
-      <span style="font-size:11px;color:#C45E0A;font-weight:600">Mayo 2026</span>
-    </div>
-    <ul style="font-size:12px;color:#C45E0A;line-height:1.9;padding-left:1.1rem;margin:0">
-      <li>🆕 Nuevo ramo: <strong>Cumplimiento</strong> — Particular, Estatal, Judicial, RCE y más</li>
-      <li>25 preguntas nuevas basadas en clausulados reales</li>
-      <li>Autos Comercial — TaxiEstado, Genio, Pesados y RC Pasajeros</li>
-      <li>Ranking mejorado con posición real entre todos los intermediarios</li>
-    </ul>
-  </div>
-
-  <!-- MENSAJE ENGANCHADOR + NIVELES -->
-  <div style="border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;border:1px solid #e8eaf0;background:#fff">
-    <div style="font-size:16px;font-weight:700;color:#111;line-height:1.4;margin-bottom:.6rem">
-      ¿Cuánto sabes realmente de los productos que vendes?
-    </div>
-    <p style="font-size:13px;color:#555;line-height:1.7;margin-bottom:.75rem">
-      Un intermediario que conoce su portafolio no solo vende más — <strong>protege mejor</strong>. Preguntas basadas en coberturas reales. Elige tu nivel:
-    </p>
-
-    <!-- NIVELES EN UNA LÍNEA -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.85rem">
-      <div style="background:#E6F1FB;border-radius:10px;padding:.65rem .5rem;text-align:center">
-        <div style="width:32px;height:32px;background:#185FA5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 5px">
-          <i class="ti ti-plant" style="font-size:15px;color:#fff" aria-hidden="true"></i>
-        </div>
-        <div style="font-size:12px;font-weight:700;color:#0C447C">Básico</div>
-        <div style="font-size:10px;color:#185FA5;margin-top:2px;line-height:1.4">Coberturas y conceptos clave</div>
-      </div>
-      <div style="background:#FEF0E6;border:1px solid #F4A45A;border-radius:10px;padding:.65rem .5rem;text-align:center">
-        <div style="width:32px;height:32px;background:#F47920;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 5px">
-          <i class="ti ti-sword" style="font-size:15px;color:#fff" aria-hidden="true"></i>
-        </div>
-        <div style="font-size:12px;font-weight:700;color:#C45E0A">Intermedio</div>
-        <div style="font-size:10px;color:#F47920;margin-top:2px;line-height:1.4">Casos reales y objeciones</div>
-      </div>
-      <div style="background:#0C447C;border-radius:10px;padding:.65rem .5rem;text-align:center">
-        <div style="width:32px;height:32px;background:#F47920;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 5px">
-          <i class="ti ti-crown" style="font-size:15px;color:#fff" aria-hidden="true"></i>
-        </div>
-        <div style="font-size:12px;font-weight:700;color:#fff">Avanzado</div>
-        <div style="font-size:10px;color:#FEF0E6;margin-top:2px;line-height:1.4">Escenarios complejos</div>
-      </div>
-    </div>
-
-    <div style="background:#0C447C;border-radius:8px;padding:.75rem 1rem">
-      <div style="color:#fff;font-size:13px;font-weight:700;text-align:center">No es un examen. Es tu ventaja competitiva.</div>
-      <div style="color:rgba(255,255,255,.8);font-size:12px;text-align:center;margin-top:4px">Elige tu ramo, tu segmento y demuéstralo 👇</div>
-    </div>
-  </div>
-
-  <!-- TÍTULO SELECCIÓN -->
-  <div style="text-align:center;margin-bottom:1rem">
-    <div style="font-size:16px;font-weight:700;color:#111">¿Qué quieres practicar hoy?</div>
-    <div style="font-size:12px;color:#888;margin-top:3px">Elige el ramo y luego el segmento</div>
-  </div>
-
-  <!-- RAMOS -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem">
-    <button onclick="seleccionarRamo('autos',this)" id="ramo-autos"
-      style="background:#FEF0E6;border:2px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-      <i class="ti ti-car" style="font-size:28px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
-      <div style="font-size:14px;font-weight:700;color:#C45E0A">Autos</div>
-      <div style="font-size:11px;color:#F47920;margin-top:3px">Particular · Comercial</div>
-    </button>
-    <button onclick="seleccionarRamo('cumplimiento',this)" id="ramo-cumplimiento"
-      style="background:#FEF0E6;border:2px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-      <i class="ti ti-shield-check" style="font-size:28px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
-      <div style="font-size:14px;font-weight:700;color:#C45E0A">Cumplimiento</div>
-      <div style="font-size:11px;color:#F47920;margin-top:3px">Particular · Estatal · Judicial</div>
-    </button>
-    <button onclick="alert('Próximamente 🚀')"
-      style="background:#f8f9fb;border:1px dashed #ccc;border-radius:12px;padding:1rem .75rem;cursor:not-allowed;font-family:inherit;text-align:center;opacity:.55">
-      <i class="ti ti-shield" style="font-size:28px;color:#aaa;display:block;margin-bottom:6px" aria-hidden="true"></i>
-      <div style="font-size:14px;font-weight:700;color:#aaa">Patrimoniales</div>
-      <div style="font-size:11px;color:#bbb;margin-top:3px">Próximamente</div>
-    </button>
-    <button onclick="alert('Próximamente 🚀')"
-      style="background:#f8f9fb;border:1px dashed #ccc;border-radius:12px;padding:1rem .75rem;cursor:not-allowed;font-family:inherit;text-align:center;opacity:.55">
-      <i class="ti ti-heart" style="font-size:28px;color:#aaa;display:block;margin-bottom:6px" aria-hidden="true"></i>
-      <div style="font-size:14px;font-weight:700;color:#aaa">Vida</div>
-      <div style="font-size:11px;color:#bbb;margin-top:3px">Próximamente</div>
-    </button>
-  </div>
-
-  <!-- SEGMENTOS AUTOS -->
-  <div id="segmentos-autos" style="display:none">
-    <div style="font-size:13px;font-weight:700;color:#444;margin-bottom:8px">Elige el segmento de Autos:</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
-      <button onclick="irALogin('particular')"
-        style="background:#E6F1FB;border:1.5px solid #185FA5;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-        <i class="ti ti-car" style="font-size:24px;color:#185FA5;display:block;margin-bottom:6px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#0C447C">Particular</div>
-        <div style="font-size:10px;color:#185FA5;margin-top:3px">Élite · Integral · Clásico</div>
-      </button>
-      <button onclick="irALogin('comercial')"
-        style="background:#FEF0E6;border:1.5px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-        <i class="ti ti-truck" style="font-size:24px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#C45E0A">Comercial</div>
-        <div style="font-size:10px;color:#F47920;margin-top:3px">TaxiEstado · Genio · Pesados</div>
-      </button>
-    </div>
-
-  </div>
-
-  <!-- SEGMENTOS CUMPLIMIENTO -->
-  <div id="segmentos-cumplimiento" style="display:none">
-    <div style="font-size:13px;font-weight:700;color:#444;margin-bottom:8px">Elige el segmento de Cumplimiento:</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
-      <button onclick="irALogin('cumplimiento-particular')"
-        style="background:#E6F1FB;border:1.5px solid #185FA5;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-        <i class="ti ti-building" style="font-size:24px;color:#185FA5;display:block;margin-bottom:6px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#0C447C">Particular</div>
-        <div style="font-size:10px;color:#185FA5;margin-top:3px">Contratos privados</div>
-      </button>
-      <button onclick="irALogin('cumplimiento-estatal')"
-        style="background:#FEF0E6;border:1.5px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-        <i class="ti ti-landmark" style="font-size:24px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#C45E0A">Estatal</div>
-        <div style="font-size:10px;color:#F47920;margin-top:3px">Contratos con el Estado</div>
-      </button>
-      <button onclick="irALogin('cumplimiento-judicial')"
-        style="background:#E6F1FB;border:1.5px solid #185FA5;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-        <i class="ti ti-gavel" style="font-size:24px;color:#185FA5;display:block;margin-bottom:6px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#0C447C">Caución Judicial</div>
-        <div style="font-size:10px;color:#185FA5;margin-top:3px">Procesos judiciales</div>
-      </button>
-      <button onclick="irALogin('cumplimiento')"
-        style="background:#FEF0E6;border:1.5px solid #F47920;border-radius:12px;padding:1rem .75rem;cursor:pointer;font-family:inherit;text-align:center;transition:.15s">
-        <i class="ti ti-list-check" style="font-size:24px;color:#F47920;display:block;margin-bottom:6px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#C45E0A">Todos los amparos</div>
-        <div style="font-size:10px;color:#F47920;margin-top:3px">Mezcla todos los productos</div>
-      </button>
-    </div>
-  </div>
-
-  <div style="text-align:center;margin-top:.25rem">
-    <button class="btn" style="font-size:11px;color:#bbb;border:none;background:none" onclick="abrirDashboard()">
-      <i class="ti ti-chart-bar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Acceso formación
-    </button>
-  </div>
-  <footer>Seguros del Estado · Vigilado por la Superintendencia Financiera de Colombia</footer>
-</div>
-
 <!-- LOGIN -->
-<div class="screen" id="s-login">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #e8eaf0">
-    <img src="data:image/jpeg;base64,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YIrLSMa5gE2Ok4a8nv4diluUt/mvVW5zXkw56LTqxq4ce1RjG9PWWAl2QjdXnvU7hWqNDQEobA29K+1KEpGyRXlVlVaX4EhPQCsXlVhaynGrrjUiQthq6w3oa3WwCpAcQUlQB6bjesrSiKCs4Lmy4TdqnapTRDQ2lo+w21iM/wAoG3Rz3uU7eYFSjHsetGK2iPY7HEEeJGB5U8xUpSid1KUo9VKJJJJ6kk1kqURQ++4VfZuVKyvHswVaH3be3b3mlQG5KVoQ4taVDmIIO7ih+6s9YYV5gQe4vt8F1k85V34ipj+75J5Ukjp8ayVKIlYbKcaYymFFhSJTjCYs6POCkAEqU0sKCTv5HbaszSiJWLyTG7Tldoesl6YU7He5VAoWULbWk8yHEKHVK0qAII8CKylKIoKcEzd2P8lv6sXM28jkJRAYRNKPh7QB0V+cEA1KcfsFpxezxrFZIiY0OIjkbQCSfHckk9VKJJJJ6kkmsjSiLDx8cZjZVPypMlxTs+FGhKaIHKlLK3VBQPjue+O/1CvRj2Ixsau96n22Y6mJepAmqglI7tiQRs64g+I7zYFQ8OYE+ZrP0oiw0vG2ZeU2/KVSXEu2+K/FS0AOVYdKSST47jkH76xeOacWfGstvWXRJEhx67kcjDhHdwwTzOhoeQcX76vWpbSiLB4di0fDrL8ixpbshHtMiTzuAA7uuqcI6eQKyP5q8bFiUWy3a+XtyS5Ml3yWmQ6t1I+bQhtKG2k7fkpCf3knzrPUoiwKsTipzNrM40lxl8W9VufYQkd2+33gWhSvPmQebb0Wa9+UYvacvtKrRd23O750vMusrKHo7yDuh1tY6pWk9Qf7QSKy9KIoG9gWazYxtdx1Wua7coci/Z4LDEtaPgXx4EjxUlIPw2qXWSy2vHbVFsllhtxIMNsNMsoHRKR/afMk9SSSa+6lEWDsmKx7Lf8AIL+1Ldccv77D7ragAlotMpaATt47hO/X4145bh1uy6PG9okSYU6A738GfEWESIrm2xKSQQQR0UkghQ6EVnqURQOXp3kl/a+TMw1DmXG0q2D8OLCbh+0p+g64glRQfAhPLuOnhU4jx2IjDcWKyhpllAbbbQNkoSBsAB5ACvZSiLDY7jTGOv3l5mU48bzcnLk4FgDu1KQhHKNvL5sHr8TWJsWmlmx7P71n1tkyG3b5FaYfh7juELQtSlOoHilSyr3vIkb+O9S+lESlKURKUpREpSlESsbd4AnNFsjcVkqURRq14tGiud4Wkg/VUiabS0nlSK8q/aIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoi/9k=" alt="Escuela de Formación" style="height:36px;object-fit:contain">
-    <img src="data:image/jpeg;base64,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" alt="Seguros del Estado 70 años" style="height:36px;object-fit:contain">
-  </div>
+<div class="screen active" id="s-login">
+  <div class="logo">SEGUROS DEL ESTADO</div>
   <h1>¿A quién le estás vendiendo?</h1>
   <p class="sub">Entrenamiento de intermediarios · Autos livianos</p>
 
+  <div style="background:#f0f4ff;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;border-left:4px solid #185FA5">
+    <p style="font-size:13px;color:#1a3a5c;line-height:1.7">
+      🎯 <strong>¡Bienvenido al entrenamiento de productos de autos de Seguros del Estado!</strong><br>
+      Aquí pondrás a prueba tu conocimiento sobre nuestro portafolio y aprenderás a identificar el perfil de cada cliente para ofrecerle el producto ideal. Completa tu información, elige tu nivel y ¡demuestra de qué estás hecho!
+    </p>
+  </div>
 
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem">
+    <div style="background:#EAF3DE;border-radius:10px;padding:.75rem;text-align:center">
+      <div style="font-size:18px;margin-bottom:4px">🟢</div>
+      <div style="font-size:12px;font-weight:700;color:#27500A;margin-bottom:4px">Básico</div>
+      <div style="font-size:11px;color:#3B6D11;line-height:1.5">Conceptos fundamentales del portafolio. Ideal para repasar coberturas, deducibles y perfiles.</div>
+    </div>
+    <div style="background:#E6F1FB;border-radius:10px;padding:.75rem;text-align:center">
+      <div style="font-size:18px;margin-bottom:4px">🔵</div>
+      <div style="font-size:12px;font-weight:700;color:#0C447C;margin-bottom:4px">Intermedio</div>
+      <div style="font-size:11px;color:#185FA5;line-height:1.5">Casos reales de venta. Practica argumentos y manejo de objeciones del día a día.</div>
+    </div>
+    <div style="background:#FAECE7;border-radius:10px;padding:.75rem;text-align:center">
+      <div style="font-size:18px;margin-bottom:4px">🔴</div>
+      <div style="font-size:12px;font-weight:700;color:#4A1B0C;margin-bottom:4px">Avanzado</div>
+      <div style="font-size:11px;color:#993C1D;line-height:1.5">El reto del experto. Escenarios complejos y cierres de alto nivel. Solo para los más preparados.</div>
+    </div>
+  </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.75rem">
     <div class="field" style="margin-bottom:0">
@@ -359,25 +201,10 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 
   <div class="field">
     <label>Nivel de dificultad</label>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-      <button id="d-basico" onclick="setDiff('basico')"
-        style="background:#E6F1FB;border:2px solid #185FA5;border-radius:10px;padding:.75rem .5rem;cursor:pointer;font-family:inherit;text-align:center">
-        <i class="ti ti-plant" style="font-size:20px;color:#185FA5;display:block;margin-bottom:4px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#0C447C">Básico</div>
-        <i class="ti ti-circle-check" id="chk-basico" style="font-size:14px;color:#185FA5;margin-top:3px;display:block" aria-hidden="true"></i>
-      </button>
-      <button id="d-intermedio" onclick="setDiff('intermedio')"
-        style="background:#f8f9fb;border:1.5px solid #ddd;border-radius:10px;padding:.75rem .5rem;cursor:pointer;font-family:inherit;text-align:center">
-        <i class="ti ti-sword" style="font-size:20px;color:#ccc;display:block;margin-bottom:4px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#aaa">Intermedio</div>
-        <i class="ti ti-circle" id="chk-intermedio" style="font-size:14px;color:#ddd;margin-top:3px;display:block" aria-hidden="true"></i>
-      </button>
-      <button id="d-avanzado" onclick="setDiff('avanzado')"
-        style="background:#f8f9fb;border:1.5px solid #ddd;border-radius:10px;padding:.75rem .5rem;cursor:pointer;font-family:inherit;text-align:center">
-        <i class="ti ti-crown" style="font-size:20px;color:#ccc;display:block;margin-bottom:4px" aria-hidden="true"></i>
-        <div style="font-size:13px;font-weight:700;color:#aaa">Avanzado</div>
-        <i class="ti ti-circle" id="chk-avanzado" style="font-size:14px;color:#ddd;margin-top:3px;display:block" aria-hidden="true"></i>
-      </button>
+    <div class="diff-row">
+      <button class="diff-opt sel-basico" id="d-basico" onclick="setDiff('basico')">🟢 Básico</button>
+      <button class="diff-opt" id="d-intermedio" onclick="setDiff('intermedio')">🔵 Intermedio</button>
+      <button class="diff-opt" id="d-avanzado" onclick="setDiff('avanzado')">🔴 Avanzado</button>
     </div>
   </div>
 
@@ -388,21 +215,15 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
     </label>
   </div>
 
-  <button onclick="iniciar()" style="width:100%;padding:14px;font-size:16px;font-weight:700;color:#fff;background:#F47920;border:none;border-radius:10px;cursor:pointer;font-family:inherit;margin-top:.25rem;letter-spacing:.3px">Comenzar juego →</button>
+  <button class="btn btn-p btn-full" onclick="iniciar()">Comenzar juego →</button>
   <div style="text-align:center;margin-top:1rem">
     <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none" onclick="abrirDashboard()">📊 Acceso formación</button>
   </div>
-  <footer>Seguros del Estado · Vigilado por la Superintendencia Financiera de Colombia</footer>
+  <footer>Seguros del Estado · Dirección de Formación</footer>
 </div>
 
 <!-- JUEGO -->
 <div class="screen" id="s-game">
-  <div style="margin-bottom:.6rem">
-    <button onclick="if(confirm('¿Seguro que quieres salir? Perderás el progreso.'))backToMain()" 
-      style="background:none;border:none;font-size:13px;color:#888;cursor:pointer;padding:4px 0;font-family:inherit">
-      ← Salir al inicio
-    </button>
-  </div>
   <div class="top-bar">
     <div class="timer-wrap" id="tw">
       <svg width="46" height="46" viewBox="0 0 46 46">
@@ -433,10 +254,7 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
 
 <!-- RESULTADO -->
 <div class="screen" id="s-result">
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #e8eaf0">
-    <img src="data:image/jpeg;base64,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YIrLSMa5gE2Ok4a8nv4diluUt/mvVW5zXkw56LTqxq4ce1RjG9PWWAl2QjdXnvU7hWqNDQEobA29K+1KEpGyRXlVlVaX4EhPQCsXlVhaynGrrjUiQthq6w3oa3WwCpAcQUlQB6bjesrSiKCs4Lmy4TdqnapTRDQ2lo+w21iM/wAoG3Rz3uU7eYFSjHsetGK2iPY7HEEeJGB5U8xUpSid1KUo9VKJJJJ6kk1kqURQ++4VfZuVKyvHswVaH3be3b3mlQG5KVoQ4taVDmIIO7ih+6s9YYV5gQe4vt8F1k85V34ipj+75J5Ukjp8ayVKIlYbKcaYymFFhSJTjCYs6POCkAEqU0sKCTv5HbaszSiJWLyTG7Tldoesl6YU7He5VAoWULbWk8yHEKHVK0qAII8CKylKIoKcEzd2P8lv6sXM28jkJRAYRNKPh7QB0V+cEA1KcfsFpxezxrFZIiY0OIjkbQCSfHckk9VKJJJJ6kkmsjSiLDx8cZjZVPypMlxTs+FGhKaIHKlLK3VBQPjue+O/1CvRj2Ixsau96n22Y6mJepAmqglI7tiQRs64g+I7zYFQ8OYE+ZrP0oiw0vG2ZeU2/KVSXEu2+K/FS0AOVYdKSST47jkH76xeOacWfGstvWXRJEhx67kcjDhHdwwTzOhoeQcX76vWpbSiLB4di0fDrL8ixpbshHtMiTzuAA7uuqcI6eQKyP5q8bFiUWy3a+XtyS5Ml3yWmQ6t1I+bQhtKG2k7fkpCf3knzrPUoiwKsTipzNrM40lxl8W9VufYQkd2+33gWhSvPmQebb0Wa9+UYvacvtKrRd23O750vMusrKHo7yDuh1tY6pWk9Qf7QSKy9KIoG9gWazYxtdx1Wua7coci/Z4LDEtaPgXx4EjxUlIPw2qXWSy2vHbVFsllhtxIMNsNMsoHRKR/afMk9SSSa+6lEWDsmKx7Lf8AIL+1Ldccv77D7ragAlotMpaATt47hO/X4145bh1uy6PG9okSYU6A738GfEWESIrm2xKSQQQR0UkghQ6EVnqURQOXp3kl/a+TMw1DmXG0q2D8OLCbh+0p+g64glRQfAhPLuOnhU4jx2IjDcWKyhpllAbbbQNkoSBsAB5ACvZSiLDY7jTGOv3l5mU48bzcnLk4FgDu1KQhHKNvL5sHr8TWJsWmlmx7P71n1tkyG3b5FaYfh7juELQtSlOoHilSyr3vIkb+O9S+lESlKURKUpREpSlESsbd4AnNFsjcVkqURRq14tGiud4Wkg/VUiabS0nlSK8q/aIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoiUpSiJSlKIlKUoi/9k=" alt="Escuela de Formación" style="height:28px;object-fit:contain">
-    <span style="font-size:12px;color:#185FA5;font-weight:700">ESCUELA DE FORMACIÓN</span>
-  </div>
+  <div class="logo">SEGUROS DEL ESTADO</div>
   <h1>¡Resultado final!</h1>
   <div class="result-card">
     <div class="big-score" id="r-score">0</div>
@@ -455,7 +273,7 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
     <button class="btn" onclick="irLogin()">← Inicio</button>
     <button class="btn btn-p" onclick="irLogin()">🔄 Jugar de nuevo</button>
   </div>
-  <footer>Seguros del Estado · Vigilado por la Superintendencia Financiera de Colombia</footer>
+  <footer>Seguros del Estado · Dirección de Formación</footer>
 </div>
 
 <!-- DASHBOARD -->
@@ -467,17 +285,16 @@ footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
   <div style="margin-top:1rem">
     <button class="btn" onclick="mostrar('s-login')">← Salir</button>
   </div>
-  <footer>Seguros del Estado · Vigilado por la Superintendencia Financiera de Colombia</footer>
+  <footer>Seguros del Estado · Dirección de Formación</footer>
 </div>
 
 </div><!-- end app -->
 
 <script>
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwsyWO-5GtUqAsG8fd7PI46firYQqSch3n1ARGpSkWZGoXb5ViMD0zfr45vqhYTR0ya/exec';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbz4NPzw22lbtKM8pGAtb4tIeby7WPFPkqu8uacH_kTQasFY_tNf1OrgqL2XbzPD7LXS/exec';
 var CIRC = 119.4;
 var TL = 30;
 var diff = 'basico';
-var segmento = 'particular';
 var pName = '', pCity = '', pDoc = '', pClave = '', pMail = '', pCel = '', pCargo = '', pEdad = '';
 var curQ, score, nOk, tmInt, tLeft, gHist, gQuestions;
 
@@ -688,563 +505,7 @@ var banco = [
    hint:'El producto se elige según el arquetipo, no según el precio del vehículo.',
    ops:['"Tiene razón — Élite solo es para carros de lujo"','"Élite es para cualquier cliente"','"Ofrézcale siempre Clásico"','"El arquetipo determina el producto, no el precio del carro. Un Rey con carro de $60M puede querer Élite por su mentalidad"'],cor:3,
    fb:'El arquetipo del cliente, no el valor del vehículo, determina qué producto le conecta.',
-   coach:'💡 Esta es la filosofía central: el producto sigue al arquetipo, no al precio.'},
-  // =================== AUTOS COMERCIAL ===================
-  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'taxiestado',
-   txt:'Un taxista de servicio urbano quiere asegurar su taxi. ¿Cuál es el producto indicado?',
-   hint:'Dato real: TaxiEstado es la cobertura específica para taxis de servicio urbano y especial.',
-   ops:['Genio Comercial','Genio Pasajeros','TaxiEstado','MotoEstado'],cor:2,seg:'comercial',
-   fb:'TaxiEstado es el producto diseñado específicamente para taxis de servicio urbano y especial.',
-   coach:'💡 TaxiEstado=taxis · Genio Comercial=carga · Genio Pasajeros=buses · MotoEstado=motos.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
-   txt:'Un propietario de motocicleta quiere asegurarla. ¿Qué producto le corresponde?',
-   hint:'Dato real: MotoEstado es la cobertura específica para motocicletas.',
-   ops:['TaxiEstado','Genio Comercial','Genio Pasajeros','MotoEstado'],cor:3,seg:'comercial',
-   fb:'MotoEstado es el producto diseñado específicamente para motocicletas.',
-   coach:'💡 Las motos tienen su propio producto: MotoEstado. No se aseguran con productos de carga o pasajeros.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'genioPasajeros',
-   txt:'Una empresa tiene microbuses para transporte de pasajeros. ¿Qué producto le corresponde?',
-   hint:'Dato real: Genio Pasajeros cubre buses, busetas, microbuses, colectivos y vans de pasajeros.',
-   ops:['TaxiEstado','Genio Comercial','MotoEstado','Genio Pasajeros'],cor:3,seg:'comercial',
-   fb:'Genio Pasajeros es el producto para microbuses, buses, busetas y vans de transporte de pasajeros.',
-   coach:'💡 Pasajeros=Genio Pasajeros · Carga=Genio Comercial. Nunca los mezcles.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'genioComercial',
-   txt:'Un transportador tiene un camión de 4 toneladas de carga. ¿Qué producto le corresponde?',
-   hint:'Dato real: Genio Comercial cubre camiones hasta 5 toneladas, Pick Up, Furgón y Estacas.',
-   ops:['Genio Pasajeros','TaxiEstado','Genio Comercial','MotoEstado'],cor:2,seg:'comercial',
-   fb:'Genio Comercial cubre vehículos comerciales de carga hasta 5 toneladas: camiones, Pick Ups y furgones.',
-   coach:'💡 Carga hasta 5 TN=Genio Comercial · Carga mayor de 5 TN=Pesados.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'taxiestado',
-   txt:'¿Cuál es el límite de RCE de TaxiEstado?',
-   hint:'Dato real: TaxiEstado RCE=700/700/1.400 millones. MotoEstado=50/50/100 millones.',
-   ops:['50/50/100 millones','700/700/1.400 millones','3.400 millones','200/200/400 millones'],cor:1,seg:'comercial',
-   fb:'TaxiEstado tiene RCE de 700/700/1.400 millones — igual que Genio Comercial, Ambulancia y Pasajeros.',
-   coach:'💡 Todos los Genio+TaxiEstado=700/700/1.400M de RCE. Solo MotoEstado tiene menos: 50/50/100M.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
-   txt:'¿Cuál es la diferencia de RCE entre MotoEstado y TaxiEstado?',
-   hint:'Dato real: MotoEstado RCE=50/50/100 millones. TaxiEstado=700/700/1.400 millones.',
-   ops:['Son iguales — ambos tienen 700/700/1.400M','MotoEstado tiene 50/50/100M vs 700/700/1.400M de TaxiEstado','MotoEstado tiene más RCE','Solo difieren en el tercer límite'],cor:1,seg:'comercial',
-   fb:'MotoEstado tiene RCE de 50/50/100M — significativamente menor que los 700/700/1.400M de TaxiEstado.',
-   coach:'💡 La moto tiene mucho menos RCE. Clave al comparar coberturas con el cliente motociclista.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'genioComercial',
-   txt:'¿Cuánto cubre Genio Comercial en Accidentes Personales al conductor?',
-   hint:'Dato real: Todos los productos comerciales cubren $50 millones en Accidentes Personales.',
-   ops:['$20 millones','$100 millones','$50 millones','No cubre accidentes personales'],cor:2,seg:'comercial',
-   fb:'Genio Comercial cubre $50 millones en Accidentes Personales al conductor — igual que TaxiEstado, Genio Pasajeros y MotoEstado.',
-   coach:'💡 $50M en Accidentes Personales es estándar en todos los productos comerciales livianos.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'taxiestado',
-   txt:'¿Cuánto cubre TaxiEstado en remolque por avería?',
-   hint:'Dato real: TaxiEstado y MotoEstado=20 SMDLV. Genio Comercial, Ambulancia y Pasajeros=40 SMDLV.',
-   ops:['40 SMDLV','20 SMDLV','130 SMDLV','80 SMDLV'],cor:1,seg:'comercial',
-   fb:'TaxiEstado cubre 20 SMDLV en remolque por avería — la mitad que Genio Comercial y Pasajeros.',
-   coach:'💡 TaxiEstado y MotoEstado=20 SMDLV avería · Los Genio=40 SMDLV · Pesados=130 SMDLV.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'genioComercial',
-   txt:'¿Cuánto cubre Genio Comercial en remolque por avería?',
-   hint:'Dato real: Genio Comercial=40 SMDLV · TaxiEstado y MotoEstado=20 SMDLV.',
-   ops:['20 SMDLV','130 SMDLV','40 SMDLV','80 SMDLV'],cor:2,seg:'comercial',
-   fb:'Genio Comercial cubre 40 SMDLV en remolque por avería — el doble que TaxiEstado.',
-   coach:'💡 A mayor tamaño de vehículo, mayor cobertura de grúa. Genio Comercial tiene el doble que TaxiEstado.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'taxiestado',
-   txt:'¿Cuál es el único producto comercial liviano que incluye Auxilio por Paralización?',
-   hint:'Dato real: Solo TaxiEstado incluye Auxilio por Paralización=4 SMDLV. Los demás NO APLICA.',
-   ops:['Genio Comercial','Genio Pasajeros','MotoEstado','TaxiEstado'],cor:3,seg:'comercial',
-   fb:'Solo TaxiEstado incluye Auxilio por Paralización de 4 SMDLV. Genio Comercial, Pasajeros y MotoEstado NO lo tienen.',
-   coach:'💡 El Auxilio por Paralización es exclusivo de TaxiEstado — el taxi es la fuente de ingreso diario del conductor.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Qué vehículos cubre el seguro de Pesados de Seguros del Estado?',
-   hint:'Dato real: Pesados cubre camiones >5TN, furgones, chasis, carrotanques, remolcadores, volquetas.',
-   ops:['Camiones hasta 5 TN','Pick Ups y furgones livianos','Camiones más de 5 TN, volquetas, carrotanques y remolcadores','Buses y microbuses'],cor:2,seg:'comercial',
-   fb:'El seguro de Pesados cubre vehículos con capacidad mayor a 5 toneladas: camiones, volquetas, carrotanques, remolcadores.',
-   coach:'💡 La frontera es 5 toneladas. Hasta 5TN=Genio Comercial. Más de 5TN=Pesados.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Cuál es el límite de RCE del seguro de Pesados?',
-   hint:'Dato real: Pesados RCE=3.400 millones.',
-   ops:['700/700/1.400 millones','50/50/100 millones','3.400 millones','1.000 millones'],cor:2,seg:'comercial',
-   fb:'El seguro de Pesados tiene RCE de 3.400 millones — el mayor del portafolio de autos.',
-   coach:'💡 A mayor riesgo vial, mayor RCE. 3.400M en Pesados vs 700M en livianos comerciales.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Cuánto cubre Pesados en Accidentes Personales al ayudante del conductor?',
-   hint:'Dato real: Pesados cubre $50M al conductor y $20M al ayudante.',
-   ops:['$50 millones','$20 millones','No cubre al ayudante','$100 millones'],cor:1,seg:'comercial',
-   fb:'Pesados cubre $50M al conductor y $20M al ayudante — único producto que cubre al ayudante.',
-   coach:'💡 Pesados es el único que cubre al ayudante. Diferenciador importante para transportadores de carga.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#27500A',prod:'rcPasajeros',
-   txt:'¿Qué tipo de vehículos requieren el seguro de RC Pasajeros?',
-   hint:'Dato real: RC Pasajeros es para vehículos de transporte público de pasajeros.',
-   ops:['Vehículos particulares de lujo','Camiones de carga pesada','Vehículos de transporte público de pasajeros','Motos de reparto'],cor:2,seg:'comercial',
-   fb:'RC Pasajeros es para vehículos de transporte público: taxis, buses, busetas, microbuses de servicio público.',
-   coach:'💡 RC Pasajeros es cobertura obligatoria para operar transporte terrestre de pasajeros.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#27500A',prod:'rcPasajeros',
-   txt:'¿Cuántos tipos de servicio cubre RC Pasajeros de Seguros del Estado?',
-   hint:'Dato real: RC Pasajeros cubre Especial, Urbano, Intermunicipal, Escolar e Interdepartamental.',
-   ops:['Solo urbano e intermunicipal','Urbano, especial e intermunicipal','Especial, urbano, intermunicipal, escolar e interdepartamental','Solo especial y escolar'],cor:2,seg:'comercial',
-   fb:'RC Pasajeros cubre 5 tipos de servicio: Especial, Urbano, Intermunicipal, Escolar e Interdepartamental.',
-   coach:'💡 Cinco tipos de servicio. Identifica cuál opera tu cliente para cotizar correctamente.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#27500A',prod:'rcPasajeros',
-   txt:'En RC Pasajeros Especial, ¿cuánto cubre en daños a bienes de terceros?',
-   hint:'Dato real: RC Pasajeros Especial=100 SMMLV daños bienes terceros. Urbano/Intermunicipal=60 SMMLV.',
-   ops:['60 SMMLV','200 SMMLV','100 SMMLV','40 SMMLV'],cor:2,seg:'comercial',
-   fb:'RC Pasajeros Especial cubre 100 SMMLV en daños a bienes de terceros — el doble que el servicio Urbano.',
-   coach:'💡 Especial tiene el doble de cobertura que Urbano. Importante para cotizar según el tipo de servicio del cliente.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
-   txt:'¿Qué amparos básicos incluye MotoEstado?',
-   hint:'Dato real: MotoEstado incluye RCE, daños mayor y menor cuantía, hurto mayor y menor cuantía.',
-   ops:['Solo RCE y daños','RCE, daños mayor/menor cuantía, hurto mayor/menor cuantía','Solo daños y hurto, sin RCE','RCE y hurto únicamente'],cor:1,seg:'comercial',
-   fb:'MotoEstado incluye: RCE, daños de mayor y menor cuantía, y hurto de mayor y menor cuantía — igual que los demás productos comerciales.',
-   coach:'💡 Los amparos básicos son iguales en todos los productos comerciales. La diferencia está en los límites y beneficios adicionales.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'genioComercial',
-   txt:'¿Cuál es el límite de grúa por accidente en Genio Comercial?',
-   hint:'Dato real: Genio Comercial grúa por accidente=80 SMDLV ilimitado.',
-   ops:['20 SMDLV ilimitado','80 SMDLV ilimitado','40 SMDLV / 3 eventos','130 SMDLV ilimitado'],cor:1,seg:'comercial',
-   fb:'Genio Comercial cubre 80 SMDLV en grúa por accidente de forma ilimitada.',
-   coach:'💡 La grúa por accidente es ilimitada en los Genio. La de avería sí tiene límite en SMDLV.'},
-  // INTERMEDIO COMERCIAL
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#185FA5',prod:'genioComercial',
-   txt:'¿Cuál es la diferencia en deducible de daños de mayor cuantía entre TaxiEstado y Genio Comercial?',
-   hint:'Dato real: TaxiEstado daños mayor cuantía=10% hasta 30%. Genio Comercial=10% hasta 20%.',
-   ops:['Son iguales en ambos','TaxiEstado va hasta 30%, Genio Comercial hasta 20%','Genio Comercial va hasta 30%, TaxiEstado hasta 20%','TaxiEstado tiene deducible fijo del 20%'],cor:1,seg:'comercial',
-   fb:'TaxiEstado tiene deducible mayor en daños de mayor cuantía (hasta 30%) vs Genio Comercial (hasta 20%). El taxi tiene mayor siniestralidad.',
-   coach:'💡 Mayor siniestralidad=mayor deducible. El taxi opera más horas y en más condiciones de riesgo.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#E8610A',prod:'taxiestado',
-   txt:'¿Qué beneficio exclusivo tiene TaxiEstado que NO tienen Genio Comercial ni Genio Pasajeros?',
-   hint:'Dato real: Solo TaxiEstado incluye Auxilio por Paralización=4 SMDLV. Los demás NO APLICA.',
-   ops:['Accidentes personales al conductor','RCE más alta','Auxilio por Paralización de 4 SMDLV','Grúa por avería de 40 SMDLV'],cor:2,seg:'comercial',
-   fb:'El Auxilio por Paralización (4 SMDLV) es exclusivo de TaxiEstado. Para un taxista, cada día sin trabajar es pérdida económica directa.',
-   coach:'💡 Argumento emocional: si su taxi queda en el taller, TaxiEstado le ayuda mientras tanto. Eso cierra con el taxista.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un transportador dice: tengo un camión de 6 toneladas. ¿Qué producto y por qué?',
-   hint:'Pista: La frontera es 5 toneladas. Más de 5 TN=Pesados.',
-   ops:['Genio Comercial — cubre todos los camiones','TaxiEstado — para vehículos comerciales','Pesados — los camiones >5TN van en este segmento','Genio Pasajeros — para transporte'],cor:2,seg:'comercial',
-   fb:'Con 6 toneladas supera el límite de 5TN de Genio Comercial. El producto correcto es Pesados.',
-   coach:'💡 Siempre pregunta la capacidad de carga. Es la pregunta más importante en el segmento comercial.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Qué amparo adicional exclusivo tienen Pesados que no tienen los productos livianos comerciales?',
-   hint:'Dato real: Pesados incluye Obligaciones Financieras hasta 7M o max 3 cuotas y Auxilio Pérdida Patrimonial.',
-   ops:['Accidentes personales al conductor','Protección patrimonial','Obligaciones Financieras hasta 7M o 3 cuotas y Auxilio Pérdida Patrimonial','RCE más alta'],cor:2,seg:'comercial',
-   fb:'Pesados incluye Obligaciones Financieras (7M o max 3 cuotas) y Auxilio Pérdida Patrimonial — amparos para vehículos frecuentemente financiados.',
-   coach:'💡 Los pesados suelen estar financiados. Las Obligaciones Financieras protegen si el vehículo se pierde con cuotas pendientes.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Cuánto cubre Pesados en grúa por avería?',
-   hint:'Dato real: Pesados=130 SMDLV / 3 eventos por vigencia. Genio Comercial=40 SMDLV.',
-   ops:['40 SMDLV ilimitado','20 SMDLV / 3 eventos','130 SMDLV / 3 eventos por vigencia','80 SMDLV ilimitado'],cor:2,seg:'comercial',
-   fb:'Pesados cubre 130 SMDLV en grúa por avería con máximo 3 eventos por vigencia — más del triple que Genio Comercial.',
-   coach:'💡 Una grúa para un camión pesado cuesta mucho más. Los 130 SMDLV reflejan esa realidad operativa.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#27500A',prod:'rcPasajeros',
-   txt:'En RC Pasajeros, ¿cuánto cubre el servicio Especial en lesiones o muerte de DOS O MÁS personas?',
-   hint:'Dato real: RC Pasajeros Especial=200 SMMLV para lesiones/muerte de 2 o más personas.',
-   ops:['100 SMMLV','120 SMMLV','200 SMMLV','60 SMMLV'],cor:2,seg:'comercial',
-   fb:'RC Pasajeros Especial cubre 200 SMMLV para lesiones o muerte de 2 o más personas — el doble que Urbano (120 SMMLV).',
-   coach:'💡 Especial siempre duplica a Urbano. Importante para cotizar flotas de transporte especial o escolar.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un cliente tiene un pick up con platón que usa para distribuir mercancía. ¿Qué producto le corresponde?',
-   hint:'Pista: Pick Up con carrocería de platón para uso comercial está dentro de Genio Comercial.',
-   ops:['TaxiEstado — es un vehículo comercial','Genio Pasajeros — transporta carga','Genio Comercial — Pick Up comercial con platón','Seguro para carros — es un particular'],cor:2,seg:'comercial',
-   fb:'El Pick Up con carrocería de platón para uso comercial está dentro de Genio Comercial. El uso define el producto.',
-   coach:'💡 El uso define el producto, no el tipo de vehículo. Un pick up puede ser particular o comercial.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#185FA5',prod:'genioPasajeros',
-   txt:'¿Cuánto cubre Genio Pasajeros en grúa por accidente?',
-   hint:'Dato real: Genio Pasajeros grúa por accidente=80 SMDLV ilimitado.',
-   ops:['20 SMDLV ilimitado','40 SMDLV / 3 eventos','80 SMDLV ilimitado','130 SMDLV / 3 eventos'],cor:2,seg:'comercial',
-   fb:'Genio Pasajeros cubre 80 SMDLV en grúa por accidente de forma ilimitada — igual que Genio Comercial y Ambulancia.',
-   coach:'💡 La grúa por accidente es ilimitada en los Genio. La de avería sí tiene límite de eventos.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'Filosofia',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un taxista dice: Genio Comercial es más barato que TaxiEstado, son iguales. ¿Qué le responderías?',
-   hint:'TaxiEstado tiene beneficios exclusivos que Genio Comercial no tiene.',
-   ops:['Tiene razón, son prácticamente iguales','TaxiEstado incluye Auxilio por Paralización — si su taxi está en el taller, tiene apoyo económico. Genio Comercial no lo tiene','Ambos tienen la misma cobertura','Elija el más barato'],cor:1,seg:'comercial',
-   fb:'TaxiEstado tiene el Auxilio por Paralización exclusivo. Para quien vive de su taxi, eso vale más que el ahorro en prima.',
-   coach:'💡 El taxista necesita TaxiEstado. La paralización es su mayor riesgo económico — un día sin trabajar es ingreso perdido.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#E8610A',prod:'taxiestado',
-   txt:'¿Cuál es el límite del depósito o custodia del vehículo en los productos comerciales livianos?',
-   hint:'Dato real: Todos los productos comerciales tienen Depósito/Custodia=30 SMDLV máximo 7 días.',
-   ops:['20 SMDLV máximo 5 días','30 SMDLV máximo 7 días','40 SMDLV sin límite de días','50 SMDLV máximo 10 días'],cor:1,seg:'comercial',
-   fb:'El depósito o custodia es 30 SMDLV con máximo 7 días — igual en todos los productos comerciales livianos.',
-   coach:'💡 30 SMDLV / 7 días es estándar en todos los Genio y TaxiEstado. Igual para todos, fácil de recordar.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Cuánto cubre Pesados en el Auxilio por Paralización?',
-   hint:'Dato real: Pesados=$3.500.000 / 1 evento por vigencia.',
-   ops:['4 SMDLV por evento','$3.500.000 / 1 evento por vigencia','$7.000.000 / 3 eventos','No tiene auxilio por paralización'],cor:1,seg:'comercial',
-   fb:'Pesados cubre $3.500.000 en Auxilio por Paralización con máximo 1 evento por vigencia.',
-   coach:'💡 Un pesado parado puede significar pérdidas de millones al día. El auxilio por paralización es argumento poderoso.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
-   txt:'¿Cuál es el deducible de daños de mayor cuantía en MotoEstado?',
-   hint:'Dato real: MotoEstado daños mayor cuantía=10% hasta 20%.',
-   ops:['10% hasta 30%','0%','10% hasta 20%','Fijo del 15%'],cor:2,seg:'comercial',
-   fb:'MotoEstado tiene deducible de daños de mayor cuantía entre 10% y 20% — igual que Genio Comercial y Pasajeros.',
-   coach:'💡 TaxiEstado es el único que va hasta 30% en mayor cuantía, reflejando su mayor exposición al riesgo urbano.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#27500A',prod:'rcPasajeros',
-   txt:'En RC Pasajeros Urbano, ¿cuánto cubre en lesiones o muerte de una persona?',
-   hint:'Dato real: RC Pasajeros Urbano=60 SMMLV lesiones/muerte 1 persona. Especial=100 SMMLV.',
-   ops:['100 SMMLV','200 SMMLV','60 SMMLV','40 SMMLV'],cor:2,seg:'comercial',
-   fb:'RC Pasajeros Urbano cubre 60 SMMLV en lesiones o muerte de una persona — menos que el Especial (100 SMMLV).',
-   coach:'💡 Urbano=60 SMMLV · Especial=100 SMMLV por persona. Siempre identifica el tipo de servicio antes de cotizar.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'Identificacion',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un cliente llega con una Van de 12 pasajeros para servicio escolar. ¿Qué producto necesita?',
-   hint:'Pista: Servicio escolar=RC Pasajeros Especial + seguro del vehículo Genio Pasajeros.',
-   ops:['Solo Genio Pasajeros','Solo RC Pasajeros Especial','Genio Pasajeros para el vehículo + RC Pasajeros Especial para la operación','TaxiEstado porque es servicio especial'],cor:2,seg:'comercial',
-   fb:'Una Van escolar necesita dos coberturas: Genio Pasajeros para el vehículo y RC Pasajeros Especial para operar el transporte.',
-   coach:'💡 Transporte de pasajeros=dos capas de cobertura. Seguro del vehículo (Genio Pasajeros) + RC de la operación (RC Pasajeros). Nunca uno sin el otro.'},
-  // AVANZADO COMERCIAL
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un cliente tiene una ambulancia privada. ¿Qué producto le corresponde según el portafolio?',
-   hint:'Dato real: Genio Ambulancias cubre ambulancias dentro del segmento comercial liviano.',
-   ops:['Genio Pasajeros — transporta personas','Genio Comercial — es un vehículo comercial','Genio Ambulancias — producto específico para ambulancias','TaxiEstado — servicio especial'],cor:2,seg:'comercial',
-   fb:'Genio Ambulancias es el producto específico para ambulancias — coberturas ajustadas a sus particularidades de operación.',
-   coach:'💡 Existe un producto específico para ambulancias. Conocer el portafolio completo te diferencia del intermediario promedio.'},
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#27500A',prod:'rcPasajeros',
-   txt:'¿Cuál es la diferencia en cobertura de muerte accidental entre RC Contractual Especial vs Urbano?',
-   hint:'Dato real: RC Contractual Especial=100 SMMLV muerte accidental. Urbano/Intermunicipal=60 SMMLV.',
-   ops:['Son iguales en ambos servicios','Especial=100 SMMLV, Urbano=60 SMMLV','Urbano tiene más cobertura que Especial','Solo Especial cubre muerte accidental'],cor:1,seg:'comercial',
-   fb:'RC Contractual Especial cubre 100 SMMLV en muerte accidental vs 60 SMMLV del Urbano e Intermunicipal.',
-   coach:'💡 El tipo de servicio determina los límites de RC. Siempre identifica si es Especial, Urbano o Intermunicipal.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un cliente tiene: 3 carros particulares, 2 taxis y 1 camión de 3 TN. ¿Cuántos productos diferentes necesita?',
-   hint:'Pista: cada tipo de vehículo/uso corresponde a un producto diferente.',
-   ops:['1 producto — todo en una póliza de flota','2 productos — particulares y comerciales','3 productos — Seguro para carros, TaxiEstado y Genio Comercial','Solo Genio Comercial para todo'],cor:2,seg:'comercial',
-   fb:'Necesita 3 productos: Seguro para carros (particulares), TaxiEstado (taxis) y Genio Comercial (camión). Cada uso tiene su producto.',
-   coach:'💡 Flota mixta=múltiples productos. El intermediario experto identifica cada vehículo, su uso y su producto correcto.'},
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'Un camión pesado financiado sufre pérdida total. ¿Qué amparo de Pesados protege las cuotas pendientes?',
-   hint:'Dato real: Pesados incluye Obligaciones Financieras hasta 7M o máximo 3 cuotas.',
-   ops:['Protección patrimonial','Accidentes personales al conductor','Obligaciones Financieras hasta 7M o 3 cuotas','Auxilio por paralización'],cor:2,seg:'comercial',
-   fb:'Las Obligaciones Financieras (hasta 7M o max 3 cuotas) protegen al propietario cuando el vehículo se pierde y aún tiene deuda.',
-   coach:'💡 Clave para transportadores que compran pesados a crédito. Pregunta siempre si el vehículo está financiado.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'¿Cuál es la diferencia más importante entre asegurar un taxi con TaxiEstado vs con Seguro para Carros (Élite/Integral/Clásico)?',
-   hint:'Los productos particulares no están diseñados para uso comercial — uso distinto puede invalidar cobertura.',
-   ops:['No hay diferencia, ambos cubren igual','El precio — TaxiEstado es más caro','TaxiEstado está diseñado para uso comercial; asegurar un taxi como particular genera riesgo de no pago por uso distinto al declarado','Solo difiere en el nombre'],cor:2,seg:'comercial',
-   fb:'Asegurar un taxi con seguro particular es un error técnico grave. El uso distinto al declarado puede invalidar la cobertura en el siniestro.',
-   coach:'💡 El error de intermediación más grave: producto incorrecto por uso. El siniestro lo descubre cuando ya es tarde.'},
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#27500A',prod:'rcPasajeros',
-   txt:'¿Qué amparo incluye RC Pasajeros para proteger al conductor del vehículo de servicio público?',
-   hint:'Dato real: RC Pasajeros Contractual y Extracontractual incluyen Amparo al Conductor.',
-   ops:['Accidentes personales al conductor por $50M','Amparo al Conductor incluido en RC Contractual y Extracontractual','Invalidez permanente al conductor','No existe amparo al conductor en RC Pasajeros'],cor:1,seg:'comercial',
-   fb:'RC Pasajeros incluye Amparo al Conductor en sus coberturas de RC Contractual y Extracontractual.',
-   coach:'💡 El Amparo al Conductor es diferente a Accidentes Personales. En taxis, el decreto 1047/2014 establece condiciones especiales.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'El Rey',pc:'#BA7517',prod:'arquetipo',
-   txt:'Un empresario con 15 pesados dice: quiero la mejor cobertura para mi flota. ¿Cuál es tu estrategia?',
-   hint:'Flota de 5 o más=Colectivo. Pesados=producto específico. Empresario=arquetipo Rey.',
-   ops:['Ofrecer Genio Comercial para toda la flota','Ofrecer Pesados Colectivo — 5 o más vehículos bajo un tomador califican como colectiva','Ofrecer Seguro para Carros','Cotizar cada vehículo individualmente sin mencionar colectiva'],cor:1,seg:'comercial',
-   fb:'Con 15 pesados califica para Colectiva (mínimo 5 vehículos, mismo tomador). El producto es Pesado Colectivo.',
-   coach:'💡 El empresario transportador es el Rey del segmento comercial. La figura de colectiva le da solución completa a su flota.'},
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
-   txt:'¿Qué beneficio exclusivo tiene MotoEstado en siniestros de muerte o lesiones graves?',
-   hint:'Dato real: MotoEstado incluye Investigación Forense para reconstrucción y animación de accidentes.',
-   ops:['Cobertura de casco para el conductor','Investigación Forense de siniestros para reconstrucción y recolección de pruebas en accidentes de tránsito','Seguro de vida del motociclista','Cobertura de accesorios de la moto'],cor:1,seg:'comercial',
-   fb:'MotoEstado incluye Investigación Forense para reconstrucción, animación y recolección de pruebas — muy valioso dado el alto índice de accidentalidad.',
-   coach:'💡 La Investigación Forense es diferenciador poderoso de MotoEstado. Las motos tienen la mayor accidentalidad del parque automotor.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'¿Cuál es la frontera exacta entre Genio Comercial y el seguro de Pesados?',
-   hint:'Dato real: Genio Comercial cubre hasta 5 TN. Pesados cubre vehículos con capacidad IGUAL O SUPERIOR a 5 TN.',
-   ops:['3 toneladas','5 toneladas — Genio Comercial hasta menos de 5TN, Pesados desde 5TN inclusive','10 toneladas','2 toneladas'],cor:1,seg:'comercial',
-   fb:'La frontera es 5 toneladas. Genio Comercial cubre capacidad hasta 5TN (exclusivo). Pesados cubre igual o superior a 5TN.',
-   coach:'💡 Un camión de exactamente 5TN va en Pesados. Siempre verifica la capacidad exacta antes de suscribir.'},
-
-  // =================== NUEVAS PREGUNTAS COMERCIAL (Presentación Mayo 2026) ===================
-  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
-   txt:'¿Cuál es el valor asegurable máximo para un taxi en el segmento comercial?',
-   hint:'Dato real: Taxis hasta $150 millones. Vehículos comerciales en general hasta $350 millones. Motos hasta $50 millones.',
-   ops:['$350 millones','$50 millones','$150 millones','$500 millones'],cor:2,seg:'comercial',
-   fb:'El valor asegurable máximo para taxis es $150 millones — menos que el general comercial ($350M) por el perfil de riesgo del taxi.',
-   coach:'💡 Pregunta siempre el valor del vehículo antes de cotizar. Si supera el límite, no es suscribible.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
-   txt:'¿Cuál es el valor asegurable máximo para una motocicleta en MotoEstado?',
-   hint:'Dato real: Motos hasta $50 millones. Vehículos comerciales generales hasta $350 millones.',
-   ops:['$150 millones','$350 millones','$100 millones','$50 millones'],cor:3,seg:'comercial',
-   fb:'El valor asegurable máximo para motos es $50 millones — el límite más bajo del segmento comercial.',
-   coach:'💡 Si una moto supera $50M, no es suscribible en MotoEstado. Verifica siempre el valor con la Guía Fasecolda.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Cuál es el valor asegurable máximo para vehículos pesados?',
-   hint:'Dato real: Pesados hasta $900 millones.',
-   ops:['$350 millones','$500 millones','$900 millones','$1.200 millones'],cor:2,seg:'comercial',
-   fb:'Los vehículos pesados tienen un valor asegurable máximo de $900 millones — el más alto del portafolio de autos.',
-   coach:'💡 Un remolcador puede costar $300M-$800M. El límite de $900M cubre la mayoría de flotas pesadas del mercado.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
-   txt:'¿Cuál es la antigüedad máxima permitida para asegurar un vehículo comercial (no moto)?',
-   hint:'Dato real: Vehículos comerciales hasta 15 años de antigüedad. Motos hasta 5 años.',
-   ops:['5 años','10 años','20 años','15 años'],cor:3,seg:'comercial',
-   fb:'Los vehículos comerciales pueden asegurarse hasta 15 años de antigüedad. Las motos solo hasta 5 años.',
-   coach:'💡 La antigüedad es una variable clave de suscripción. Siempre verifica el año de fabricación antes de cotizar.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#533AB7',prod:'motoestado',
-   txt:'¿Cuál es la antigüedad máxima permitida para asegurar una motocicleta?',
-   hint:'Dato real: Motos hasta 5 años de antigüedad. Vehículos comerciales generales hasta 15 años.',
-   ops:['10 años','15 años','5 años','3 años'],cor:2,seg:'comercial',
-   fb:'Las motocicletas solo pueden asegurarse hasta 5 años de antigüedad — mucho menor que los vehículos comerciales (15 años).',
-   coach:'💡 Una moto de 6 años no es suscribible. Verifica siempre el año antes de ofrecer MotoEstado.'},
-
-  {lv:'basico',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un cliente quiere asegurar su vehículo eléctrico comercial. ¿Qué le respondes?',
-   hint:'Dato real: Los vehículos eléctricos están dentro de las principales exclusiones del portafolio.',
-   ops:['Claro, lo aseguramos con Genio Comercial','Lo aseguramos con condiciones especiales','Los vehículos eléctricos son una exclusión — no son suscribibles en el portafolio actual','Solo si tiene menos de 5 años'],cor:2,seg:'comercial',
-   fb:'Los vehículos eléctricos son una exclusión expresa del portafolio de Seguros del Estado — no son suscribibles.',
-   coach:'💡 Comunica las exclusiones con claridad y empatía. Es mejor decirlo antes que en el siniestro.'},
-
-  {lv:'basico',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un conductor de plataforma (Uber, InDriver) quiere asegurar su carro con Seguros del Estado. ¿Qué aplica?',
-   hint:'Dato real: El transporte de pasajeros en servicio de plataformas es una exclusión expresa.',
-   ops:['Se asegura como particular — es un carro normal','Se asegura con TaxiEstado','El transporte en plataformas es una exclusión — no es suscribible','Se asegura con Genio Pasajeros'],cor:2,seg:'comercial',
-   fb:'El transporte de pasajeros en servicio de plataformas (Uber, InDriver, etc.) es una exclusión expresa — no es suscribible.',
-   coach:'💡 Este es uno de los errores más frecuentes. Un carro de plataforma asegurado como particular tiene riesgo de no pago en siniestro.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Qué coberturas NO otorga el seguro cuando el vehículo pesado es un remolque?',
-   hint:'Dato real: Remolques NO tienen RCE, amparo patrimonial, accidentes personales, auxilio por paralización ni obligaciones financieras.',
-   ops:['Solo no tiene RCE','No tiene ninguna cobertura','RCE, amparo patrimonial, accidentes personales, auxilio por paralización y obligaciones financieras','Solo no tiene accidentes personales'],cor:2,seg:'comercial',
-   fb:'Los remolques tienen coberturas muy limitadas: NO tienen RCE, amparo patrimonial, accidentes personales, auxilio por paralización ni obligaciones financieras.',
-   coach:'💡 El remolque es el vehículo más limitado en coberturas. Siempre aclara esto al cliente antes de suscribir.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
-   txt:'¿Cuáles son las variables clave de tarificación en el segmento comercial?',
-   hint:'Dato real: Marca, clase, tipo/línea, año de fabricación, valor asegurable, zona y otros.',
-   ops:['Solo el valor y el año','Color, marca y modelo','Marca, clase, tipo/línea, año de fabricación, valor asegurable y zona','Solo la zona y el uso'],cor:2,seg:'comercial',
-   fb:'Las variables clave de tarificación son: marca, clase, tipo/línea, año de fabricación, valor asegurable y zona — todas determinan el precio final.',
-   coach:'💡 Conocer las variables de tarificación te permite anticipar el precio antes de cotizar y manejar las expectativas del cliente.'},
-
-  {lv:'intermedio',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un taxista dice: "me robaron el taxi — es toda mi fuente de ingreso". ¿Qué argumento usa Seguros del Estado para este perfil?',
-   hint:'La presentación dice: Un taxi robado no es un carro perdido... es una familia sin ingresos mañana.',
-   ops:['El taxi tiene el mejor precio del mercado','TaxiEstado protege el patrimonio, da continuidad al negocio y responde rápido ante siniestro — un taxi robado es una familia sin ingresos','El seguro cubre el valor total sin deducible','Todos los seguros de taxi son iguales'],cor:1,seg:'comercial',
-   fb:'El argumento emocional más poderoso: "Un taxi robado no es un carro perdido... es una familia sin ingresos mañana." TaxiEstado fue diseñado para proteger esa realidad.',
-   coach:'💡 Con el taxista el argumento no es técnico — es humano. Conecta con su realidad: el taxi es su sustento diario.'},
-
-  {lv:'intermedio',tp:'arquetipo',prf:'Identificación',pc:'#633806',prod:'arquetipo',
-   txt:'¿Cuál es el perfil de cliente típico del segmento de vehículos pesados?',
-   hint:'Dato real: Empresas transportadoras, transportadores independientes, constructoras, mensajería, paqueteo y logística.',
-   ops:['Solo personas naturales con camiones','Empresas transportadoras, transportadores, constructoras, mensajería, paqueteo y logística','Solo cooperativas de transporte','Únicamente empresas con más de 10 vehículos'],cor:1,seg:'comercial',
-   fb:'El perfil de cliente pesado incluye: empresas transportadoras, transportadores independientes, constructoras, mensajería, paqueteo y logística.',
-   coach:'💡 Conocer el perfil de cliente te permite ir al lugar correcto a prospectar. Las constructoras y empresas de logística son clientes de alto valor.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
-   txt:'¿Qué documentos se requieren AL EXPEDIR una póliza comercial?',
-   hint:'Dato real: Cotización, SARLAFT, documentos del tomador, tarjeta de propiedad, inspección/continuidad y facturas.',
-   ops:['Solo la cédula y el SOAT','Cotización, SARLAFT, documentos del tomador, tarjeta de propiedad, inspección y facturas','Solo la tarjeta de propiedad','Cédula, tarjeta de propiedad y foto del vehículo'],cor:1,seg:'comercial',
-   fb:'Para expedir una póliza comercial se necesita: cotización, SARLAFT, documentos del tomador, tarjeta de propiedad, inspección/continuidad y facturas.',
-   coach:'💡 El SARLAFT es obligatorio y no negociable. Un cliente que no pasa SARLAFT no puede ser asegurado sin importar el vehículo.'},
-
-  {lv:'intermedio',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un cliente quiere asegurar una camioneta que fue repotenciada con motor nuevo. ¿Qué aplica?',
-   hint:'Dato real: Vehículos repotenciados o transformados son una exclusión expresa del portafolio.',
-   ops:['Se asegura normalmente','Se asegura con inspección adicional','Los vehículos repotenciados son una exclusión — no son suscribibles','Solo si tiene menos de 5 años de repotenciado'],cor:2,seg:'comercial',
-   fb:'Los vehículos repotenciados o transformados son una exclusión expresa. No son suscribibles en el portafolio de Seguros del Estado.',
-   coach:'💡 Antes de cotizar pregunta siempre si el vehículo ha sido modificado. Una repotenciación invalida la suscripción.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'Un siniestro de un remolcador puede costar entre $300M y $800M. ¿Cuál es el argumento de venta más poderoso de Pesados?',
-   hint:'El seguro de Pesados está diseñado para proteger el patrimonio, dar continuidad al negocio y responder rápido ante siniestro.',
-   ops:['El precio más bajo del mercado','Proteger el patrimonio, dar continuidad al negocio y responder rápido — un siniestro de un remolcador puede costar $800M y paralizar la operación','Es el único seguro para pesados','Tiene el mayor número de asistencias'],cor:1,seg:'comercial',
-   fb:'El argumento de Pesados: proteger el patrimonio, dar continuidad al negocio y responder rápido. Un siniestro de un remolcador puede costar $800M.',
-   coach:'💡 Con el empresario transportador el argumento es financiero: ¿cuánto cuesta tener un vehículo pesado en taller? Eso cierra.'},
-
-  {lv:'intermedio',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
-   txt:'¿Cuál de estas situaciones es una exclusión en el segmento comercial de Seguros del Estado?',
-   hint:'Dato real: Vehículos para carreras, importación temporal, test drive, salvamentos y regrabados son exclusiones.',
-   ops:['Un taxi con 10 años de antigüedad','Una moto de 4 años asegurada con MotoEstado','Un vehículo destinado a test drive de concesionario','Un camión de 4 toneladas con Genio Comercial'],cor:2,seg:'comercial',
-   fb:'Los vehículos destinados a test drive son una exclusión expresa. No son suscribibles en el portafolio.',
-   coach:'💡 Los concesionarios a veces piden asegurar vehículos de test drive. La respuesta es clara: no aplica.'},
-
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un intermediario quiere asegurar una flota de vehículos de renting corporativo. ¿Qué aplica?',
-   hint:'Dato real: Vehículos destinados al servicio de renting corporativo son una exclusión expresa.',
-   ops:['Se aseguran con Colectivas — es una flota','Se aseguran con condiciones especiales de suscripción','El renting corporativo es una exclusión expresa — no son suscribibles','Solo si la empresa tiene más de 5 años'],cor:2,seg:'comercial',
-   fb:'Los vehículos de renting corporativo son una exclusión expresa — no son suscribibles en el portafolio de Seguros del Estado.',
-   coach:'💡 El renting corporativo tiene un modelo de negocio distinto que genera riesgo moral. Es una exclusión firme.'},
-
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#E8610A',prod:'comercial',
-   txt:'¿Cuáles son las condiciones ANTES DE COTIZAR que debe verificar el intermediario en el segmento comercial?',
-   hint:'Dato real: Usuario activo en plataforma, tipo de vehículo, uso, antigüedad, valor (Guía Fasecolda), inspección y continuidad.',
-   ops:['Solo el valor y la marca del vehículo','Usuario activo en plataforma, tipo y uso del vehículo, antigüedad, valor según Guía Fasecolda, inspección y continuidad','Solo la tarjeta de propiedad','El SARLAFT y la cédula del tomador'],cor:1,seg:'comercial',
-   fb:'Antes de cotizar: usuario activo, tipo de vehículo, uso, antigüedad, valor (Guía Fasecolda), inspección y continuidad. Sin estos datos no se puede cotizar correctamente.',
-   coach:'💡 Un intermediario que cotiza sin verificar estos datos primero comete errores de suscripción que luego se convierten en problemas en el siniestro.'},
-
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'¿Por qué el solo 12% del parque automotor tiene seguro voluntario es una oportunidad y no un problema?',
-   hint:'Fuente: Fasecolda + RUNT. El 88% del mercado no está asegurado.',
-   ops:['Porque significa que el mercado está saturado','Porque el 88% sin seguro representa clientes potenciales con vehículo, capacidad de pago y exposición al riesgo — el mercado está virgen','Porque los clientes sin seguro no quieren asegurarse','Porque la competencia ya tiene ese 88%'],cor:1,seg:'comercial',
-   fb:'El 88% sin seguro son clientes que ya tienen vehículo, pueden tener capacidad de pago y están expuestos al riesgo — es un mercado virgen de enorme potencial.',
-   coach:'💡 Usa esta estadística con tus clientes intermediarios: el mercado de autos en Colombia está prácticamente sin explotar. Ese es su campo de acción.'},
-
-  {lv:'avanzado',tp:'arquetipo',prf:'Exclusiones',pc:'#993C1D',prod:'arquetipo',
-   txt:'¿Cuál de estas es una exclusión válida en el portafolio comercial de Seguros del Estado?',
-   hint:'Dato real: Vehículos con cambio de facelift, regrabados, embargados y con limitaciones a la propiedad son exclusiones.',
-   ops:['Un camión de 12 años con Pesados','Un vehículo con cambio de facelift o regrabado — son exclusiones expresas','Una moto de 4 años con MotoEstado','Un taxi de $120M con TaxiEstado'],cor:1,seg:'comercial',
-   fb:'Vehículos con cambio de facelift o regrabados son exclusiones expresas — tienen problemas de identificación o modificaciones que los hacen no suscribibles.',
-   coach:'💡 Un vehículo regrabado tiene serias implicaciones legales. La exclusión protege tanto a la aseguradora como al intermediario de responsabilidades futuras.'},
-
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#633806',prod:'pesados',
-   txt:'¿Cuál es la principal ventaja competitiva de Seguros del Estado en el segmento comercial y pesados según la presentación corporativa?',
-   hint:'Dato real: Apetito de riesgo claro y amplio, producto competitivo, facilidad de cotización, beneficio de continuidad, agilidad de inspección y acompañamiento técnico y comercial.',
-   ops:['El precio más bajo del mercado','El mayor número de asistencias','Apetito de riesgo amplio, producto competitivo, continuidad, agilidad de inspección y acompañamiento técnico y comercial','La cobertura más alta de RCE'],cor:2,seg:'comercial',
-   fb:'Las ventajas competitivas son: apetito de riesgo claro y amplio, producto competitivo, facilidad de cotización, beneficio de continuidad, agilidad de inspección y acompañamiento técnico y comercial.',
-   coach:'💡 Cuando el cliente pregunte por qué elegir Seguros del Estado, tienes 8 argumentos concretos. Memóralos y úsalos.'},
-
-  // =================== CUMPLIMIENTO ===================
-  // BÁSICO
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué garantiza el Seguro de Cumplimiento de Seguros del Estado?',
-   hint:'El seguro de cumplimiento garantiza las obligaciones adquiridas en contratos, disposiciones legales y cauciones judiciales.',
-   ops:['Protege el patrimonio del asegurado ante robos','Garantiza las obligaciones adquiridas en contratos, disposiciones legales y cauciones judiciales','Cubre daños a terceros por accidentes','Es un seguro de vida para contratistas'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El seguro de cumplimiento garantiza las obligaciones de personas naturales o jurídicas en contratos, disposiciones legales y cauciones judiciales.',
-   coach:'💡 Cumplimiento no protege el patrimonio del contratista — protege al beneficiario (el contratante) ante el incumplimiento del contratista.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Cuántos tipos de Seguro de Cumplimiento ofrece Seguros del Estado?',
-   hint:'Seguros del Estado tiene: Cumplimiento Particular, Estatal, Ecopetrol, Disposiciones Legales y Caución Judicial.',
-   ops:['Solo uno — Cumplimiento General','Dos — Particular y Estatal','Cinco — Particular, Estatal, Ecopetrol, Disposiciones Legales y Caución Judicial','Tres — Particular, Estatal y Judicial'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'Seguros del Estado ofrece 5 modalidades de Cumplimiento: Particular, Estatal, Ecopetrol, Disposiciones Legales y Caución Judicial.',
-   coach:'💡 Conocer todas las modalidades te diferencia. La mayoría de intermediarios solo conoce Estatal y Particular.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué amparo cubre al beneficiario si el contratista no suscribe el contrato después de ganar la licitación?',
-   hint:'El Amparo de Seriedad de la Oferta cubre el incumplimiento de las obligaciones previas a la firma del contrato.',
-   ops:['Amparo de Anticipo','Amparo de Cumplimiento del Contrato','Amparo de Seriedad de la Oferta','Amparo de Estabilidad de la Obra'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Amparo de Seriedad de la Oferta cubre al beneficiario cuando el proponente gana pero no suscribe el contrato, no amplía vigencias o no otorga garantías.',
-   coach:'💡 Seriedad de la Oferta = etapa precontractual. Cumplimiento del Contrato = etapa de ejecución. Son momentos distintos del proceso.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué amparo protege al beneficiario cuando el contratista recibe dinero por adelantado y lo usa indebidamente?',
-   hint:'El Amparo de Anticipo garantiza la devolución del dinero entregado al contratista cuando lo usa o apropia indebidamente.',
-   ops:['Amparo de Seriedad de la Oferta','Amparo de Cumplimiento del Contrato','Amparo de Anticipo','Amparo de Pago de Salarios'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Amparo de Anticipo garantiza la devolución de los dineros entregados al contratista cuando los usa o apropia indebidamente.',
-   coach:'💡 Anticipo = dinero dado ANTES del trabajo. Pago Anticipado = dinero dado como remuneración adelantada. Son amparos distintos con condiciones diferentes.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué amparo protege al beneficiario si la obra entregada presenta deterioro por culpa del contratista DESPUÉS de terminada?',
-   hint:'El Amparo de Estabilidad de la Obra cubre los perjuicios por deterioro de obras ya entregadas y recibidas a satisfacción.',
-   ops:['Amparo de Cumplimiento del Contrato','Amparo de Calidad del Servicio','Amparo de Estabilidad de la Obra','Amparo de Anticipo'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Amparo de Estabilidad de la Obra comienza su vigencia desde el Acta de Entrega y cubre el deterioro posterior imputable al contratista.',
-   coach:'💡 Clave: la Estabilidad de la Obra empieza DESPUÉS de la entrega. Durante la ejecución aplica el Amparo de Cumplimiento.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Cuál es la principal diferencia entre el Seguro de Cumplimiento Particular y el Estatal?',
-   hint:'El Estatal se rige por el Decreto 1082 de 2015 y es irrevocable. El Particular puede revocarse con 30 días hábiles de aviso.',
-   ops:['No hay diferencia — son iguales','El Estatal cubre más amparos que el Particular','El Estatal es irrevocable y se rige por el Decreto 1082/2015. El Particular puede revocarse con 30 días hábiles de aviso','El Particular es para empresas grandes y el Estatal para pymes'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Cumplimiento Estatal es irrevocable, no expira por falta de pago de prima y se rige por el Decreto 1082 de 2015. El Particular puede revocarse con aviso de 30 días hábiles.',
-   coach:'💡 Esta diferencia es crucial al explicarle al cliente. Una entidad pública NUNCA puede quedar sin garantía — por eso el Estatal es irrevocable.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué es una Caución Judicial?',
-   hint:'La Caución Judicial es una modalidad del seguro de cumplimiento ordenada por autoridad competente en procesos judiciales.',
-   ops:['Un seguro de vida para jueces','Una garantía ordenada por autoridad competente en procesos judiciales para proteger a la contraparte o terceros','Un seguro de cumplimiento para contratos estatales','Una póliza de RC para abogados'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'La Caución Judicial protege a la contraparte o terceros frente a perjuicios derivados de disposiciones judiciales, garantizando el cumplimiento de lo ordenado por la autoridad.',
-   coach:'💡 La Caución Judicial no protege al que la contrata — protege a quien el juez ordenó proteger. Es una garantía judicial, no comercial.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Cuánto dura la vigencia de una Póliza de Caución Judicial?',
-   hint:'La vigencia de la Caución Judicial no está limitada en el tiempo — dura lo que dure el proceso judicial.',
-   ops:['1 año renovable','Hasta 5 años máximo','No está limitada en el tiempo — dura lo que dure el proceso judicial','6 meses prorrogables'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'La Caución Judicial tiene vigencia ilimitada — corresponde al tiempo que dure el proceso y/o disposición legal asociada al riesgo asegurado.',
-   coach:'💡 A diferencia de otros seguros, la Caución Judicial no tiene fecha de vencimiento fija. Esto la hace muy especial en términos de vigencia.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué exclusión es común en todos los amparos del Seguro de Cumplimiento?',
-   hint:'La Fuerza Mayor o Caso Fortuito excluye la responsabilidad del contratista cuando el incumplimiento no le es imputable.',
-   ops:['El incumplimiento por culpa del contratista','La fuerza mayor o caso fortuito como causal de incumplimiento','Las multas pactadas en el contrato','El deterioro de equipos suministrados'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'La Fuerza Mayor o Caso Fortuito es exclusión común: si el incumplimiento se debe a eventos fuera del control del contratista, el seguro no opera.',
-   coach:'💡 Fuerza mayor exonera al contratista de responsabilidad y por tanto el seguro no opera. El cliente debe entender que el seguro cubre incumplimientos imputables al contratista.'},
-
-  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué amparo del Seguro de Cumplimiento protege al beneficiario si el contratista no paga a sus trabajadores?',
-   hint:'El Amparo de Pago de Salarios, Prestaciones Sociales e Indemnizaciones protege al beneficiario de los incumplimientos laborales del contratista.',
-   ops:['Amparo de Cumplimiento del Contrato','Amparo de Anticipo','Amparo de Pago de Salarios, Prestaciones Sociales e Indemnizaciones','Amparo de Seriedad de la Oferta'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Amparo de Salarios protege al beneficiario si el contratista incumple sus obligaciones laborales con el personal empleado en el contrato.',
-   coach:'💡 Esto aplica el Art. 34 del Código Sustantivo del Trabajo: el beneficiario puede ser solidariamente responsable de los salarios del personal del contratista. El seguro lo protege de ese riesgo.'},
-
-  // INTERMEDIO CUMPLIMIENTO
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'Un contratista firma un contrato y recibe anticipo, pero en lugar de usarlo en la obra lo destina a otros negocios. ¿Qué amparo aplica y qué debe demostrar el beneficiario?',
-   hint:'Amparo de Anticipo. El beneficiario debe demostrar el uso indebido de los recursos.',
-   ops:['Amparo de Cumplimiento — el contratista incumplió el contrato','Amparo de Anticipo — hubo uso o apropiación indebida de los recursos entregados','Amparo de Pago Anticipado — no devolvió el saldo','Amparo de Seriedad — no cumplió la oferta'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'Aplica el Amparo de Anticipo cuando los recursos no se usan para lo que fueron entregados. El beneficiario debe acreditar el uso indebido y la cuantía del perjuicio.',
-   coach:'💡 La diferencia entre Anticipo y Pago Anticipado es sutil pero importante: Anticipo = para ejecutar el contrato. Pago Anticipado = remuneración adelantada por trabajo ya comprometido.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Cuándo NO expira el Seguro de Cumplimiento Estatal por falta de pago de la prima?',
-   hint:'El Cumplimiento Estatal tiene una condición especial: no expira por falta de pago de la prima y es irrevocable.',
-   ops:['Solo en contratos superiores a $500 millones','Nunca — el Cumplimiento Estatal no expira por falta de pago de prima y no puede revocarse unilateralmente','Solo durante la ejecución del contrato','Cuando la entidad estatal lo autoriza'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Cumplimiento Estatal nunca expira por falta de pago de prima. Esta condición protege a la entidad pública de quedar sin garantía por razones internas del contratista.',
-   coach:'💡 Esto es una ventaja competitiva para Seguros del Estado: la entidad pública siempre está protegida. Si el contratista deja de pagar la prima, el riesgo lo asume Segurestado — no la entidad.'},
-
-  {lv:'intermedio',tp:'arquetipo',prf:'Identificacion',pc:'#533AB7',prod:'arquetipo',
-   txt:'Una empresa constructora va a participar en una licitación pública. ¿Qué seguro necesita para presentar su propuesta?',
-   hint:'Para participar en licitaciones públicas se requiere Cumplimiento Estatal con Amparo de Seriedad de la Oferta.',
-   ops:['Seguro de RC Extracontractual','Cumplimiento Particular con amparo de anticipo','Cumplimiento Estatal con Amparo de Seriedad de la Oferta','Caución Judicial porque es un proceso competitivo'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'Para participar en licitaciones públicas se requiere Cumplimiento Estatal con Amparo de Seriedad de la Oferta — garantiza que el proponente suscribirá el contrato si gana.',
-   coach:'💡 Licitación pública = Cumplimiento Estatal. Contratos privados = Cumplimiento Particular. Es la primera pregunta de diagnóstico del cliente.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué diferencia existe entre los amparos del Cumplimiento Estatal y el de Ecopetrol?',
-   hint:'El de Ecopetrol incluye amparos específicos como Calidad de Elementos Suministrados, Correcto Funcionamiento de Equipos y Provisión de Repuestos que no están en el Estatal estándar.',
-   ops:['Son completamente iguales','El de Ecopetrol incluye amparos específicos como Calidad de Elementos, Correcto Funcionamiento de Equipos y Provisión de Repuestos y Accesorios','El Estatal cubre más que el de Ecopetrol','Solo difieren en el precio de la prima'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Cumplimiento para Ecopetrol tiene amparos adicionales específicos: Calidad de los Elementos Suministrados, Correcto Funcionamiento de los Equipos y Provisión de Repuestos y Accesorios.',
-   coach:'💡 Cada cliente grande tiene condiciones especiales. Ecopetrol exige garantías adicionales por la naturaleza técnica de sus contratos de suministro y obras.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué ocurre con el Seguro de Cumplimiento si el contrato original es modificado sin que la aseguradora lo acepte por escrito?',
-   hint:'Las modificaciones al contrato original sin aceptación escrita de la aseguradora son una exclusión expresa.',
-   ops:['El seguro se amplía automáticamente para cubrir las modificaciones','Las modificaciones al contrato sin aceptación escrita de la aseguradora son una exclusión — el seguro no cubre los perjuicios derivados de esas modificaciones','El seguro se cancela automáticamente','La aseguradora tiene 30 días para objetar la modificación'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'Las modificaciones al contrato original sin aceptación escrita de la aseguradora son exclusión expresa. El cliente debe notificar y obtener aprobación antes de modificar el contrato.',
-   coach:'💡 Punto crítico: cuando el cliente amplía o modifica el contrato, debe actualizar la póliza. Si no lo hace y ocurre un siniestro derivado de la modificación, el seguro no opera.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué amparo de la RCE cubre los daños causados a terceros por contratistas del asegurado que trabajan en sus predios?',
-   hint:'El Amparo de Contratistas y Subcontratistas Independientes cubre la RC extracontractual por daños causados por contratistas externos que trabajan en los predios.',
-   ops:['Amparo Básico de Predios, Labores y Operaciones','Amparo de Responsabilidad Patronal','Amparo de Contratistas y Subcontratistas Independientes','No existe ese amparo en RCE'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'El Amparo de Contratistas y Subcontratistas Independientes cubre los daños a terceros causados por contratistas externos que realizan labores en los predios del asegurado.',
-   coach:'💡 Importante: este amparo solo opera si el contratista NO tiene su propia póliza de RCE con los mismos amparos. Si ya la tiene, no aplica.'},
-
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Cuáles son las exclusiones comunes de la Póliza de RCE que el intermediario debe conocer?',
-   hint:'Perjuicios morales, lucro cesante, daños al propio asegurado y familia, uso de vehículos, responsabilidad contractual y responsabilidad profesional.',
-   ops:['Solo los perjuicios morales','Perjuicios morales, lucro cesante (salvo sublímite), daños al asegurado y familia, uso de vehículos, RC contractual y responsabilidad profesional','Solo los daños fuera de Colombia','Solo los causados con dolo del asegurado'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'Las exclusiones de RCE incluyen: perjuicios morales, lucro cesante (salvo sublímite pactado), daños al asegurado/familia, uso de vehículos, RC contractual y responsabilidad profesional.',
-   coach:'💡 La RC contractual NO está cubierta en RCE — eso lo cubre el Seguro de Cumplimiento. Son complementarios, no sustitutos.'},
-
-  {lv:'intermedio',tp:'arquetipo',prf:'Identificacion',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un abogado tiene un proceso donde el juez le exige prestar caución para continuar. ¿Qué producto le corresponde?',
-   hint:'La Caución Judicial es la garantía ordenada por autoridad competente en procesos judiciales.',
-   ops:['Cumplimiento Particular — es un contrato entre partes','Cumplimiento Estatal — el juez es una entidad pública','Caución Judicial — es una garantía ordenada por autoridad judicial dentro de un proceso','RCE — protege a terceros en el proceso'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'La Caución Judicial es específica para garantías ordenadas por autoridades competentes en procesos judiciales o administrativos.',
-   coach:'💡 El intermediario de Cumplimiento debe conocer bien cuándo va Caución Judicial vs Cumplimiento. La clave: ¿lo ordenó un juez? → Caución Judicial.'},
-
-  // AVANZADO CUMPLIMIENTO
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'Una vez presentada al juzgado, ¿puede revocarse la Caución Judicial por las partes del contrato de seguro?',
-   hint:'La Caución Judicial es irrevocable una vez presentada al juzgado — ninguna de las partes puede revocarla.',
-   ops:['Sí — el tomador puede revocarla con 30 días de aviso','Sí — la aseguradora puede revocarla si el tomador no paga la prima','No — una vez presentada al juzgado es irrevocable por las partes del contrato de seguro','Solo el juez puede revocarla, pero las partes sí pueden'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'La Caución Judicial es absolutamente irrevocable una vez presentada al juzgado. Ninguna de las partes del contrato de seguro puede revocarla unilateralmente.',
-   coach:'💡 La irrevocabilidad protege el proceso judicial. Un seguro que puede cancelarse en medio de un proceso no sería una garantía real para el juez ni para la contraparte.'},
-
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Cómo se hace efectiva una garantía en el Cumplimiento Estatal cuando hay caducidad del contrato?',
-   hint:'En caso de caducidad, la entidad estatal profiere el acto administrativo correspondiente que declara la caducidad y ordena el pago al contratista y a Segurestado.',
-   ops:['El beneficiario llama a Segurestado y solicita el pago directamente','La entidad estatal profiere el acto administrativo que declara la caducidad, cuantifica el perjuicio y ordena el pago — ese acto es el siniestro','El contratista debe confesar el incumplimiento','Segurestado visita la obra y evalúa el daño por su cuenta'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'En caso de caducidad, la entidad estatal profiere el acto administrativo declarando la caducidad, cuantifica el perjuicio y ordena el pago. Ese acto administrativo ejecutoriado ES el siniestro.',
-   coach:'💡 En el sector público todo es a través de actos administrativos. El intermediario debe orientar a su cliente sobre qué documentos necesita para hacer efectiva la garantía.'},
-
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un cliente empresa tiene contratos con entidades públicas, contratos privados y un proceso judicial pendiente. ¿Cuántos productos de cumplimiento puede necesitar?',
-   hint:'Contratos públicos = Cumplimiento Estatal. Contratos privados = Cumplimiento Particular. Proceso judicial = Caución Judicial.',
-   ops:['Solo uno — Cumplimiento General que cubre todo','Dos — Estatal para lo público y Particular para lo privado','Tres — Cumplimiento Estatal, Cumplimiento Particular y Caución Judicial, cada uno para una necesidad diferente','Depende del valor de los contratos'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'Una empresa con contratos públicos, privados y proceso judicial puede necesitar los tres: Cumplimiento Estatal, Cumplimiento Particular y Caución Judicial — cada uno para una necesidad específica.',
-   coach:'💡 El intermediario experto en Cumplimiento hace un diagnóstico completo del cliente. Una empresa mediana puede tener necesidades múltiples de garantías simultáneamente.'},
-
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué sucede con el valor asegurado del Seguro de Cumplimiento cuando Segurestado paga una indemnización?',
-   hint:'El pago del siniestro reduce el valor asegurado en igual cantidad, sin devolución de prima.',
-   ops:['El valor asegurado se restablece automáticamente','El valor asegurado se reduce en igual cantidad al pago — sin devolución de prima. Para restablecer debe solicitarse y pagar prima adicional','El contrato termina automáticamente después del primer pago','El valor asegurado permanece igual'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'Cada pago de indemnización reduce el valor asegurado en igual cantidad, sin devolución de prima. Para restablecer el valor asegurado se requiere solicitud formal y pago de prima adicional.',
-   coach:'💡 Esto es muy relevante en contratos con múltiples siniestros. El cliente debe estar al tanto de que el valor asegurado se va consumiendo con cada pago.'},
-
-  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
-   txt:'¿Qué es la subrogación en el Seguro de Cumplimiento y qué implica para el beneficiario?',
-   hint:'La subrogación permite que Segurestado, después de pagar la indemnización, asuma los derechos del beneficiario contra el contratista incumplido.',
-   ops:['El beneficiario pierde todos sus derechos contra el contratista','Segurestado, después de pagar la indemnización, se subroga en los derechos del beneficiario contra el contratista hasta el valor pagado','El contratista queda exonerado una vez que Segurestado paga','Es cuando el beneficiario cede la póliza a un tercero'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
-   fb:'La subrogación permite que Segurestado, al pagar la indemnización, asuma los derechos del beneficiario contra el contratista incumplido hasta el monto pagado — puede cobrarle al contratista.',
-   coach:'💡 Esto significa que pagar el siniestro no libera al contratista de su responsabilidad. Segurestado lo perseguirá para recuperar lo pagado. El contratista debe saber esto antes de incumplir.'},
-
+   coach:'💡 Esta es la filosofía central: el producto sigue al arquetipo, no al precio.'}
 ];
 
 // ---- ESTADO ----
@@ -1261,71 +522,12 @@ function setEdad(e, btn){
   btn.className='diff-opt sel-intermedio';
 }
 
-// ---- NAVEGACIÓN DE RAMOS ----
-function seleccionarRamo(ramo, btn){
-  document.querySelectorAll('[id^="ramo-"]').forEach(function(b){
-    b.style.borderWidth='1px';
-    b.style.borderStyle='dashed';
-    b.style.borderColor='#ccc';
-    b.style.background='#f8f9fb';
-    b.style.opacity='0.6';
-  });
-  btn.style.borderWidth='2px';
-  btn.style.borderStyle='solid';
-  btn.style.borderColor = ramo==='cumplimiento' ? '#F47920' : '#185FA5';
-  btn.style.background = ramo==='cumplimiento' ? '#FEF0E6' : '#E6F1FB';
-  btn.style.opacity='1';
-  document.getElementById('segmentos-autos').style.display = ramo==='autos' ? 'block' : 'none';
-  var segCump = document.getElementById('segmentos-cumplimiento');
-  if(segCump) segCump.style.display = ramo==='cumplimiento' ? 'block' : 'none';
-}
-
-function irALogin(seg){
-  segmento = seg;
-  mostrar('s-login');
-  // Mostrar qué segmento se va a jugar
-  var labels = {particular:'🚗 Autos Particular', comercial:'🏢 Autos Comercial'};
-  var existing = document.getElementById('seg-indicator');
-  if(!existing){
-    var ind = document.createElement('div');
-    ind.id = 'seg-indicator';
-    ind.style.cssText = 'background:#f0f4ff;border-radius:8px;padding:8px 14px;margin-bottom:1rem;font-size:13px;font-weight:600;color:#185FA5;text-align:center';
-    var loginBox = document.querySelector('#s-login .field');
-    loginBox.parentNode.insertBefore(ind, loginBox);
-  }
-  document.getElementById('seg-indicator').textContent = 'Practicando: ' + labels[seg];
-}
-
-// ---- SEGMENTO ----
-function setSeg(s, btn){
-  segmento = s;
-  document.querySelectorAll('[id^="seg-"]').forEach(function(b){
-    b.className='diff-opt';
-  });
-  btn.className='diff-opt sel-basico';
-}
-
 // ---- DIFICULTAD ----
 function setDiff(d){
   diff=d;
-  var colores = {
-    basico:     {bg:'#E6F1FB',    border:'2px solid #185FA5',    icoCol:'#185FA5',  txt:'#0C447C',    chkIcon:'ti-circle-check', chkCol:'#185FA5'},
-    intermedio: {bg:'#FEF0E6', border:'2px solid #F47920',     icoCol:'#F47920',   txt:'#C45E0A', chkIcon:'ti-circle-check', chkCol:'#F47920'},
-    avanzado:   {bg:'#0C447C',      border:'2px solid #0C447C',    icoCol:'#fff',        txt:'#fff',          chkIcon:'ti-circle-check', chkCol:'#F47920'}
-  };
-  var inactivo = {bg:'#f8f9fb', border:'1.5px solid #ddd', icoCol:'#ccc', txt:'#aaa', chkIcon:'ti-circle', chkCol:'#ddd'};
   ['basico','intermedio','avanzado'].forEach(function(x){
-    var btn = document.getElementById('d-'+x);
-    var chk = document.getElementById('chk-'+x);
-    var ico = btn.querySelector('i:first-child');
-    var lbl = btn.querySelector('div');
-    var c = (x===d) ? colores[x] : inactivo;
-    btn.style.background = c.bg;
-    btn.style.border = c.border;
-    if(ico) ico.style.color = c.icoCol;
-    if(lbl) lbl.style.color = c.txt;
-    chk.className = 'ti ' + c.chkIcon;
-    chk.style.color = c.chkCol;
+    var b=document.getElementById('d-'+x);
+    b.className='diff-opt'+(x===d?' sel-'+x:'');
   });
 }
 
@@ -1346,17 +548,7 @@ function iniciar(){
   if(!pCel){alert('Ingresa tu número de celular.');return;}
   if(!pCity){alert('Ingresa tu ciudad.');return;}
   resetEstado();
-  var pool=banco.filter(function(q){
-    if(segmento==='particular'){
-      return q.lv===diff && (!q.seg || q.seg==='particular');
-    } else if(segmento==='cumplimiento'){
-      return q.lv===diff && q.seg==='cumplimiento';
-    } else if(segmento==='cumplimiento-particular' || segmento==='cumplimiento-estatal' || segmento==='cumplimiento-judicial'){
-      return q.lv===diff && q.seg==='cumplimiento';
-    } else {
-      return q.lv===diff && q.seg===segmento;
-    }
-  });
+  var pool=banco.filter(function(q){return q.lv===diff;});
   pool.sort(function(){return Math.random()-.5;});
   gQuestions=pool.slice(0,Math.min(15,pool.length));
   mostrar('s-game');
@@ -1376,15 +568,7 @@ function mostrarQ(){
   document.getElementById('q-fb').className='fb';
 
   // meta
-  var segLabel={
-    'particular':'Autos Particular',
-    'comercial':'Autos Comercial',
-    'cumplimiento':'Cumplimiento',
-    'cumplimiento-particular':'Cumplimiento Particular',
-    'cumplimiento-estatal':'Cumplimiento Estatal',
-    'cumplimiento-judicial':'Caución Judicial'
-  }[segmento]||segmento;
-  document.getElementById('q-cnt').textContent='Pregunta '+(curQ+1)+'/'+gQuestions.length+' · '+segLabel+' · '+pName;
+  document.getElementById('q-cnt').textContent='Pregunta '+(curQ+1)+'/'+gQuestions.length+' · '+pName;
   document.getElementById('q-prof').textContent=q.prf;
   document.getElementById('q-prof').style.color=q.pc;
   document.getElementById('q-kind').textContent=q.tp==='arquetipo'?'Pregunta de arquetipo':'Pregunta de producto';
@@ -1509,30 +693,30 @@ function mostrarResultado(){
   document.getElementById('r-msg').textContent=msg;
 
   // Ranking global desde Google Sheets
-  // Mensaje de espera animado
-  var mensajesEspera = [
-    '⏳ No te vayas... estamos calculando tu posición global',
-    '📊 Comparando tu resultado con todos los intermediarios...',
-    '🏆 ¡Ya casi! Preparando tu ranking...'
-  ];
-  var msgIdx = 0;
-  document.getElementById('r-pos').textContent = mensajesEspera[0];
-  var msgInterval = setInterval(function(){
-    msgIdx = (msgIdx + 1) % mensajesEspera.length;
-    document.getElementById('r-pos').textContent = mensajesEspera[msgIdx];
-  }, 900);
+  document.getElementById('r-pos').textContent='⏳ Calculando tu posición...';
   setTimeout(function(){
-    clearInterval(msgInterval);
-    fetch(SHEET_URL + '?action=ranking&score=' + score + '&nivel=' + encodeURIComponent(diff) + '&doc=' + encodeURIComponent(pDoc))
+    fetch(SHEET_URL + '?action=ranking')
       .then(function(r){return r.json();})
-      .then(function(data){
-        var nivelLabel = {basico:'Básico', intermedio:'Intermedio', avanzado:'Avanzado'}[data.nivel] || data.nivel;
-        document.getElementById('r-pos').innerHTML =
-          '🏆 Puesto <strong>' + data.posGeneral + '</strong> de <strong>' + data.totalGeneral + '</strong> intermediarios (general)<br>' +
-          '📊 Puesto <strong>' + data.posNivel + '</strong> de <strong>' + data.totalNivel + '</strong> en nivel <strong>' + nivelLabel + '</strong>';
+      .then(function(ranking){
+        var pos = 1;
+        for(var i=0;i<ranking.length;i++){
+          if(ranking[i].score > score) pos++;
+        }
+        var total = ranking.length + 1;
+        document.getElementById('r-pos').textContent='🏆 Estás en el puesto '+pos+' de '+total+' intermediarios';
+        // También guardar local como respaldo
+        var registros=JSON.parse(localStorage.getItem('seg_rank')||'[]');
+        registros.push({name:pName,city:pCity,diff:diff,score:score,pct:Math.round(pct*100),date:new Date().toLocaleDateString('es-CO')});
+        registros.sort(function(a,b){return b.score-a.score;});
+        localStorage.setItem('seg_rank',JSON.stringify(registros));
       })
       .catch(function(){
-        document.getElementById('r-pos').textContent='🏆 ¡Resultado registrado!';
+        var registros=JSON.parse(localStorage.getItem('seg_rank')||'[]');
+        registros.push({name:pName,city:pCity,diff:diff,score:score,pct:Math.round(pct*100),date:new Date().toLocaleDateString('es-CO')});
+        registros.sort(function(a,b){return b.score-a.score;});
+        localStorage.setItem('seg_rank',JSON.stringify(registros));
+        var pos=registros.findIndex(function(r){return r.name===pName&&r.score===score;})+1;
+        document.getElementById('r-pos').textContent='🏆 Puesto '+pos+' de '+registros.length+' intermediarios';
       });
   }, 2000);
 
@@ -1545,8 +729,6 @@ function mostrarResultado(){
     '&city=' + encodeURIComponent(pCity) +
     '&cargo=' + encodeURIComponent(pCargo) +
     '&edad=' + encodeURIComponent(pEdad) +
-    '&ramo=' + encodeURIComponent(segmento.startsWith('cumplimiento') ? 'cumplimiento' : 'autos') +
-    '&seg=' + encodeURIComponent(segmento) +
     '&diff=' + encodeURIComponent(diff) +
     '&score=' + encodeURIComponent(score) +
     '&pct=' + encodeURIComponent(Math.round(pct*100)) +
@@ -1582,7 +764,7 @@ function mostrar(id){
 function irLogin(){
   clearInterval(tmInt);
   resetEstado();
-  mostrar('s-inicio');
+  mostrar('s-login');
 }
 
 // ---- DASHBOARD ----

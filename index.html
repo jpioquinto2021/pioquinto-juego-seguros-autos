@@ -1,511 +1,143 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Juego Seguros del Estado</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6fa;padding:1rem;display:flex;justify-content:center}
-.app{background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,.1);padding:1.5rem;width:100%;max-width:620px}
-.screen{display:none}.screen.active{display:block}
-h1{font-size:20px;font-weight:700;color:#111;text-align:center;margin-bottom:.5rem}
-p.sub{font-size:13px;color:#666;text-align:center;margin-bottom:1.25rem}
-.logo{text-align:center;font-size:11px;font-weight:700;color:#185FA5;letter-spacing:1px;margin-bottom:.75rem}
+ropia indebidamente.',
+   ops:['Amparo de Seriedad de la Oferta','Amparo de Cumplimiento del Contrato','Amparo de Anticipo','Amparo de Pago de Salarios'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Amparo de Anticipo garantiza la devolución de los dineros entregados al contratista cuando los usa o apropia indebidamente.',
+   coach:'💡 Anticipo = dinero dado ANTES del trabajo. Pago Anticipado = dinero dado como remuneración adelantada. Son amparos distintos con condiciones diferentes.'},
 
-/* LOGIN */
-.field{margin-bottom:1rem}
-.field label{display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:5px}
-.field input{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit}
-.diff-row{display:flex;gap:8px;margin-bottom:1.25rem}
-.diff-opt{flex:1;padding:10px 6px;text-align:center;border:1px solid #ddd;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:#666;background:#fff;transition:.15s}
-.diff-opt.sel-basico{border-color:#3B6D11;background:#EAF3DE;color:#27500A}
-.diff-opt.sel-intermedio{border-color:#185FA5;background:#E6F1FB;color:#0C447C}
-.diff-opt.sel-avanzado{border-color:#993C1D;background:#FAECE7;color:#4A1B0C}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué amparo protege al beneficiario si la obra entregada presenta deterioro por culpa del contratista DESPUÉS de terminada?',
+   hint:'El Amparo de Estabilidad de la Obra cubre los perjuicios por deterioro de obras ya entregadas y recibidas a satisfacción.',
+   ops:['Amparo de Cumplimiento del Contrato','Amparo de Calidad del Servicio','Amparo de Estabilidad de la Obra','Amparo de Anticipo'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Amparo de Estabilidad de la Obra comienza su vigencia desde el Acta de Entrega y cubre el deterioro posterior imputable al contratista.',
+   coach:'💡 Clave: la Estabilidad de la Obra empieza DESPUÉS de la entrega. Durante la ejecución aplica el Amparo de Cumplimiento.'},
 
-/* JUEGO */
-.top-bar{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
-.timer-wrap{position:relative;width:46px;height:46px;flex-shrink:0}
-.timer-wrap svg{transform:rotate(-90deg)}
-.timer-wrap circle{fill:none;stroke-width:3}
-.t-bg{stroke:#e0e0e0}.t-fg{stroke:#185FA5;stroke-linecap:round;transition:stroke-dashoffset .9s linear}
-.t-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#111}
-.urgent .t-fg{stroke:#e24b4a}.urgent .t-num{color:#e24b4a}
-.pbar{flex:1;height:5px;background:#eee;border-radius:99px}
-.pfill{height:100%;background:#185FA5;border-radius:99px;transition:width .3s}
-.pts{font-size:13px;font-weight:700;color:#185FA5;min-width:48px;text-align:right}
-.tbar{height:3px;background:#e24b4a;border-radius:99px;margin-bottom:.5rem;transition:width .1s linear}
-.qmeta{display:flex;justify-content:space-between;font-size:12px;color:#888;margin-bottom:.6rem}
-.qprof{font-weight:700}
-.qbox{background:#f8f9fb;border:1px solid #e8eaf0;border-radius:12px;padding:1rem;margin-bottom:.75rem}
-.qkind{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#aaa;font-weight:700;margin-bottom:6px}
-.qtxt{font-size:15px;color:#111;line-height:1.65;font-weight:500}
-.hint-box{font-size:12px;color:#666;background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:8px 10px;margin-top:10px;line-height:1.6;display:none}
-.tags{margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap}
-.tag{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:700}
-.t-elite{background:#FAEEDA;color:#633806}
-.t-integral{background:#E6F1FB;color:#0C447C}
-.t-clasico{background:#EAF3DE;color:#27500A}
-.t-arquetipo{background:#F3EEFE;color:#533AB7}
-.t-basico{background:#EAF3DE;color:#27500A}
-.t-intermedio{background:#E6F1FB;color:#0C447C}
-.t-avanzado{background:#FAECE7;color:#4A1B0C}
-.opts{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
-.opt{width:100%;padding:12px 16px;text-align:left;border:1px solid #e0e2e8;border-radius:8px;cursor:pointer;font-size:14px;color:#111;line-height:1.5;font-family:inherit;background:#fff;transition:.15s}
-.opt:hover{border-color:#185FA5;background:#f0f4ff}
-.opt.correct{border-color:#3B6D11!important;background:#EAF3DE!important;color:#27500A!important;font-weight:600}
-.opt.wrong{border-color:#993C1D!important;background:#FAECE7!important;color:#4A1B0C!important}
-.opt:disabled{cursor:default}
-.fb{border-radius:8px;padding:12px 16px;font-size:13px;line-height:1.6;margin-bottom:.75rem;display:none}
-.fb.ok{background:#EAF3DE;color:#27500A;border-left:3px solid #3B6D11}
-.fb.fail{background:#FAECE7;color:#4A1B0C;border-left:3px solid #993C1D}
-.coach{background:#E6F1FB;border-left:3px solid #185FA5;color:#0C447C;border-radius:8px;padding:12px 16px;font-size:13px;line-height:1.6;margin-bottom:.75rem;display:none}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Cuál es la principal diferencia entre el Seguro de Cumplimiento Particular y el Estatal?',
+   hint:'El Estatal se rige por el Decreto 1082 de 2015 y es irrevocable. El Particular puede revocarse con 30 días hábiles de aviso.',
+   ops:['No hay diferencia — son iguales','El Estatal cubre más amparos que el Particular','El Estatal es irrevocable y se rige por el Decreto 1082/2015. El Particular puede revocarse con 30 días hábiles de aviso','El Particular es para empresas grandes y el Estatal para pymes'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Cumplimiento Estatal es irrevocable, no expira por falta de pago de prima y se rige por el Decreto 1082 de 2015. El Particular puede revocarse con aviso de 30 días hábiles.',
+   coach:'💡 Esta diferencia es crucial al explicarle al cliente. Una entidad pública NUNCA puede quedar sin garantía — por eso el Estatal es irrevocable.'},
 
-/* BOTÓN SIGUIENTE — MUY VISIBLE */
-.btn-sig{
-  display:none;
-  width:100%;
-  padding:16px;
-  font-size:17px;
-  font-weight:700;
-  color:#fff;
-  background:#185FA5;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-family:inherit;
-  margin-top:4px;
-  letter-spacing:.3px;
-}
-.btn-sig:active{background:#0C447C;transform:scale(.98)}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué es una Caución Judicial?',
+   hint:'La Caución Judicial es una modalidad del seguro de cumplimiento ordenada por autoridad competente en procesos judiciales.',
+   ops:['Un seguro de vida para jueces','Una garantía ordenada por autoridad competente en procesos judiciales para proteger a la contraparte o terceros','Un seguro de cumplimiento para contratos estatales','Una póliza de RC para abogados'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'La Caución Judicial protege a la contraparte o terceros frente a perjuicios derivados de disposiciones judiciales, garantizando el cumplimiento de lo ordenado por la autoridad.',
+   coach:'💡 La Caución Judicial no protege al que la contrata — protege a quien el juez ordenó proteger. Es una garantía judicial, no comercial.'},
 
-/* RESULTADO */
-.result-card{background:#f8f9fb;border:1px solid #e8eaf0;border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:1rem}
-.big-score{font-size:56px;font-weight:700;color:#185FA5}
-.position{font-size:18px;font-weight:700;color:#185FA5;margin:.5rem 0}
-.rank-txt{font-size:17px;font-weight:700;color:#111;margin-bottom:.25rem}
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
-.stat{background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:10px;text-align:center}
-.sn{font-size:22px;font-weight:700;color:#185FA5}
-.sl{font-size:11px;color:#888;margin-top:2px}
-.hist{display:flex;flex-direction:column;gap:6px;margin-top:1rem}
-.hi{display:flex;gap:8px;font-size:12px;padding:8px 10px;border-radius:8px;line-height:1.5}
-.hi.ok{background:#EAF3DE;color:#27500A}
-.hi.fail{background:#FAECE7;color:#4A1B0C}
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Cuánto dura la vigencia de una Póliza de Caución Judicial?',
+   hint:'La vigencia de la Caución Judicial no está limitada en el tiempo — dura lo que dure el proceso judicial.',
+   ops:['1 año renovable','Hasta 5 años máximo','No está limitada en el tiempo — dura lo que dure el proceso judicial','6 meses prorrogables'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'La Caución Judicial tiene vigencia ilimitada — corresponde al tiempo que dure el proceso y/o disposición legal asociada al riesgo asegurado.',
+   coach:'💡 A diferencia de otros seguros, la Caución Judicial no tiene fecha de vencimiento fija. Esto la hace muy especial en términos de vigencia.'},
 
-/* BOTONES GENERALES */
-.btn{padding:11px 18px;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;font-family:inherit;border:1px solid #ddd;background:#fff;color:#111}
-.btn:hover{background:#f0f2f5}
-.btn-p{background:#185FA5;color:#fff;border-color:#185FA5}
-.btn-p:hover{background:#0C447C}
-.btn-full{width:100%;padding:13px;font-size:15px;margin-top:.5rem}
-.btn-row{display:flex;gap:8px;margin-top:1rem}
-.btn-row .btn{flex:1}
-footer{text-align:center;font-size:11px;color:#ccc;margin-top:1.5rem}
-.dash-card{background:#f8f9fb;border:1px solid #e8eaf0;border-radius:12px;padding:1rem;margin-bottom:1rem}
-.dash-title{font-size:13px;font-weight:700;color:#185FA5;margin-bottom:.75rem}
-.bar-wrap{margin-bottom:.6rem}
-.bar-label{display:flex;justify-content:space-between;font-size:12px;color:#444;margin-bottom:3px}
-.bar-track{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden}
-.bar-fill{height:100%;border-radius:99px;transition:width .5s}
-.bar-ok{background:#3B6D11}
-.bar-fail{background:#E24B4A}
-.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1rem}
-.dash-stat{background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:10px;text-align:center}
-.dash-snum{font-size:24px;font-weight:700;color:#185FA5}
-.dash-slbl{font-size:11px;color:#888;margin-top:2px}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:999}
-.modal-box{background:#fff;border-radius:16px;padding:1.5rem;width:90%;max-width:360px;text-align:center}
-.modal-box h2{font-size:18px;font-weight:700;margin-bottom:.5rem}
-.modal-box p{font-size:13px;color:#666;margin-bottom:1rem}
-.modal-box input{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:16px;font-family:inherit;text-align:center;letter-spacing:4px;margin-bottom:1rem}
-.tag-ok{background:#EAF3DE;color:#27500A;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:700}
-.tag-fail{background:#FAECE7;color:#4A1B0C;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:700}
-</style>
-</head>
-<body>
-<div class="app">
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué exclusión es común en todos los amparos del Seguro de Cumplimiento?',
+   hint:'La Fuerza Mayor o Caso Fortuito excluye la responsabilidad del contratista cuando el incumplimiento no le es imputable.',
+   ops:['El incumplimiento por culpa del contratista','La fuerza mayor o caso fortuito como causal de incumplimiento','Las multas pactadas en el contrato','El deterioro de equipos suministrados'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'La Fuerza Mayor o Caso Fortuito es exclusión común: si el incumplimiento se debe a eventos fuera del control del contratista, el seguro no opera.',
+   coach:'💡 Fuerza mayor exonera al contratista de responsabilidad y por tanto el seguro no opera. El cliente debe entender que el seguro cubre incumplimientos imputables al contratista.'},
 
-<!-- LOGIN -->
-<div class="screen active" id="s-login">
-  <div class="logo">SEGUROS DEL ESTADO</div>
-  <h1>¿A quién le estás vendiendo?</h1>
-  <p class="sub">Entrenamiento de intermediarios · Autos livianos</p>
+  {lv:'basico',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué amparo del Seguro de Cumplimiento protege al beneficiario si el contratista no paga a sus trabajadores?',
+   hint:'El Amparo de Pago de Salarios, Prestaciones Sociales e Indemnizaciones protege al beneficiario de los incumplimientos laborales del contratista.',
+   ops:['Amparo de Cumplimiento del Contrato','Amparo de Anticipo','Amparo de Pago de Salarios, Prestaciones Sociales e Indemnizaciones','Amparo de Seriedad de la Oferta'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Amparo de Salarios protege al beneficiario si el contratista incumple sus obligaciones laborales con el personal empleado en el contrato.',
+   coach:'💡 Esto aplica el Art. 34 del Código Sustantivo del Trabajo: el beneficiario puede ser solidariamente responsable de los salarios del personal del contratista. El seguro lo protege de ese riesgo.'},
 
-  <div style="background:#f0f4ff;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;border-left:4px solid #185FA5">
-    <p style="font-size:13px;color:#1a3a5c;line-height:1.7">
-      🎯 <strong>¡Bienvenido al entrenamiento de productos de autos de Seguros del Estado!</strong><br>
-      Aquí pondrás a prueba tu conocimiento sobre nuestro portafolio y aprenderás a identificar el perfil de cada cliente para ofrecerle el producto ideal. Completa tu información, elige tu nivel y ¡demuestra de qué estás hecho!
-    </p>
-  </div>
+  // INTERMEDIO CUMPLIMIENTO
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'Un contratista firma un contrato y recibe anticipo, pero en lugar de usarlo en la obra lo destina a otros negocios. ¿Qué amparo aplica y qué debe demostrar el beneficiario?',
+   hint:'Amparo de Anticipo. El beneficiario debe demostrar el uso indebido de los recursos.',
+   ops:['Amparo de Cumplimiento — el contratista incumplió el contrato','Amparo de Anticipo — hubo uso o apropiación indebida de los recursos entregados','Amparo de Pago Anticipado — no devolvió el saldo','Amparo de Seriedad — no cumplió la oferta'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'Aplica el Amparo de Anticipo cuando los recursos no se usan para lo que fueron entregados. El beneficiario debe acreditar el uso indebido y la cuantía del perjuicio.',
+   coach:'💡 La diferencia entre Anticipo y Pago Anticipado es sutil pero importante: Anticipo = para ejecutar el contrato. Pago Anticipado = remuneración adelantada por trabajo ya comprometido.'},
 
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem">
-    <div style="background:#EAF3DE;border-radius:10px;padding:.75rem;text-align:center">
-      <div style="font-size:18px;margin-bottom:4px">🟢</div>
-      <div style="font-size:12px;font-weight:700;color:#27500A;margin-bottom:4px">Básico</div>
-      <div style="font-size:11px;color:#3B6D11;line-height:1.5">Conceptos fundamentales del portafolio. Ideal para repasar coberturas, deducibles y perfiles.</div>
-    </div>
-    <div style="background:#E6F1FB;border-radius:10px;padding:.75rem;text-align:center">
-      <div style="font-size:18px;margin-bottom:4px">🔵</div>
-      <div style="font-size:12px;font-weight:700;color:#0C447C;margin-bottom:4px">Intermedio</div>
-      <div style="font-size:11px;color:#185FA5;line-height:1.5">Casos reales de venta. Practica argumentos y manejo de objeciones del día a día.</div>
-    </div>
-    <div style="background:#FAECE7;border-radius:10px;padding:.75rem;text-align:center">
-      <div style="font-size:18px;margin-bottom:4px">🔴</div>
-      <div style="font-size:12px;font-weight:700;color:#4A1B0C;margin-bottom:4px">Avanzado</div>
-      <div style="font-size:11px;color:#993C1D;line-height:1.5">El reto del experto. Escenarios complejos y cierres de alto nivel. Solo para los más preparados.</div>
-    </div>
-  </div>
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Cuándo NO expira el Seguro de Cumplimiento Estatal por falta de pago de la prima?',
+   hint:'El Cumplimiento Estatal tiene una condición especial: no expira por falta de pago de la prima y es irrevocable.',
+   ops:['Solo en contratos superiores a $500 millones','Nunca — el Cumplimiento Estatal no expira por falta de pago de prima y no puede revocarse unilateralmente','Solo durante la ejecución del contrato','Cuando la entidad estatal lo autoriza'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Cumplimiento Estatal nunca expira por falta de pago de prima. Esta condición protege a la entidad pública de quedar sin garantía por razones internas del contratista.',
+   coach:'💡 Esto es una ventaja competitiva para Seguros del Estado: la entidad pública siempre está protegida. Si el contratista deja de pagar la prima, el riesgo lo asume Segurestado — no la entidad.'},
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.75rem">
-    <div class="field" style="margin-bottom:0">
-      <label>Nombre completo *</label>
-      <input id="inp-name" type="text" placeholder="Carlos Rodríguez" maxlength="80">
-    </div>
-    <div class="field" style="margin-bottom:0">
-      <label>Documento *</label>
-      <input id="inp-doc" type="text" placeholder="12345678" maxlength="20">
-    </div>
-    <div class="field" style="margin-bottom:0">
-      <label>Clave intermediación *</label>
-      <input id="inp-clave" type="text" placeholder="INT-2024-001" maxlength="30">
-    </div>
-    <div class="field" style="margin-bottom:0">
-      <label>Correo electrónico *</label>
-      <input id="inp-mail" type="email" placeholder="correo@ejemplo.com" maxlength="80">
-    </div>
-    <div class="field" style="margin-bottom:0">
-      <label>Celular *</label>
-      <input id="inp-cel" type="tel" placeholder="3001234567" maxlength="15">
-    </div>
-    <div class="field" style="margin-bottom:0">
-      <label>Ciudad *</label>
-      <input id="inp-city" type="text" placeholder="Bogotá" maxlength="30">
-    </div>
-    <div class="field" style="margin-bottom:0">
-      <label>Cargo</label>
-      <input id="inp-cargo" type="text" placeholder="Agente, Corredor..." maxlength="50">
-    </div>
-  </div>
+  {lv:'intermedio',tp:'arquetipo',prf:'Identificacion',pc:'#533AB7',prod:'arquetipo',
+   txt:'Una empresa constructora va a participar en una licitación pública. ¿Qué seguro necesita para presentar su propuesta?',
+   hint:'Para participar en licitaciones públicas se requiere Cumplimiento Estatal con Amparo de Seriedad de la Oferta.',
+   ops:['Seguro de RC Extracontractual','Cumplimiento Particular con amparo de anticipo','Cumplimiento Estatal con Amparo de Seriedad de la Oferta','Caución Judicial porque es un proceso competitivo'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'Para participar en licitaciones públicas se requiere Cumplimiento Estatal con Amparo de Seriedad de la Oferta — garantiza que el proponente suscribirá el contrato si gana.',
+   coach:'💡 Licitación pública = Cumplimiento Estatal. Contratos privados = Cumplimiento Particular. Es la primera pregunta de diagnóstico del cliente.'},
 
-  <div class="field">
-    <label>Rango de edad</label>
-    <div class="diff-row" style="gap:5px">
-      <button class="diff-opt" id="edad-1" onclick="setEdad('18-25',this)" style="padding:8px 4px;font-size:12px">18-25</button>
-      <button class="diff-opt" id="edad-2" onclick="setEdad('26-35',this)" style="padding:8px 4px;font-size:12px">26-35</button>
-      <button class="diff-opt" id="edad-3" onclick="setEdad('36-45',this)" style="padding:8px 4px;font-size:12px">36-45</button>
-      <button class="diff-opt" id="edad-4" onclick="setEdad('46-55',this)" style="padding:8px 4px;font-size:12px">46-55</button>
-      <button class="diff-opt" id="edad-5" onclick="setEdad('56+',this)" style="padding:8px 4px;font-size:12px">56+</button>
-    </div>
-  </div>
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué diferencia existe entre los amparos del Cumplimiento Estatal y el de Ecopetrol?',
+   hint:'El de Ecopetrol incluye amparos específicos como Calidad de Elementos Suministrados, Correcto Funcionamiento de Equipos y Provisión de Repuestos que no están en el Estatal estándar.',
+   ops:['Son completamente iguales','El de Ecopetrol incluye amparos específicos como Calidad de Elementos, Correcto Funcionamiento de Equipos y Provisión de Repuestos y Accesorios','El Estatal cubre más que el de Ecopetrol','Solo difieren en el precio de la prima'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Cumplimiento para Ecopetrol tiene amparos adicionales específicos: Calidad de los Elementos Suministrados, Correcto Funcionamiento de los Equipos y Provisión de Repuestos y Accesorios.',
+   coach:'💡 Cada cliente grande tiene condiciones especiales. Ecopetrol exige garantías adicionales por la naturaleza técnica de sus contratos de suministro y obras.'},
 
-  <div class="field">
-    <label>Nivel de dificultad</label>
-    <div class="diff-row">
-      <button class="diff-opt sel-basico" id="d-basico" onclick="setDiff('basico')">🟢 Básico</button>
-      <button class="diff-opt" id="d-intermedio" onclick="setDiff('intermedio')">🔵 Intermedio</button>
-      <button class="diff-opt" id="d-avanzado" onclick="setDiff('avanzado')">🔴 Avanzado</button>
-    </div>
-  </div>
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué ocurre con el Seguro de Cumplimiento si el contrato original es modificado sin que la aseguradora lo acepte por escrito?',
+   hint:'Las modificaciones al contrato original sin aceptación escrita de la aseguradora son una exclusión expresa.',
+   ops:['El seguro se amplía automáticamente para cubrir las modificaciones','Las modificaciones al contrato sin aceptación escrita de la aseguradora son una exclusión — el seguro no cubre los perjuicios derivados de esas modificaciones','El seguro se cancela automáticamente','La aseguradora tiene 30 días para objetar la modificación'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'Las modificaciones al contrato original sin aceptación escrita de la aseguradora son exclusión expresa. El cliente debe notificar y obtener aprobación antes de modificar el contrato.',
+   coach:'💡 Punto crítico: cuando el cliente amplía o modifica el contrato, debe actualizar la póliza. Si no lo hace y ocurre un siniestro derivado de la modificación, el seguro no opera.'},
 
-  <div style="background:#f0f4ff;border-radius:8px;padding:10px 14px;margin-bottom:1rem;display:flex;align-items:flex-start;gap:10px">
-    <input type="checkbox" id="chk-auth" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;cursor:pointer">
-    <label for="chk-auth" style="font-size:12px;color:#444;line-height:1.6;cursor:pointer">
-      Autorizo a <strong>Seguros del Estado</strong> a recolectar y usar mis datos personales (nombre, documento, correo, ciudad y cargo) con fines de formación y seguimiento comercial, conforme a la Ley 1581 de 2012 de Protección de Datos Personales de Colombia.
-    </label>
-  </div>
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué amparo de la RCE cubre los daños causados a terceros por contratistas del asegurado que trabajan en sus predios?',
+   hint:'El Amparo de Contratistas y Subcontratistas Independientes cubre la RC extracontractual por daños causados por contratistas externos que trabajan en los predios.',
+   ops:['Amparo Básico de Predios, Labores y Operaciones','Amparo de Responsabilidad Patronal','Amparo de Contratistas y Subcontratistas Independientes','No existe ese amparo en RCE'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'El Amparo de Contratistas y Subcontratistas Independientes cubre los daños a terceros causados por contratistas externos que realizan labores en los predios del asegurado.',
+   coach:'💡 Importante: este amparo solo opera si el contratista NO tiene su propia póliza de RCE con los mismos amparos. Si ya la tiene, no aplica.'},
 
-  <button class="btn btn-p btn-full" onclick="iniciar()">Comenzar juego →</button>
-  <div style="text-align:center;margin-top:1rem">
-    <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none" onclick="abrirDashboard()">📊 Acceso formación</button>
-  </div>
-  <footer>Seguros del Estado · Dirección de Formación</footer>
-</div>
+  {lv:'intermedio',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Cuáles son las exclusiones comunes de la Póliza de RCE que el intermediario debe conocer?',
+   hint:'Perjuicios morales, lucro cesante, daños al propio asegurado y familia, uso de vehículos, responsabilidad contractual y responsabilidad profesional.',
+   ops:['Solo los perjuicios morales','Perjuicios morales, lucro cesante (salvo sublímite), daños al asegurado y familia, uso de vehículos, RC contractual y responsabilidad profesional','Solo los daños fuera de Colombia','Solo los causados con dolo del asegurado'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'Las exclusiones de RCE incluyen: perjuicios morales, lucro cesante (salvo sublímite pactado), daños al asegurado/familia, uso de vehículos, RC contractual y responsabilidad profesional.',
+   coach:'💡 La RC contractual NO está cubierta en RCE — eso lo cubre el Seguro de Cumplimiento. Son complementarios, no sustitutos.'},
 
-<!-- JUEGO -->
-<div class="screen" id="s-game">
-  <div class="top-bar">
-    <div class="timer-wrap" id="tw">
-      <svg width="46" height="46" viewBox="0 0 46 46">
-        <circle class="t-bg" cx="23" cy="23" r="19"/>
-        <circle class="t-fg" id="t-arc" cx="23" cy="23" r="19" stroke-dasharray="119.4" stroke-dashoffset="0"/>
-      </svg>
-      <div class="t-num" id="t-num">20</div>
-    </div>
-    <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
-    <div class="pts" id="pts-live">0 pts</div>
-  </div>
-  <div class="tbar" id="tbar" style="width:100%"></div>
-  <div class="qmeta">
-    <span id="q-cnt">Pregunta 1/15</span>
-    <span class="qprof" id="q-prof" style="color:#533AB7"></span>
-  </div>
-  <div class="qbox">
-    <div class="qkind" id="q-kind">Pregunta</div>
-    <div class="qtxt" id="q-txt"></div>
-    <div class="hint-box" id="q-hint"></div>
-  </div>
-  <div class="tags" id="q-tags"></div>
-  <div class="opts" id="q-opts"></div>
-  <div class="fb" id="q-fb"></div>
-  <button class="btn-sig" id="btn-sig">Siguiente →</button>
-  <div class="coach" id="q-coach"></div>
-</div>
+  {lv:'intermedio',tp:'arquetipo',prf:'Identificacion',pc:'#533AB7',prod:'arquetipo',
+   txt:'Un abogado tiene un proceso donde el juez le exige prestar caución para continuar. ¿Qué producto le corresponde?',
+   hint:'La Caución Judicial es la garantía ordenada por autoridad competente en procesos judiciales.',
+   ops:['Cumplimiento Particular — es un contrato entre partes','Cumplimiento Estatal — el juez es una entidad pública','Caución Judicial — es una garantía ordenada por autoridad judicial dentro de un proceso','RCE — protege a terceros en el proceso'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'La Caución Judicial es específica para garantías ordenadas por autoridades competentes en procesos judiciales o administrativos.',
+   coach:'💡 El intermediario de Cumplimiento debe conocer bien cuándo va Caución Judicial vs Cumplimiento. La clave: ¿lo ordenó un juez? → Caución Judicial.'},
 
-<!-- RESULTADO -->
-<div class="screen" id="s-result">
-  <div class="logo">SEGUROS DEL ESTADO</div>
-  <h1>¡Resultado final!</h1>
-  <div class="result-card">
-    <div class="big-score" id="r-score">0</div>
-    <div style="font-size:13px;color:#888">puntos</div>
-    <div class="position" id="r-pos"></div>
-    <div class="rank-txt" id="r-rank"></div>
-    <p style="font-size:13px;color:#666;margin-top:4px" id="r-msg"></p>
-    <div class="stat-row">
-      <div class="stat"><div class="sn" id="r-ok">0</div><div class="sl">correctas</div></div>
-      <div class="stat"><div class="sn" id="r-bad">0</div><div class="sl">incorrectas</div></div>
-      <div class="stat"><div class="sn" id="r-pct">0%</div><div class="sl">acierto</div></div>
-    </div>
-  </div>
-  <div class="hist" id="r-hist"></div>
-  <div class="btn-row">
-    <button class="btn" onclick="irLogin()">← Inicio</button>
-    <button class="btn btn-p" onclick="irLogin()">🔄 Jugar de nuevo</button>
-  </div>
-  <footer>Seguros del Estado · Dirección de Formación</footer>
-</div>
+  // AVANZADO CUMPLIMIENTO
+  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'Una vez presentada al juzgado, ¿puede revocarse la Caución Judicial por las partes del contrato de seguro?',
+   hint:'La Caución Judicial es irrevocable una vez presentada al juzgado — ninguna de las partes puede revocarla.',
+   ops:['Sí — el tomador puede revocarla con 30 días de aviso','Sí — la aseguradora puede revocarla si el tomador no paga la prima','No — una vez presentada al juzgado es irrevocable por las partes del contrato de seguro','Solo el juez puede revocarla, pero las partes sí pueden'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'La Caución Judicial es absolutamente irrevocable una vez presentada al juzgado. Ninguna de las partes del contrato de seguro puede revocarla unilateralmente.',
+   coach:'💡 La irrevocabilidad protege el proceso judicial. Un seguro que puede cancelarse en medio de un proceso no sería una garantía real para el juez ni para la contraparte.'},
 
-<!-- DASHBOARD -->
-<div class="screen" id="s-dash">
-  <div class="logo">SEGUROS DEL ESTADO</div>
-  <h1>📊 Dashboard de Formación</h1>
-  <p class="sub">Análisis de aciertos y errores por pregunta</p>
-  <div id="dash-content"></div>
-  <div style="margin-top:1rem">
-    <button class="btn" onclick="mostrar('s-login')">← Salir</button>
-  </div>
-  <footer>Seguros del Estado · Dirección de Formación</footer>
-</div>
+  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Cómo se hace efectiva una garantía en el Cumplimiento Estatal cuando hay caducidad del contrato?',
+   hint:'En caso de caducidad, la entidad estatal profiere el acto administrativo correspondiente que declara la caducidad y ordena el pago al contratista y a Segurestado.',
+   ops:['El beneficiario llama a Segurestado y solicita el pago directamente','La entidad estatal profiere el acto administrativo que declara la caducidad, cuantifica el perjuicio y ordena el pago — ese acto es el siniestro','El contratista debe confesar el incumplimiento','Segurestado visita la obra y evalúa el daño por su cuenta'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'En caso de caducidad, la entidad estatal profiere el acto administrativo declarando la caducidad, cuantifica el perjuicio y ordena el pago. Ese acto administrativo ejecutoriado ES el siniestro.',
+   coach:'💡 En el sector público todo es a través de actos administrativos. El intermediario debe orientar a su cliente sobre qué documentos necesita para hacer efectiva la garantía.'},
 
-</div><!-- end app -->
-
-<script>
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbz4NPzw22lbtKM8pGAtb4tIeby7WPFPkqu8uacH_kTQasFY_tNf1OrgqL2XbzPD7LXS/exec';
-var CIRC = 119.4;
-var TL = 30;
-var diff = 'basico';
-var pName = '', pCity = '', pDoc = '', pClave = '', pMail = '', pCel = '', pCargo = '', pEdad = '';
-var curQ, score, nOk, tmInt, tLeft, gHist, gQuestions;
-
-var banco = [
-  // BÁSICO
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'elite',
-   txt:'¿Cuál es el producto de Seguros del Estado con mayor cobertura?',
-   hint:'Dato real: Élite $4.400M · Integral $4.000M · Clásico $3.000M.',
-   ops:['Clásico','Élite','Integral','Todos igual'],cor:1,
-   fb:'Élite cubre hasta $4.400 millones — el mayor del portafolio.',
-   coach:'💡 Para el Rey siempre empieza por Élite.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'integral',
-   txt:'¿Cuántas asistencias tiene el plan Integral durante la vigencia?',
-   hint:'Dato real: Élite=20 · Integral=16 · Clásico=12.',
-   ops:['12','16','20','8'],cor:1,
-   fb:'Integral tiene 16 asistencias.',
-   coach:'💡 Memoriza 20-16-12: Élite, Integral, Clásico.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#3B6D11',prod:'clasico',
-   txt:'¿Cuál es el deducible en daños del plan Clásico?',
-   hint:'Dato real: Élite y Integral 0%. Clásico 10% o 1 SMMLV.',
-   ops:['0%','5%','20%','10% o 1 SMMLV'],cor:3,
-   fb:'Clásico aplica 10% o 1 SMMLV — diferencia clave vs Integral.',
-   coach:'💡 El deducible del Clásico es el argumento para subir a Integral.'},
-  {lv:'basico',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un cliente dice "quiero lo mejor para mi carro, el precio no importa". ¿Qué arquetipo es?',
-   hint:'Pista: "el precio no importa" + "lo mejor" = perfil de alto estatus.',
-   ops:['El Sabio','El Guerrero','El Rey','Ninguno'],cor:2,
-   fb:'Es El Rey. La indiferencia al precio y la búsqueda de lo mejor son sus señales clave.',
-   coach:'💡 Cuando escuches "quiero lo mejor" activa modo Rey — ve directo a Élite.'},
-  {lv:'basico',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un cliente pide comparar tres aseguradoras antes de decidir. ¿Qué arquetipo es?',
-   hint:'Pista: comparar, analizar y pedir datos = perfil analítico.',
-   ops:['El Rey','El Sabio','El Guerrero','Ninguno'],cor:2,
-   fb:'Es El Guerrero. Su característica principal es comparar y pedir argumentos concretos.',
-   coach:'💡 Al Guerrero dale números, no generalidades.'},
-  {lv:'basico',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un cliente pregunta "¿qué es exactamente lo que NO cubre el seguro?" ¿Qué arquetipo es?',
-   hint:'Pista: preguntar por exclusiones = perfil cauteloso y racional.',
-   ops:['El Sabio','El Guerrero','El Rey','Ninguno'],cor:0,
-   fb:'Es El Sabio. Su foco en exclusiones refleja su naturaleza cautelosa.',
-   coach:'💡 Con el Sabio sé honesto sobre las exclusiones — eso genera confianza.'},
-  {lv:'basico',tp:'producto',prf:'El Rey',pc:'#BA7517',prod:'elite',
-   txt:'¿Cuántos días de vehículo de reemplazo tiene el plan Élite?',
-   hint:'Dato real: Élite=30 días · Integral=20 · Clásico=7.',
-   ops:['30 días','20 días','15 días','7 días'],cor:0,
-   fb:'Élite da 30 días de reemplazo — el mayor del portafolio.',
-   coach:'💡 30 días es el argumento emocional del Rey: su vida no se interrumpe.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#3B6D11',prod:'clasico',
-   txt:'¿El plan Clásico cubre los vidrios del vehículo?',
-   hint:'Dato real: Élite sí (90 SMDLV) · Integral sí (30 SMDLV) · Clásico NO.',
-   ops:['Sí, hasta 30 SMDLV','Sí, hasta 90 SMDLV','No, Clásico no ampara vidrios','Solo en pérdida total'],cor:2,
-   fb:'Clásico NO ampara vidrios. Exclusión importante que siempre debes comunicar.',
-   coach:'💡 Di las exclusiones del Clásico antes de que el cliente las descubra solo.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'integral',
-   txt:'¿La grúa por avería funciona si el conductor tomó alcohol?',
-   hint:'Dato real: Los tres planes tienen grúa sin restricción de alcohol en 40km.',
-   ops:['Los tres — sin restricción','Solo Élite','Solo Élite e Integral','No, ningún plan'],cor:0,
-   fb:'Los tres planes tienen grúa sin restricción al consumo de alcohol en 40km.',
-   coach:'💡 "Nuestra grúa funciona incluso si tomó." Ese dato sorprende y diferencia.'},
-  {lv:'basico',tp:'arquetipo',prf:'Filosofía',pc:'#533AB7',prod:'arquetipo',
-   txt:'El Sabio dice "déjame pensarlo". ¿Cuál es la mejor reacción?',
-   hint:'El Sabio necesita tiempo e información — no presión.',
-   ops:['Enviarle un comparativo con exclusiones','"Todos eligen Integral"','"La oferta vence hoy"','Ignorarlo'],cor:0,
-   fb:'El comparativo escrito con exclusiones es exactamente lo que el Sabio necesita.',
-   coach:'💡 Con el Sabio: información + tiempo = cierre. Nunca presión.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#BA7517',prod:'elite',
-   txt:'¿Cuál es la diferencia en cobertura de llantas entre Élite e Integral?',
-   hint:'Dato real: Élite cubre llantas hasta 90 SMDLV con logomarca. Integral hasta 30 SMDLV sin logomarca. Clásico NO ampara llantas.',
-   ops:['Solo Élite cubre llantas — Integral no','Élite cubre hasta 90 SMDLV con logomarca, Integral hasta 30 SMDLV sin logomarca','Ambos cubren igual hasta 90 SMDLV','Ninguno cubre llantas'],cor:1,
-   fb:'Élite cubre llantas hasta 90 SMDLV con repuesto de logomarca. Integral las cubre hasta 30 SMDLV sin logomarca. Clásico no ampara.',
-   coach:'💡 La diferencia no es si cubre o no — es el límite y la calidad del repuesto. Para el Rey eso importa.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#3B6D11',prod:'clasico',
-   txt:'¿Cuántas asistencias tiene el plan Clásico?',
-   hint:'Dato real: Élite=20 · Integral=16 · Clásico=12.',
-   ops:['8','12','10','16'],cor:1,
-   fb:'Clásico tiene 12 asistencias — 4 menos que Integral.',
-   coach:'💡 La diferencia de asistencias es argumento para quienes viajan frecuentemente.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'integral',
-   txt:'¿Cuántos días de reemplazo tiene el plan Integral?',
-   hint:'Dato real: Élite=30 · Integral=20 · Clásico=7.',
-   ops:['7','20','10','30'],cor:1,
-   fb:'Integral da 20 días de reemplazo — el triple que Clásico.',
-   coach:'💡 20 vs 7 días es un argumento potente para subir de Clásico a Integral.'},
-  {lv:'basico',tp:'arquetipo',prf:'Identificación',pc:'#533AB7',prod:'arquetipo',
-   txt:'Un cliente lleva semanas sin decidirse y pide más información cada vez. ¿Qué arquetipo es?',
-   hint:'Pista: proceso largo, mucha información, sin presión propia.',
-   ops:['El Rey','El Guerrero','El Sabio','Ninguno'],cor:2,
-   fb:'Es El Sabio. Su proceso largo no es desinterés — es su forma de decidir.',
-   coach:'💡 La paciencia con el Sabio se convierte en fidelización de por vida.'},
-  {lv:'basico',tp:'producto',prf:'General',pc:'#185FA5',prod:'integral',
-   txt:'¿Cuál es el deducible en hurto de mayor cuantía del plan Integral?',
-   hint:'Dato real: Integral 0% · Clásico 10% o 1 SMMLV · Élite 0%.',
-   ops:['10% o 1 SMMLV','5%','1 SMMLV fijo','0%'],cor:3,
-   fb:'Integral tiene deducible 0% en hurto de mayor cuantía — igual que Élite.',
-   coach:'💡 Este es el argumento más poderoso para subir de Clásico a Integral.'},
-  {lv:'basico',tp:'arquetipo',prf:'Filosofía',pc:'#185FA5',prod:'arquetipo',
-   txt:'¿Cuál es la frase más efectiva para cerrar con El Guerrero?',
-   hint:'El Guerrero responde a datos concretos y costo-beneficio.',
-   ops:['"Confíe en mí"','"Le hago descuento"','"Es el más vendido"','"$767 pesos más al día: 0% deducible y el doble de reemplazo"'],cor:3,
-   fb:'El argumento matemático diario es el cierre perfecto para el Guerrero.',
-   coach:'💡 Practica decir el número de días con naturalidad. El framing lo es todo.'},
-  // INTERMEDIO
-  {lv:'intermedio',tp:'producto',prf:'El Guerrero',pc:'#185FA5',prod:'integral',
-   txt:'La prima de Integral vs Clásico difiere $280.000/año. ¿Cómo lo expresas para convencer al Guerrero?',
-   hint:'Divide $280.000 entre 365 días = $767/día.',
-   ops:['$767 pesos más al día: 0% deducible, 4 asistencias extra y 13 días más de reemplazo','$280.000 al año es poco','Integral cubre más, punto','El precio no importa'],cor:0,
-   fb:'El framing diario convierte una suma grande en algo accesible con valor concreto.',
-   coach:'💡 El Guerrero piensa en rentabilidad diaria. Ese framing cierra.'},
-  {lv:'intermedio',tp:'producto',prf:'El Sabio',pc:'#3B6D11',prod:'clasico',
-   txt:'El Sabio tiene carro de $48M en Clásico. ¿Cuánto pagaría de deducible si le roban el carro?',
-   hint:'Clásico aplica 10% o 1 SMMLV en hurto.',
-   ops:['$4.8M (10% de $48M)','1 SMMLV fijo','Nada','$2.4M (5%)'],cor:0,
-   fb:'Con Clásico pagaría $4.8M de su bolsillo. Con Integral ese deducible es 0%.',
-   coach:'💡 Este cálculo concreto convence al Sabio de subir a Integral.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'El Rey',pc:'#BA7517',prod:'arquetipo',
-   txt:'El Rey dice "en otra aseguradora me dan Élite más barato". ¿Cuál es la mejor respuesta?',
-   hint:'El Rey valora exclusividad y calidad — no precio.',
-   ops:['"Le igualo el precio"','"Somos mejores"','"¿Revisamos qué incluye exactamente? Muchos Élite del mercado tienen sublímites"','"Si está más barato quizás le conviene"'],cor:2,
-   fb:'Invitar a comparar coberturas específicas es donde Élite de Seguros del Estado gana.',
-   coach:'💡 Con el Rey nunca compites en precio — compites en exclusividad.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#185FA5',prod:'integral',
-   txt:'¿Cuál es el límite de asistencia en viajes de cada plan?',
-   hint:'Dato real: Élite 80 SMDLV · Integral 60 SMDLV · Clásico 50 SMDLV. Todos ilimitados.',
-   ops:['Élite 80, Integral 60, Clásico 50 — todos ilimitados','Élite 100, Integral 80, Clásico 50','Todos 50 SMDLV','Solo Élite tiene viajes'],cor:0,
-   fb:'Los tres tienen asistencia en viajes con límites distintos.',
-   coach:'💡 Decir "80, 60 y 50 SMDLV" demuestra expertise ante el Sabio.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'El Guerrero',pc:'#185FA5',prod:'arquetipo',
-   txt:'El Guerrero pregunta "¿para qué 16 asistencias si nunca las uso?" ¿Cuál es el mejor argumento?',
-   hint:'El Guerrero responde a analogías prácticas.',
-   ops:['"Es el estándar del mercado"','"Todos las usan"','"La bolsa de asistencias es como el extintor: espera no usarla, pero en carretera a las 11PM querrá tener 16 y no 12"','"Integral sin asistencias no existe"'],cor:2,
-   fb:'La analogía del extintor conecta con la lógica práctica del Guerrero.',
-   coach:'💡 Las analogías concretas funcionan mejor que los argumentos abstractos.'},
-  {lv:'intermedio',tp:'producto',prf:'El Rey',pc:'#BA7517',prod:'elite',
-   txt:'¿Cuál es la diferencia entre Élite e Integral en la cobertura de vidrios?',
-   hint:'Dato real: Élite cubre vidrios hasta 90 SMDLV con logomarca. Integral hasta 30 SMDLV sin logomarca. Clásico NO ampara vidrios.',
-   ops:['Élite 90 SMDLV con logomarca, Integral 30 SMDLV sin logomarca, Clásico no ampara','Solo Élite cubre vidrios','Ambos cubren igual hasta 90 SMDLV','Integral cubre más que Élite en vidrios'],cor:0,
-   fb:'Élite cubre vidrios hasta 90 SMDLV con repuesto de logomarca. Integral los cubre hasta 30 SMDLV sin logomarca. Clásico no ampara vidrios.',
-   coach:'💡 Para el Rey el detalle de logomarca importa — es coherente con su estatus y el valor de su vehículo.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'El Sabio',pc:'#3B6D11',prod:'arquetipo',
-   txt:'El Sabio pregunta "¿por qué necesito Integral si solo uso el carro en ciudad?" ¿Qué respondes?',
-   hint:'Con el Sabio la honestidad genera más confianza que intentar vender más.',
-   ops:['"Integral siempre es mejor"','"Para uso solo en ciudad Clásico puede ser suficiente si acepta el deducible en hurto y la exclusión de vidrios. ¿Le explico?"','"Todo el mundo necesita Integral"','"Sin Integral no está protegido"'],cor:1,
-   fb:'La honestidad con el Sabio construye confianza — y eso cierra más ventas.',
-   coach:'💡 Reconocer cuándo Clásico es suficiente no es perder la venta — es ganar un cliente fiel.'},
-  {lv:'intermedio',tp:'producto',prf:'General',pc:'#3B6D11',prod:'clasico',
-   txt:'¿Cuántos días de reemplazo da Clásico en caso de siniestro?',
-   hint:'Dato real: Élite=30 · Integral=20 · Clásico=7.',
-   ops:['3 días','10 días','7 días','15 días'],cor:2,
-   fb:'Clásico da solo 7 días de reemplazo — vs 20 de Integral.',
-   coach:'💡 7 vs 20 días es un argumento potente para subir de Clásico a Integral.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'El Guerrero',pc:'#185FA5',prod:'arquetipo',
-   txt:'El Guerrero compara tu Integral con el de Sura. El tuyo es 12% más caro. ¿Cómo respondes?',
-   hint:'El Guerrero necesita comparar coberturas específicas, no precios.',
-   ops:['"Le igualo el precio"','"Somos más baratos que Bolívar"','"Nuestro servicio es mejor"','"¿Comparamos coberturas? Integral incluye 16 asistencias, 0% deducible en hurto y 20 días de reemplazo. ¿Qué incluye el de ellos?"'],cor:3,
-   fb:'Comparar coberturas concretas es donde Integral gana con el Guerrero.',
-   coach:'💡 Nunca compitas en precio con el Guerrero — compite en valor detallado.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'El Sabio',pc:'#3B6D11',prod:'arquetipo',
-   txt:'El Sabio recibe tu comparativo y no responde en 5 días. ¿Qué haces?',
-   hint:'El Sabio procesa lentamente — la presión lo aleja.',
-   ops:['Llamarlo todos los días','Decirle que la oferta vence mañana','Ignorarlo','Enviar un mensaje amable preguntando si tiene dudas'],cor:3,
-   fb:'Un mensaje amable sin presión respeta su proceso y mantiene la relación.',
-   coach:'💡 Con el Sabio el seguimiento amable sin presión es la estrategia ganadora.'},
-  {lv:'intermedio',tp:'arquetipo',prf:'El Rey',pc:'#BA7517',prod:'arquetipo',
-   txt:'¿Cuál de estas frases conecta mejor con el perfil Rey al presentar Élite?',
-   hint:'El Rey toma decisiones por estatus y tranquilidad.',
-   ops:['"Cubre daños a terceros"','"Es nuestra opción más económica"','"Le explico cláusula por cláusula"','"Usted ya invirtió mucho en su vehículo — Élite protege esa inversión sin límites"'],cor:3,
-   fb:'La frase conecta con la inversión del Rey y su identidad — eso activa la decisión.',
-   coach:'💡 El Rey compra por identidad: "protege esa inversión" es su lenguaje.'},
-  // AVANZADO
   {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un cliente dice "ya revisé el clausulado completo y tengo 8 preguntas sobre exclusiones". ¿Qué arquetipo y producto inicial?',
-   hint:'Alguien que lee el clausulado completo = perfil muy específico.',
-   ops:['El Rey — Élite','El Guerrero — Integral','El Sabio — empieza con Clásico y sé honesto','El Guerrero — Clásico'],cor:2,
-   fb:'Es El Sabio en modo experto. Empieza con Clásico — la honestidad sobre exclusiones genera confianza para escalar.',
-   coach:'💡 El Sabio avanzado puede ser el mejor cliente si lo tratas como igual técnico.'},
-  {lv:'avanzado',tp:'producto',prf:'El Guerrero',pc:'#185FA5',prod:'integral',
-   txt:'El Guerrero calcula que con Clásico ahorra $280.000/año. Tiene carro de $90M y viaja por carretera. ¿Cuál es el contraargumento más poderoso?',
-   hint:'Considera: 10% de $90M = $9M de deducible en hurto.',
-   ops:['"Integral es simplemente mejor"','"El precio no importa"','"Confíe en nosotros"','"El ahorro de $280K no justifica el riesgo de pagar $9M de deducible en hurto, perder 13 días de reemplazo y tener 4 asistencias menos en carretera"'],cor:3,
-   fb:'El argumento combina el riesgo real ($9M) con la pérdida práctica. Perfecto para el Guerrero.',
-   coach:'💡 Muestra el costo real del "ahorro": $9M de deducible vs $280K de prima.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'El Sabio',pc:'#3B6D11',prod:'arquetipo',
-   txt:'El Sabio dice "leí que en algunas aseguradoras el conductor elegido no funciona si el vehículo tiene más de X años". ¿Cómo respondes?',
-   hint:'El Sabio llegó con investigación propia — respétala.',
-   ops:['"Eso no es cierto"','"Tiene razón en investigar. En nuestro caso opera sin esa restricción — déjeme confirmarle el clausulado por escrito"','"No sé de eso"','"Solo aplica a otras aseguradoras"'],cor:1,
-   fb:'Validar su investigación y ofrecer evidencia escrita es el cierre perfecto para el Sabio avanzado.',
-   coach:'💡 El Sabio avanzado ya investigó. Tu trabajo es confirmar con evidencia, no contradecirlo.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un cliente es analítico y compara precios, pero también dice "no quiero complicaciones si tengo un siniestro". ¿Qué mezcla de arquetipos es?',
-   hint:'Combina características del Guerrero (analítico) y el Rey (cero fricciones).',
-   ops:['Solo Sabio — Clásico','Mezcla Guerrero-Rey — Integral o Élite según valor del vehículo','Guerrero puro','Solo Rey — Élite siempre'],cor:1,
-   fb:'Los arquetipos se mezclan. Un Guerrero-Rey necesita datos Y tranquilidad.',
-   coach:'💡 Los clientes reales mezclan arquetipos. Identifica el dominante y adapta.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'¿Cuál es la mayor diferencia estratégica entre venderle al Rey vs al Guerrero?',
-   hint:'Uno compra por identidad y estatus, el otro por datos y lógica.',
-   ops:['No hay diferencia','El Rey compra por estatus — argumento emocional. El Guerrero compra por datos — argumento matemático','El Rey es más fácil','El Guerrero siempre elige Élite'],cor:1,
-   fb:'Esta distinción es la esencia del entrenamiento: mismo producto, dos lenguajes distintos.',
-   coach:'💡 Dominar este cambio de lenguaje separa al intermediario experto del promedio.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'El Guerrero',pc:'#185FA5',prod:'arquetipo',
-   txt:'El Guerrero elige Clásico después de tu presentación de Integral. ¿Qué haces?',
-   hint:'Respetar la decisión informada del Guerrero vale más que forzar el upsell.',
-   ops:['Respetar su decisión, asegurarte de que entiende las exclusiones y documentar para la renovación','Hacer descuento en Integral','Insistir hasta que cambie','Negarte a venderle Clásico'],cor:0,
-   fb:'Respetar la decisión informada construye confianza. En la renovación tendrás argumentos reales.',
-   coach:'💡 El Guerrero que elige Clásico con información puede subir en la renovación — si lo tratas bien.'},
-  {lv:'avanzado',tp:'arquetipo',prf:'Mixto',pc:'#993C1D',prod:'arquetipo',
-   txt:'Un intermediario nuevo pierde ventas porque "le da pena recomendar Élite a clientes de carro económico". ¿Qué le dirías?',
-   hint:'El producto se elige según el arquetipo, no según el precio del vehículo.',
-   ops:['"Tiene razón — Élite solo es para carros de lujo"','"Élite es para cualquier cliente"','"Ofrézcale siempre Clásico"','"El arquetipo determina el producto, no el precio del carro. Un Rey con carro de $60M puede querer Élite por su mentalidad"'],cor:3,
-   fb:'El arquetipo del cliente, no el valor del vehículo, determina qué producto le conecta.',
-   coach:'💡 Esta es la filosofía central: el producto sigue al arquetipo, no al precio.'}
+   txt:'Un cliente empresa tiene contratos con entidades públicas, contratos privados y un proceso judicial pendiente. ¿Cuántos productos de cumplimiento puede necesitar?',
+   hint:'Contratos públicos = Cumplimiento Estatal. Contratos privados = Cumplimiento Particular. Proceso judicial = Caución Judicial.',
+   ops:['Solo uno — Cumplimiento General que cubre todo','Dos — Estatal para lo público y Particular para lo privado','Tres — Cumplimiento Estatal, Cumplimiento Particular y Caución Judicial, cada uno para una necesidad diferente','Depende del valor de los contratos'],cor:2,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'Una empresa con contratos públicos, privados y proceso judicial puede necesitar los tres: Cumplimiento Estatal, Cumplimiento Particular y Caución Judicial — cada uno para una necesidad específica.',
+   coach:'💡 El intermediario experto en Cumplimiento hace un diagnóstico completo del cliente. Una empresa mediana puede tener necesidades múltiples de garantías simultáneamente.'},
+
+  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué sucede con el valor asegurado del Seguro de Cumplimiento cuando Segurestado paga una indemnización?',
+   hint:'El pago del siniestro reduce el valor asegurado en igual cantidad, sin devolución de prima.',
+   ops:['El valor asegurado se restablece automáticamente','El valor asegurado se reduce en igual cantidad al pago — sin devolución de prima. Para restablecer debe solicitarse y pagar prima adicional','El contrato termina automáticamente después del primer pago','El valor asegurado permanece igual'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'Cada pago de indemnización reduce el valor asegurado en igual cantidad, sin devolución de prima. Para restablecer el valor asegurado se requiere solicitud formal y pago de prima adicional.',
+   coach:'💡 Esto es muy relevante en contratos con múltiples siniestros. El cliente debe estar al tanto de que el valor asegurado se va consumiendo con cada pago.'},
+
+  {lv:'avanzado',tp:'producto',prf:'General',pc:'#0C447C',prod:'cumplimiento',
+   txt:'¿Qué es la subrogación en el Seguro de Cumplimiento y qué implica para el beneficiario?',
+   hint:'La subrogación permite que Segurestado, después de pagar la indemnización, asuma los derechos del beneficiario contra el contratista incumplido.',
+   ops:['El beneficiario pierde todos sus derechos contra el contratista','Segurestado, después de pagar la indemnización, se subroga en los derechos del beneficiario contra el contratista hasta el valor pagado','El contratista queda exonerado una vez que Segurestado paga','Es cuando el beneficiario cede la póliza a un tercero'],cor:1,seg:'cumplimiento',ramo:'cumplimiento',
+   fb:'La subrogación permite que Segurestado, al pagar la indemnización, asuma los derechos del beneficiario contra el contratista incumplido hasta el monto pagado — puede cobrarle al contratista.',
+   coach:'💡 Esto significa que pagar el siniestro no libera al contratista de su responsabilidad. Segurestado lo perseguirá para recuperar lo pagado. El contratista debe saber esto antes de incumplir.'},
+
 ];
 
 // ---- ESTADO ----
@@ -522,12 +154,71 @@ function setEdad(e, btn){
   btn.className='diff-opt sel-intermedio';
 }
 
+// ---- NAVEGACIÓN DE RAMOS ----
+function seleccionarRamo(ramo, btn){
+  document.querySelectorAll('[id^="ramo-"]').forEach(function(b){
+    b.style.borderWidth='1px';
+    b.style.borderStyle='dashed';
+    b.style.borderColor='#ccc';
+    b.style.background='#f8f9fb';
+    b.style.opacity='0.6';
+  });
+  btn.style.borderWidth='2px';
+  btn.style.borderStyle='solid';
+  btn.style.borderColor = ramo==='cumplimiento' ? '#F47920' : '#185FA5';
+  btn.style.background = ramo==='cumplimiento' ? '#FEF0E6' : '#E6F1FB';
+  btn.style.opacity='1';
+  document.getElementById('segmentos-autos').style.display = ramo==='autos' ? 'block' : 'none';
+  var segCump = document.getElementById('segmentos-cumplimiento');
+  if(segCump) segCump.style.display = ramo==='cumplimiento' ? 'block' : 'none';
+}
+
+function irALogin(seg){
+  segmento = seg;
+  mostrar('s-login');
+  // Mostrar qué segmento se va a jugar
+  var labels = {particular:'🚗 Autos Particular', comercial:'🏢 Autos Comercial'};
+  var existing = document.getElementById('seg-indicator');
+  if(!existing){
+    var ind = document.createElement('div');
+    ind.id = 'seg-indicator';
+    ind.style.cssText = 'background:#f0f4ff;border-radius:8px;padding:8px 14px;margin-bottom:1rem;font-size:13px;font-weight:600;color:#185FA5;text-align:center';
+    var loginBox = document.querySelector('#s-login .field');
+    loginBox.parentNode.insertBefore(ind, loginBox);
+  }
+  document.getElementById('seg-indicator').textContent = 'Practicando: ' + labels[seg];
+}
+
+// ---- SEGMENTO ----
+function setSeg(s, btn){
+  segmento = s;
+  document.querySelectorAll('[id^="seg-"]').forEach(function(b){
+    b.className='diff-opt';
+  });
+  btn.className='diff-opt sel-basico';
+}
+
 // ---- DIFICULTAD ----
 function setDiff(d){
   diff=d;
+  var colores = {
+    basico:     {bg:'#E6F1FB',    border:'2px solid #185FA5',    icoCol:'#185FA5',  txt:'#0C447C',    chkIcon:'ti-circle-check', chkCol:'#185FA5'},
+    intermedio: {bg:'#FEF0E6', border:'2px solid #F47920',     icoCol:'#F47920',   txt:'#C45E0A', chkIcon:'ti-circle-check', chkCol:'#F47920'},
+    avanzado:   {bg:'#0C447C',      border:'2px solid #0C447C',    icoCol:'#fff',        txt:'#fff',          chkIcon:'ti-circle-check', chkCol:'#F47920'}
+  };
+  var inactivo = {bg:'#f8f9fb', border:'1.5px solid #ddd', icoCol:'#ccc', txt:'#aaa', chkIcon:'ti-circle', chkCol:'#ddd'};
   ['basico','intermedio','avanzado'].forEach(function(x){
-    var b=document.getElementById('d-'+x);
-    b.className='diff-opt'+(x===d?' sel-'+x:'');
+    var btn = document.getElementById('d-'+x);
+    var chk = document.getElementById('chk-'+x);
+    var ico = btn.querySelector('i:first-child');
+    var lbl = btn.querySelector('div');
+    var c = (x===d) ? colores[x] : inactivo;
+    btn.style.background = c.bg;
+    btn.style.border = c.border;
+    if(ico) ico.style.color = c.icoCol;
+    if(lbl) lbl.style.color = c.txt;
+    chk.className = 'ti ' + c.chkIcon;
+    chk.style.color = c.chkCol;
   });
 }
 
@@ -548,7 +239,17 @@ function iniciar(){
   if(!pCel){alert('Ingresa tu número de celular.');return;}
   if(!pCity){alert('Ingresa tu ciudad.');return;}
   resetEstado();
-  var pool=banco.filter(function(q){return q.lv===diff;});
+  var pool=banco.filter(function(q){
+    if(segmento==='particular'){
+      return q.lv===diff && (!q.seg || q.seg==='particular');
+    } else if(segmento==='cumplimiento'){
+      return q.lv===diff && q.seg==='cumplimiento';
+    } else if(segmento==='cumplimiento-particular' || segmento==='cumplimiento-estatal' || segmento==='cumplimiento-judicial'){
+      return q.lv===diff && q.seg==='cumplimiento';
+    } else {
+      return q.lv===diff && q.seg===segmento;
+    }
+  });
   pool.sort(function(){return Math.random()-.5;});
   gQuestions=pool.slice(0,Math.min(15,pool.length));
   mostrar('s-game');
@@ -568,7 +269,15 @@ function mostrarQ(){
   document.getElementById('q-fb').className='fb';
 
   // meta
-  document.getElementById('q-cnt').textContent='Pregunta '+(curQ+1)+'/'+gQuestions.length+' · '+pName;
+  var segLabel={
+    'particular':'Autos Particular',
+    'comercial':'Autos Comercial',
+    'cumplimiento':'Cumplimiento',
+    'cumplimiento-particular':'Cumplimiento Particular',
+    'cumplimiento-estatal':'Cumplimiento Estatal',
+    'cumplimiento-judicial':'Caución Judicial'
+  }[segmento]||segmento;
+  document.getElementById('q-cnt').textContent='Pregunta '+(curQ+1)+'/'+gQuestions.length+' · '+segLabel+' · '+pName;
   document.getElementById('q-prof').textContent=q.prf;
   document.getElementById('q-prof').style.color=q.pc;
   document.getElementById('q-kind').textContent=q.tp==='arquetipo'?'Pregunta de arquetipo':'Pregunta de producto';
@@ -693,30 +402,30 @@ function mostrarResultado(){
   document.getElementById('r-msg').textContent=msg;
 
   // Ranking global desde Google Sheets
-  document.getElementById('r-pos').textContent='⏳ Calculando tu posición...';
+  // Mensaje de espera animado
+  var mensajesEspera = [
+    '⏳ No te vayas... estamos calculando tu posición global',
+    '📊 Comparando tu resultado con todos los intermediarios...',
+    '🏆 ¡Ya casi! Preparando tu ranking...'
+  ];
+  var msgIdx = 0;
+  document.getElementById('r-pos').textContent = mensajesEspera[0];
+  var msgInterval = setInterval(function(){
+    msgIdx = (msgIdx + 1) % mensajesEspera.length;
+    document.getElementById('r-pos').textContent = mensajesEspera[msgIdx];
+  }, 900);
   setTimeout(function(){
-    fetch(SHEET_URL + '?action=ranking')
+    clearInterval(msgInterval);
+    fetch(SHEET_URL + '?action=ranking&score=' + score + '&nivel=' + encodeURIComponent(diff) + '&doc=' + encodeURIComponent(pDoc))
       .then(function(r){return r.json();})
-      .then(function(ranking){
-        var pos = 1;
-        for(var i=0;i<ranking.length;i++){
-          if(ranking[i].score > score) pos++;
-        }
-        var total = ranking.length + 1;
-        document.getElementById('r-pos').textContent='🏆 Estás en el puesto '+pos+' de '+total+' intermediarios';
-        // También guardar local como respaldo
-        var registros=JSON.parse(localStorage.getItem('seg_rank')||'[]');
-        registros.push({name:pName,city:pCity,diff:diff,score:score,pct:Math.round(pct*100),date:new Date().toLocaleDateString('es-CO')});
-        registros.sort(function(a,b){return b.score-a.score;});
-        localStorage.setItem('seg_rank',JSON.stringify(registros));
+      .then(function(data){
+        var nivelLabel = {basico:'Básico', intermedio:'Intermedio', avanzado:'Avanzado'}[data.nivel] || data.nivel;
+        document.getElementById('r-pos').innerHTML =
+          '🏆 Puesto <strong>' + data.posGeneral + '</strong> de <strong>' + data.totalGeneral + '</strong> intermediarios (general)<br>' +
+          '📊 Puesto <strong>' + data.posNivel + '</strong> de <strong>' + data.totalNivel + '</strong> en nivel <strong>' + nivelLabel + '</strong>';
       })
       .catch(function(){
-        var registros=JSON.parse(localStorage.getItem('seg_rank')||'[]');
-        registros.push({name:pName,city:pCity,diff:diff,score:score,pct:Math.round(pct*100),date:new Date().toLocaleDateString('es-CO')});
-        registros.sort(function(a,b){return b.score-a.score;});
-        localStorage.setItem('seg_rank',JSON.stringify(registros));
-        var pos=registros.findIndex(function(r){return r.name===pName&&r.score===score;})+1;
-        document.getElementById('r-pos').textContent='🏆 Puesto '+pos+' de '+registros.length+' intermediarios';
+        document.getElementById('r-pos').textContent='🏆 ¡Resultado registrado!';
       });
   }, 2000);
 
@@ -729,6 +438,8 @@ function mostrarResultado(){
     '&city=' + encodeURIComponent(pCity) +
     '&cargo=' + encodeURIComponent(pCargo) +
     '&edad=' + encodeURIComponent(pEdad) +
+    '&ramo=' + encodeURIComponent(segmento.startsWith('cumplimiento') ? 'cumplimiento' : 'autos') +
+    '&seg=' + encodeURIComponent(segmento) +
     '&diff=' + encodeURIComponent(diff) +
     '&score=' + encodeURIComponent(score) +
     '&pct=' + encodeURIComponent(Math.round(pct*100)) +
@@ -764,7 +475,7 @@ function mostrar(id){
 function irLogin(){
   clearInterval(tmInt);
   resetEstado();
-  mostrar('s-login');
+  mostrar('s-inicio');
 }
 
 // ---- DASHBOARD ----
